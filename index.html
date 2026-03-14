@@ -1,18 +1,19 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
 <title>Asad Shaikh</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 </head>
 
 <body>
+
+<!-- NAVBAR -->
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 <div class="container">
@@ -27,24 +28,39 @@
 
 <ul class="navbar-nav ms-auto">
 
-<li class="nav-item">
-<a class="nav-link" href="/bcc/">BCC</a>
+<li class="nav-item dropdown">
+<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+Data
+</a>
+
+<ul class="dropdown-menu">
+
+<li>
+<a class="dropdown-item" href="/data/bcc/">BCC Analytics</a>
+</li>
+
+<li>
+<a class="dropdown-item" href="/data/travel/">My Travel Dashboard</a>
+</li>
+
+<li>
+<a class="dropdown-item disabled">Other Projects (coming soon)</a>
+</li>
+
+</ul>
 </li>
 
 <li class="nav-item">
-<a class="nav-link" href="/public-speaking/">Public Speaking</a>
-</li>
-
-<li class="nav-item">
-<a class="nav-link" href="/data-world/">Data World</a>
+<a class="nav-link" href="/speaking/">Public Speaking</a>
 </li>
 
 </ul>
 
 </div>
-
 </div>
 </nav>
+
+<!-- HERO -->
 
 <section class="p-5 text-center bg-light">
 
@@ -60,6 +76,8 @@ Cricket Analytics • Data Visualization • Public Speaking
 
 </section>
 
+<!-- MAIN CARDS -->
+
 <section class="p-5">
 
 <div class="container">
@@ -67,33 +85,21 @@ Cricket Analytics • Data Visualization • Public Speaking
 <div class="row text-center">
 
 <div class="col-md-4">
-
 <h3>BCC Analytics</h3>
-
-<p>Interactive cricket dashboards and player analytics.</p>
-
-<a href="/bcc/" class="btn btn-primary">View Dashboard</a>
-
+<p>Interactive cricket dashboards and player performance insights.</p>
+<a href="/data/bcc/" class="btn btn-primary">View Dashboard</a>
 </div>
 
 <div class="col-md-4">
+<h3>My Travel Dashboard</h3>
+<p>Interactive data visualization of my travel journeys.</p>
+<a href="/data/travel/" class="btn btn-primary">Explore</a>
+</div>
 
+<div class="col-md-4">
 <h3>Public Speaking</h3>
-
-<p>Talks, khutbahs, and community presentations.</p>
-
-<a href="/public-speaking/" class="btn btn-primary">Learn More</a>
-
-</div>
-
-<div class="col-md-4">
-
-<h3>Data World</h3>
-
-<p>Data science projects and analytics work.</p>
-
-<a href="/data-world/" class="btn btn-primary">Explore</a>
-
+<p>Khutbahs, talks, and community presentations.</p>
+<a href="/speaking/" class="btn btn-primary">Learn More</a>
 </div>
 
 </div>
@@ -102,12 +108,13 @@ Cricket Analytics • Data Visualization • Public Speaking
 
 </section>
 
+<!-- FOOTER -->
+
 <footer class="bg-dark text-light text-center p-3">
-
 © 2026 Asad Shaikh
-
 </footer>
 
-</body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+</body>
 </html>
