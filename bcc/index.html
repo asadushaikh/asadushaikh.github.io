@@ -98,5 +98,34 @@ vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
 </script>
 
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+<script>
+const firebaseConfig = {
+  apiKey: "AIzaSyB9p0Tj2wxHM-T469gTtFxeT7Eaxdz-7Rk",
+  authDomain: "asadushaikh-tracker.firebaseapp.com",
+  projectId: "asadushaikh-tracker",
+  storageBucket: "asadushaikh-tracker.firebasestorage.app",
+  messagingSenderId: "658489655999",
+  appId: "1:658489655999:web:924a8d2c6b9c1739747c0a",
+  measurementId: "G-BXRQ42S2F9"
+};
+
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
+</script>
+
+<script>
+function testDB() {
+  db.collection("test").add({
+    message: "working",
+    time: new Date()
+  }).then(() => alert("Success"));
+}
+</script>
+
+<button onclick="testDB()">Test Firebase</button>
+  
 </body>
 </html>
