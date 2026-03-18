@@ -1,85 +1,97 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BCC Dashboard</title>
+<title>BCC Login</title>
 
 <style>
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  width: 100%;
-  overflow-x: hidden;
-  background: #ffffff;
+body{
+  margin:0;
+  font-family:Arial;
+  background:#f4f6f8;
 }
 
-.tableauPlaceholder {
-  width: 100vw;
-  height: 100vh;
+/* LOGIN SCREEN */
+#loginPage{
+  display:flex;
+  height:100vh;
+  justify-content:center;
+  align-items:center;
+}
+
+.login-box{
+  background:white;
+  padding:30px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 0 10px rgba(0,0,0,0.1);
+}
+
+input, select{
+  width:100%;
+  padding:10px;
+  margin:10px 0;
+}
+
+/* DASHBOARD */
+#dashboard{
+  display:none;
+  height:100vh;
+}
+
+.tableauPlaceholder{
+  width:100%;
+  height:100%;
 }
 </style>
-
 </head>
 
 <body>
 
-<!-- 🔥 TEST BUTTON (TOP RIGHT) -->
-<div style="position:fixed; top:20px; right:20px; z-index:9999;">
-  <button onclick="testDB()" style="padding:10px 15px; font-size:14px; cursor:pointer;">
-    Test Firebase
-  </button>
+<!-- LOGIN -->
+<div id="loginPage">
+  <div class="login-box">
+    <h3>BCC Access</h3>
+
+    <select id="name">
+      <option value="">Select Name</option>
+    </select>
+
+    <input type="password" id="pin" placeholder="Enter 5-digit PIN">
+
+    <button onclick="login()">Enter</button>
+
+    <p id="error" style="color:red;"></p>
+  </div>
 </div>
 
-<!-- TABLEAU DASHBOARD -->
-<div class='tableauPlaceholder' id='viz1773374423253'>
-
-<noscript>
-<a href='#'>
-<img alt='BCC Main Dashboard'
-src='https://public.tableau.com/static/images/BC/BCCNewera/BCCMainDashboard/1_rss.png'
-style='border: none' />
-</a>
-</noscript>
-
-<object class='tableauViz' style='display:none;'>
-
-<param name='host_url' value='https://public.tableau.com/' />
-<param name='embed_code_version' value='3' />
-<param name='site_root' value='' />
-
-<param name='name' value='BCCNewera/BCCMainDashboard' />
-
-<param name='tabs' value='no' />
-<param name='toolbar' value='yes' />
-
-<param name='static_image'
-value='https://public.tableau.com/static/images/BC/BCCNewera/BCCMainDashboard/1.png' />
-
-<param name='animate_transition' value='yes' />
-<param name='display_static_image' value='yes' />
-<param name='display_spinner' value='yes' />
-<param name='display_overlay' value='yes' />
-<param name='display_count' value='yes' />
-<param name='language' value='en-US' />
-
-</object>
-
+<!-- DASHBOARD -->
+<div id="dashboard">
+  <div class='tableauPlaceholder' id='viz1773374423253'>
+    <object class='tableauViz' style='display:none;'>
+      <param name='host_url' value='https://public.tableau.com/' />
+      <param name='embed_code_version' value='3' />
+      <param name='name' value='BCCNewera/BCCMainDashboard' />
+      <param name='tabs' value='no' />
+      <param name='toolbar' value='yes' />
+    </object>
+  </div>
 </div>
 
 <!-- TABLEAU SCRIPT -->
 <script>
-var divElement = document.getElementById('viz1773374423253');
-var vizElement = divElement.getElementsByTagName('object')[0];
+function loadTableau(){
+  var divElement = document.getElementById('viz1773374423253');
+  var vizElement = divElement.getElementsByTagName('object')[0];
 
-vizElement.style.width = '100%';
-vizElement.style.height = '100vh';
+  vizElement.style.width='100%';
+  vizElement.style.height='100vh';
 
-var scriptElement = document.createElement('script');
-scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-vizElement.parentNode.insertBefore(scriptElement, vizElement);
+  var scriptElement = document.createElement('script');
+  scriptElement.src='https://public.tableau.com/javascripts/api/viz_v1.js';
+  vizElement.parentNode.insertBefore(scriptElement, vizElement);
+}
 </script>
 
 <!-- FIREBASE -->
@@ -93,29 +105,84 @@ const firebaseConfig = {
   projectId: "asadushaikh-tracker",
   storageBucket: "asadushaikh-tracker.firebasestorage.app",
   messagingSenderId: "658489655999",
-  appId: "1:658489655999:web:924a8d2c6b9c1739747c0a",
-  measurementId: "G-BXRQ42S2F9"
+  appId: "1:658489655999:web:924a8d2c6b9c1739747c0a"
 };
 
 firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-</script>
 
-<!-- TEST FUNCTION -->
-<script>
-function testDB() {
-  console.log("clicked");
+let startTime;
 
-  db.collection("test").add({
-    message: "working",
-    time: new Date()
-  }).then(() => {
-    alert("✅ Firebase Connected!");
-  }).catch((error) => {
-    console.error(error);
-    alert("❌ Error: " + error.message);
+// LOAD NAMES FROM FIREBASE
+async function loadUsers(){
+  const snapshot = await db.collection("users").get();
+  const select = document.getElementById("name");
+
+  snapshot.forEach(doc=>{
+    const user = doc.data();
+    let option = document.createElement("option");
+    option.value = user.name;
+    option.text = user.name;
+    select.appendChild(option);
   });
 }
+
+loadUsers();
+
+// LOGIN FUNCTION
+async function login(){
+  const name = document.getElementById("name").value;
+  const pin = document.getElementById("pin").value;
+
+  const snapshot = await db.collection("users")
+    .where("name","==",name).get();
+
+  if(snapshot.empty){
+    document.getElementById("error").innerText="User not found";
+    return;
+  }
+
+  const user = snapshot.docs[0].data();
+
+  if(user.pin === pin){
+
+    startTime = new Date();
+
+    // LOG LOGIN
+    db.collection("logins").add({
+      user:name,
+      time:new Date()
+    });
+
+    // SHOW DASHBOARD
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("dashboard").style.display="block";
+
+    loadTableau();
+
+    localStorage.setItem("user",name);
+    localStorage.setItem("startTime",startTime);
+
+  } else {
+    document.getElementById("error").innerText="Wrong PIN";
+  }
+}
+
+// TRACK TIME SPENT
+window.addEventListener("beforeunload", function () {
+  let user = localStorage.getItem("user");
+  let start = new Date(localStorage.getItem("startTime"));
+
+  if(user && start){
+    let duration = (new Date() - start)/1000;
+
+    db.collection("sessions").add({
+      user:user,
+      duration:duration,
+      exitTime:new Date()
+    });
+  }
+});
 </script>
 
 </body>
