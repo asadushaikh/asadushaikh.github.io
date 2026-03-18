@@ -5,57 +5,45 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Asad Shaikh</title>
+<title>Data Projects | Asad Shaikh</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
 body{
-background:#f4f6f8;
-font-family: Arial, Helvetica, sans-serif;
+    background:#f4f6f8;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-/* NAVBAR + FOOTER */
+/* NAVBAR */
 .navbar{
-background:#0a2342 !important;
+    background:#0a2342 !important;
 }
 
-footer{
-background:#0a2342;
-color:white;
+/* SECTION */
+.section-title{
+    color:#0a2342;
+    font-weight:700;
+    margin-bottom:30px;
 }
 
-/* HERO SECTION */
-.hero{
-background:#0a2342;
-color:white;
-padding:60px 20px;
+/* CARD STYLE */
+.project-card{
+    background:white;
+    padding:30px;
+    border-radius:12px;
+    box-shadow:0 5px 15px rgba(0,0,0,0.1);
+    height:100%;
 }
 
-.hero img{
-border-radius:10px;
-box-shadow:0 10px 25px rgba(0,0,0,0.3);
-}
-
-/* BUTTON SECTION */
+/* BUTTON */
 .btn-primary{
-background:#0a2342;
-border:none;
+    background:#0a2342;
+    border:none;
 }
 
 .btn-primary:hover{
-background:#123b70;
-}
-
-.section-title{
-color:#0a2342;
-font-weight:700;
-margin-bottom:30px;
-}
-
-.passions h4{
-color:#123b70;
-font-weight:600;
+    background:#123b70;
 }
 </style>
 
@@ -63,102 +51,85 @@ font-weight:600;
 
 <body>
 
+<!-- NAVBAR -->
 <nav class="navbar navbar-dark">
 <div class="container">
-<a class="navbar-brand" href="#">Asad Shaikh</a>
+<a class="navbar-brand" href="../">Asad Shaikh</a>
 </div>
 </nav>
 
-<section class="hero text-center">
+<!-- PAGE HEADER -->
+<section class="p-5 text-center">
 <div class="container">
-<h1 class="display-4">Asad Shaikh</h1>
-<p class="lead">
-From Tando to Triumph — a journey driven by faith, fueled by passion, and built on resilience and hard work.
-</p>
-<div class="mt-4">
-<img src="hero.jpg" class="img-fluid" style="max-width:400px;">
-</div>
+<h1 class="section-title">Data Projects</h1>
+<p>Explore dashboards and analytics work</p>
 </div>
 </section>
 
-<section class="p-5">
+<!-- PROJECTS -->
+<section class="pb-5">
 <div class="container">
-<h2 class="section-title">My Journey</h2>
-
-<div class="row">
-<div class="col-md-6">
-<p>
-I was born in the small city of <strong>Tando Muhammad Khan, Pakistan</strong>,
-where life was simple but full of lessons about resilience, family, and hard work.
-</p>
-</div>
-
-<div class="col-md-6">
-<p>
-Today, I live in <strong>Houston, Texas</strong>, working in data engineering and analytics.
-</p>
-</div>
-</div>
-
-</div>
-</section>
-
-<section class="p-5 bg-light passions">
-<div class="container">
-
-<h2 class="section-title text-center">Passions</h2>
-
-<div class="row text-center">
-<div class="col-md-4">
-<h4>Data</h4>
-<p>Dashboards, analytics, and storytelling.</p>
-</div>
-
-<div class="col-md-4">
-<h4>Cricket</h4>
-<p>Community + competition.</p>
-</div>
-
-<div class="col-md-4">
-<h4>Faith & Family</h4>
-<p>Values, service, and balance.</p>
-</div>
-</div>
-
-</div>
-</section>
-
-<section class="p-5">
-<div class="container text-center">
 
 <div class="row g-4">
 
+<!-- BCC DASHBOARD -->
 <div class="col-md-4">
-<a href="data/" class="btn btn-primary btn-lg w-100 p-4">
-Data Projects
+<div class="project-card text-center">
+
+<h4>BCC Stats Dashboard</h4>
+
+<p class="mt-3">
+Cricket analytics dashboard showcasing player performance,
+team insights, and match statistics.
+</p>
+
+<a href="../bcc/" class="btn btn-primary mt-3">
+View Dashboard
 </a>
+
+</div>
 </div>
 
+<!-- TRAVEL DASHBOARD -->
 <div class="col-md-4">
-<a href="publicspeaking/" class="btn btn-primary btn-lg w-100 p-4">
-Public Speaking
+<div class="project-card text-center">
+
+<h4>My Travel Dashboard</h4>
+
+<p class="mt-3">
+Interactive dashboard highlighting travel history,
+countries visited, and trip insights.
+</p>
+
+<a href="../travel/" class="btn btn-primary mt-3">
+View Dashboard
 </a>
+
+</div>
 </div>
 
+<!-- MORE PROJECTS -->
 <div class="col-md-4">
-<a href="community/" class="btn btn-primary btn-lg w-100 p-4">
-Community Service
-</a>
+<div class="project-card text-center">
+
+<h4>More Projects</h4>
+
+<p class="mt-3">
+More data projects and dashboards are currently in progress.
+Stay tuned for upcoming releases.
+</p>
+
+<button class="btn btn-secondary mt-3" disabled>
+Coming Soon
+</button>
+
+</div>
 </div>
 
 </div>
 
 </div>
 </section>
-
-<footer class="text-center p-3">
-© 2026 Asad Shaikh
-</footer>
 
 </body>
 </html>
