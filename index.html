@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Data Projects | Asad Shaikh</title>
+<title>Asad Shaikh</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -20,20 +20,30 @@ body{
     background:#0a2342 !important;
 }
 
-/* SECTION */
+/* HERO */
+.hero{
+    padding:80px 20px;
+    text-align:center;
+    background:white;
+}
+
+.hero img{
+    width:150px;
+    border-radius:50%;
+    margin-bottom:20px;
+}
+
+/* SECTION TITLE */
 .section-title{
     color:#0a2342;
     font-weight:700;
     margin-bottom:30px;
 }
 
-/* CARD STYLE */
-.project-card{
-    background:white;
-    padding:30px;
-    border-radius:12px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.1);
-    height:100%;
+/* PASSION BUTTONS */
+.passion-btn{
+    width:200px;
+    margin:10px;
 }
 
 /* BUTTON */
@@ -54,77 +64,61 @@ body{
 <!-- NAVBAR -->
 <nav class="navbar navbar-dark">
 <div class="container">
-<a class="navbar-brand" href="../">Asad Shaikh</a>
+<a class="navbar-brand" href="#">Asad Shaikh</a>
 </div>
 </nav>
 
-<!-- PAGE HEADER -->
-<section class="p-5 text-center">
+<!-- HERO SECTION -->
+<section class="hero">
 <div class="container">
-<h1 class="section-title">Data Projects</h1>
-<p>Explore dashboards and analytics work</p>
+
+<img src="hero.jpg" alt="Asad Shaikh">
+
+<h1 class="mt-3">Hi, I'm Asad</h1>
+
+<p class="mt-3">
+I’m passionate about turning data into insights, telling stories that matter,
+and exploring the world one experience at a time.
+</p>
+
 </div>
 </section>
 
-<!-- PROJECTS -->
-<section class="pb-5">
+<!-- ABOUT / STORY -->
+<section class="p-5 text-center">
 <div class="container">
 
-<div class="row g-4">
+<h2 class="section-title">My Story</h2>
 
-<!-- BCC DASHBOARD -->
-<div class="col-md-4">
-<div class="project-card text-center">
-
-<h4>BCC Stats Dashboard</h4>
-
-<p class="mt-3">
-Cricket analytics dashboard showcasing player performance,
-team insights, and match statistics.
+<p>
+From analyzing cricket statistics to building interactive dashboards,
+my journey has been driven by curiosity and creativity.
+I enjoy simplifying complex data and presenting it in a way
+that is meaningful and engaging.
 </p>
 
-<a href="../bcc/" class="btn btn-primary mt-3">
-View Dashboard
+</div>
+</section>
+
+<!-- PASSIONS -->
+<section class="p-5 text-center">
+<div class="container">
+
+<h2 class="section-title">Passions</h2>
+
+<div class="d-flex justify-content-center flex-wrap">
+
+<a href="data/" class="btn btn-primary passion-btn">
+Data
 </a>
 
-</div>
-</div>
-
-<!-- TRAVEL DASHBOARD -->
-<div class="col-md-4">
-<div class="project-card text-center">
-
-<h4>My Travel Dashboard</h4>
-
-<p class="mt-3">
-Interactive dashboard highlighting travel history,
-countries visited, and trip insights.
-</p>
-
-<a href="../travel/" class="btn btn-primary mt-3">
-View Dashboard
+<a href="speaking/" class="btn btn-primary passion-btn">
+Public Speaking
 </a>
 
-</div>
-</div>
-
-<!-- MORE PROJECTS -->
-<div class="col-md-4">
-<div class="project-card text-center">
-
-<h4>More Projects</h4>
-
-<p class="mt-3">
-More data projects and dashboards are currently in progress.
-Stay tuned for upcoming releases.
-</p>
-
-<button class="btn btn-secondary mt-3" disabled>
-Coming Soon
-</button>
-
-</div>
-</div>
+<a href="travel/" class="btn btn-primary passion-btn">
+Travel
+</a>
 
 </div>
 
