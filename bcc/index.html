@@ -2,34 +2,38 @@
 <html lang="en">
 
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>BCC Dashboard</title>
 
 <style>
-
 html, body {
-margin: 0;
-padding: 0;
-height: 100%;
-width: 100%;
-overflow-x: hidden;
-background: #ffffff;
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  overflow-x: hidden;
+  background: #ffffff;
 }
 
 .tableauPlaceholder {
-width: 100vw;
-height: 100vh;
+  width: 100vw;
+  height: 100vh;
 }
-
 </style>
 
 </head>
 
 <body>
 
+<!-- 🔥 TEST BUTTON (TOP RIGHT) -->
+<div style="position:fixed; top:20px; right:20px; z-index:9999;">
+  <button onclick="testDB()" style="padding:10px 15px; font-size:14px; cursor:pointer;">
+    Test Firebase
+  </button>
+</div>
+
+<!-- TABLEAU DASHBOARD -->
 <div class='tableauPlaceholder' id='viz1773374423253'>
 
 <noscript>
@@ -65,39 +69,20 @@ value='https://public.tableau.com/static/images/BC/BCCNewera/BCCMainDashboard/1.
 
 </div>
 
-<script type='text/javascript'>
-
+<!-- TABLEAU SCRIPT -->
+<script>
 var divElement = document.getElementById('viz1773374423253');
 var vizElement = divElement.getElementsByTagName('object')[0];
 
-if (divElement.offsetWidth > 800) {
-
-vizElement.style.width='100%';
-vizElement.style.height='100vh';
-
-}
-
-else if (divElement.offsetWidth > 500) {
-
-vizElement.style.width='100%';
-vizElement.style.height='100vh';
-
-}
-
-else {
-
-vizElement.style.width='100%';
-vizElement.style.height='100vh';
-
-}
+vizElement.style.width = '100%';
+vizElement.style.height = '100vh';
 
 var scriptElement = document.createElement('script');
 scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-
 vizElement.parentNode.insertBefore(scriptElement, vizElement);
-
 </script>
 
+<!-- FIREBASE -->
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
 
@@ -116,16 +101,22 @@ firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
 </script>
 
+<!-- TEST FUNCTION -->
 <script>
 function testDB() {
+  console.log("clicked");
+
   db.collection("test").add({
     message: "working",
     time: new Date()
-  }).then(() => alert("Success"));
+  }).then(() => {
+    alert("✅ Firebase Connected!");
+  }).catch((error) => {
+    console.error(error);
+    alert("❌ Error: " + error.message);
+  });
 }
 </script>
 
-<button onclick="testDB()">Test Firebase</button>
-  
 </body>
 </html>
