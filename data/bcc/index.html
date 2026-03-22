@@ -1,25 +1,58 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>BCC Stats Dashboard</title>
+<title>BCC Home</title>
 
 <style>
-html, body {
-margin: 0;
-padding: 0;
-height: 100%;
-width: 100%;
-overflow-x: hidden;
-background: #ffffff;
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f6f8;
+    text-align: center;
 }
 
-.tableauPlaceholder {
-width: 100%;
-height: 100vh;
+header {
+    background: #0a2342;
+    color: white;
+    padding: 20px;
+    font-size: 22px;
+}
+
+.section {
+    margin: 20px;
+    padding: 20px;
+    background: white;
+    border-radius: 10px;
+}
+
+button {
+    background: #0a2342;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.members {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.member {
+    width: 100px;
+}
+
+.member img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
 }
 </style>
 
@@ -27,28 +60,93 @@ height: 100vh;
 
 <body>
 
-<div class='tableauPlaceholder' id='viz1773374423253'>
+<header id="welcomeText">Welcome</header>
 
-<object class='tableauViz' style='display:none;'>
-<param name='host_url' value='https://public.tableau.com/' />
-<param name='embed_code_version' value='3' />
-<param name='name' value='BCCNewera/BCCMainDashboard' />
-<param name='tabs' value='no' />
-<param name='toolbar' value='yes' />
-</object>
+<div class="section">
+    <h3>Last Game</h3>
+    <p id="lastGame">Loading...</p>
 
+    <h3>Next Game</h3>
+    <p id="nextGame">Loading...</p>
 </div>
 
+<div class="section">
+    <button onclick="goToDashboard()">Go to BCC Stats Dashboard</button>
+</div>
+
+<div class="section">
+    <h3>Members</h3>
+    <div class="members" id="membersList"></div>
+</div>
+
+<!-- Firebase -->
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js"></script>
+
 <script>
-var divElement = document.getElementById('viz1773374423253');
-var vizElement = divElement.getElementsByTagName('object')[0];
+const firebaseConfig = {
+    apiKey: "YOUR_KEY",
+    authDomain: "YOUR_DOMAIN",
+    projectId: "YOUR_PROJECT"
+};
 
-vizElement.style.width = '100%';
-vizElement.style.height = window.innerHeight + 'px';
+firebase.initializeApp(firebaseConfig);
+const db = firebase.firestore();
 
-var scriptElement = document.createElement('script');
-scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-vizElement.parentNode.insertBefore(scriptElement, vizElement);
+// AUTH USER
+firebase.auth().onAuthStateChanged(async (user) => {
+    if (user) {
+
+        // Get user data
+        const doc = await db.collection("users").doc(user.uid).get();
+        const data = doc.data();
+
+        document.getElementById("welcomeText").innerText =
+            "Welcome, " + data.name;
+
+    } else {
+        window.location.href = "/login";
+    }
+});
+
+// LOAD MATCH INFO
+async function loadMatches() {
+    const doc = await db.collection("matches").doc("current").get();
+    const data = doc.data();
+
+    document.getElementById("lastGame").innerText = data.lastGame;
+    document.getElementById("nextGame").innerText = data.nextGame;
+}
+
+loadMatches();
+
+// LOAD MEMBERS
+async function loadMembers() {
+    const snapshot = await db.collection("users").get();
+    const container = document.getElementById("membersList");
+
+    snapshot.forEach(doc => {
+        const user = doc.data();
+
+        const div = document.createElement("div");
+        div.className = "member";
+
+        div.innerHTML = `
+            <img src="${user.photo || 'https://via.placeholder.com/100'}" />
+            <p>${user.name}</p>
+        `;
+
+        container.appendChild(div);
+    });
+}
+
+loadMembers();
+
+// NAVIGATION
+function goToDashboard() {
+    window.location.href = "/bcc-stats";
+}
 </script>
 
 </body>
