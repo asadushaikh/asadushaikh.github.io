@@ -64,8 +64,27 @@ input, select{
 
     <p id="error" style="color:red;"></p>
   </div>
+
 </div>
 
+  <div id="homePage" style="display:none; padding:20px; text-align:center;">
+
+  <h2 id="welcomeText">Welcome</h2>
+
+  <div style="background:white; padding:20px; border-radius:10px; margin:20px;">
+    <h3>Last Game</h3>
+    <p id="lastGame">Loading...</p>
+
+    <h3>Next Game</h3>
+    <p id="nextGame">Loading...</p>
+  </div>
+
+  <button onclick="goToDashboard()" style="padding:12px 20px; font-size:16px;">
+    Go to BCC Stats
+  </button>
+
+</div>
+  
 <!-- DASHBOARD -->
 <div id="dashboard">
   <div class='tableauPlaceholder' id='viz1773374423253'>
@@ -129,6 +148,15 @@ async function loadUsers(){
 
 loadUsers();
 
+async function loadMatchInfo(){
+  const doc = await db.collection("matches").doc("current").get();
+
+  if(doc.exists){
+    const data = doc.data();
+    document.getElementById("lastGame").innerText = data.lastGame;
+    document.getElementById("nextGame").innerText = data.nextGame;
+  }
+}
 // LOGIN FUNCTION
 async function login(){
   const name = document.getElementById("name").value;
@@ -153,12 +181,23 @@ async function login(){
       user:name,
       time:new Date()
     });
+    function goToDashboard(){
 
-    // SHOW DASHBOARD
-    document.getElementById("loginPage").style.display="none";
-    document.getElementById("dashboard").style.display="block";
+    document.getElementById("homePage").style.display = "none";
+    document.getElementById("dashboard").style.display = "block";
 
     loadTableau();
+  }
+    // SHOW DASHBOARD
+    // SHOW HOME PAGE INSTEAD
+    document.getElementById("loginPage").style.display="none";
+    document.getElementById("homePage").style.display="block";
+
+    // set welcome text
+    document.getElementById("welcomeText").innerText = "Welcome, " + name;
+
+    // load match info
+    loadMatchInfo();
 
     localStorage.setItem("user",name);
     localStorage.setItem("startTime",startTime);
