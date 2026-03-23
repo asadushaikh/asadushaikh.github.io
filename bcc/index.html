@@ -417,7 +417,9 @@ async function loadUsers(){
     select.appendChild(option);
   });
 }
-loadUsers();
+window.addEventListener('DOMContentLoaded', async () => {
+  await loadUsers();
+});
 
 // LOAD MATCH INFO
 async function loadMatchInfo(){
