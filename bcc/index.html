@@ -71,6 +71,47 @@ input, select{
 
 <body>
 
+<!-- INTRO SECTION -->
+<section class="intro" style="padding:60px 20px; text-align:center; background:#eaf1f8;">
+  <div style="max-width:800px; margin:auto; display:flex; flex-direction:column; align-items:center; gap:20px;">
+    <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/asadullah.jpg" 
+         alt="Asad Shaikh" 
+         style="border-radius:50%; width:180px; height:180px; object-fit:cover; border:3px solid #123b70;">
+    <h2 style="color:#0a2342;">Asad Shaikh</h2>
+    <p style="color:#123b70; font-size:18px; max-width:700px; text-align:center;">
+      I am a data enthusiast and cricket lover. Combining my passion for data and cricket, I built a full technology stack for BCC Cricket Club to track stats, games, and performance. With a background in data analytics and software development, I design solutions that bring insight and fun to the game we love.
+    </p>
+  </div>
+</section>
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="container">
+    <h1>BCC Cricket Club</h1>
+    <div class="hero-tagline">Brotherhood • Competition • Passion for Cricket</div>
+    <p class="hero-sub">
+      A friendly, brotherly cricket group established in 2013, built on trust, respect, and love for the game.
+      More than just cricket — BCC is family.
+    </p>
+  </div>
+</section>
+<!-- LOGIN / ACCESS SECTION -->
+<div id="loginPage" style="display:flex; justify-content:center; padding:20px; background:#123b70;">
+  <div class="login-box" style="background:#1e4a8f; color:white; padding:15px 20px; border-radius:10px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.2); width:250px;">
+    <h4 style="margin-bottom:10px;">BCC Access</h4>
+    <select id="name" style="width:100%; padding:8px; margin:5px 0; border-radius:5px; border:none;">
+      <option value="">Select Name</option>
+    </select>
+    <input type="password" id="pin" placeholder="Enter PIN" 
+           style="width:100%; padding:8px; margin:5px 0; border-radius:5px; border:none;">
+    <button onclick="login()" 
+            style="width:100%; padding:8px; margin-top:8px; border:none; border-radius:5px; background:#0a2342; color:white; cursor:pointer;">
+      Enter
+    </button>
+    <p id="error" style="color:#ffcccb; margin-top:5px; font-size:13px;"></p>
+  </div>
+</div>
+
 <!-- HERO SECTION -->
 <section class="hero">
   <div class="container">
@@ -284,19 +325,6 @@ input, select{
   </div>
 </div>
 </section>
-
-<!-- LOGIN -->
-<div id="loginPage">
-  <div class="login-box">
-    <h3>BCC Access</h3>
-    <select id="name">
-      <option value="">Select Name</option>
-    </select>
-    <input type="password" id="pin" placeholder="Enter 5-digit PIN">
-    <button onclick="login()">Enter</button>
-    <p id="error" style="color:red;"></p>
-  </div>
-</div>
 
 <!-- HOME PAGE -->
 <div id="homePage">
