@@ -407,26 +407,15 @@ let startTime;
 
 // LOAD USERS
 async function loadUsers(){
-  try {
-    const snapshot = await db.collection("users").get();
-    const select = document.getElementById("name");
-
-    if(snapshot.empty){
-      console.log("No users found in Firestore!");
-      return;
-    }
-
-    snapshot.forEach(doc=>{
-      const user = doc.data();
-      console.log("Loaded user:", user); // check in console
-      let option = document.createElement("option");
-      option.value = user.name;
-      option.text = user.name;
-      select.appendChild(option);
-    });
-  } catch(err){
-    console.error("Error loading users:", err);
-  }
+  const snapshot = await db.collection("users").get();
+  const select = document.getElementById("name");
+  snapshot.forEach(doc=>{
+    const user = doc.data();
+    let option = document.createElement("option");
+    option.value = user.name;
+    option.text = user.name;
+    select.appendChild(option);
+  });
 }
 loadUsers();
 
