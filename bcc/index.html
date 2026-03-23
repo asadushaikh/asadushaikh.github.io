@@ -183,75 +183,9 @@ input, select{
   </div>
 </div>
 
-<!-- INTRO SECTION -->
-<!-- INTRO SECTION -->
-<section class="intro" style="padding:40px 20px; text-align:center; background:#eaf1f8;">
-  <div style="max-width:700px; margin:auto; display:flex; flex-direction:column; align-items:center; gap:12px;">
-    
-    <div style="font-size:14px; font-weight:600; color:#0a2342; text-transform:uppercase; letter-spacing:1px;">
-      Meet the Developer
-    </div>
-
-    <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/asadullah.jpg" 
-         alt="Asad Shaikh" 
-         style="border-radius:50%; width:140px; height:140px; object-fit:cover; border:3px solid #123b70;">
-
-    <h2 style="color:#0a2342; font-size:22px; margin:0;">Asad Shaikh</h2>
-
-    <p style="color:#123b70; font-size:14px; max-width:600px; text-align:center; line-height:1.4;">
-      I’m a data enthusiast and cricket lover, merging analytics and technology to elevate the game. 
-      I built a full tech stack for BCC Cricket Club to track stats, games, and player performance.
-    </p>
-
-  </div>
-</section>
-
-<!-- LOGIN -->
-<div id="loginPage">
-  <div class="login-box">
-    
-    <h4>BCC Access</h4>
-
-    <select id="name"><option>Select Name</option></select>
-    <input type="password" id="pin" placeholder="Enter PIN">
-
-    <button class="cta-btn" id="enterBtn" onclick="login()">Enter</button>
-
-    <p id="welcomeMsg"></p>
-    <p id="error"></p>
-
-    <div id="homeQuick">
-      <button class="cta-btn" onclick="goToDashboard()">BCC Stats</button>
-
-      <div class="game-info">
-        <strong>Next Game:</strong>
-        <div id="nextGame">Loading...</div>
-      </div>
-
-      <div class="game-info">
-        <strong>Last Game:</strong>
-        <div id="lastGame">Loading...</div>
-      </div>
-    </div>
-
-  </div> <!-- ✅ CLOSE login-box -->
-</div>   <!-- ✅ CLOSE loginPage -->
-<!-- DASHBOARD -->
-<div id="dashboard" style="display:none;">
-  <div class='tableauPlaceholder' id='viz1773374423253'>
-    <object class='tableauViz' style='display:none;'>
-      <param name='host_url' value='https://public.tableau.com/' />
-      <param name='embed_code_version' value='3' />
-      <param name='name' value='BCCNewera/BCCMainDashboard' />
-      <param name='tabs' value='no' />
-      <param name='toolbar' value='yes' />
-    </object>
-  </div>
-</div>
-
 <!-- MEMBERS -->
 <section class="members">
-  <h2 style="margin-bottom:30px; color:#0a2342;">BCC Members</h2>
+  <h2 style="margin-bottom:30px; color:#0a2342;">Meet the BCC Members</h2>
 
   <div class="members-container">
 
@@ -426,6 +360,74 @@ input, select{
 
   </div>
 </section>
+
+<!-- INTRO SECTION -->
+<!-- INTRO SECTION -->
+<section class="intro" style="padding:40px 20px; text-align:center; background:#eaf1f8;">
+  <div style="max-width:700px; margin:auto; display:flex; flex-direction:column; align-items:center; gap:12px;">
+    
+    <div style="font-size:14px; font-weight:600; color:#0a2342; text-transform:uppercase; letter-spacing:1px;">
+      Meet the Developer
+    </div>
+
+    <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/asadullah.jpg" 
+         alt="Asad Shaikh" 
+         style="border-radius:50%; width:140px; height:140px; object-fit:cover; border:3px solid #123b70;">
+
+    <h2 style="color:#0a2342; font-size:22px; margin:0;">Asad Shaikh</h2>
+
+    <p style="color:#123b70; font-size:14px; max-width:600px; text-align:center; line-height:1.4;">
+      I’m a data enthusiast and cricket lover, merging analytics and technology to elevate the game. 
+      I built a full tech stack for BCC Cricket Club to track stats, games, and player performance.
+    </p>
+
+  </div>
+</section>
+
+<!-- LOGIN -->
+<div id="loginPage">
+  <div class="login-box">
+    
+    <h4>BCC Access</h4>
+
+    <select id="name"><option>Select Name</option></select>
+    <input type="password" id="pin" placeholder="Enter PIN">
+
+    <button class="cta-btn" id="enterBtn" onclick="login()">Enter</button>
+
+    <p id="welcomeMsg"></p>
+    <p id="error"></p>
+
+    <div id="homeQuick">
+      <button class="cta-btn" onclick="goToDashboard()">BCC Stats</button>
+
+      <div class="game-info">
+        <strong>Next Game:</strong>
+        <div id="nextGame">Loading...</div>
+      </div>
+
+      <div class="game-info">
+        <strong>Last Game:</strong>
+        <div id="lastGame">Loading...</div>
+      </div>
+    </div>
+
+  </div> <!-- ✅ CLOSE login-box -->
+</div>   <!-- ✅ CLOSE loginPage -->
+<!-- DASHBOARD -->
+<div id="dashboard" style="display:none;">
+  <div class='tableauPlaceholder' id='viz1773374423253'>
+    <object class='tableauViz' style='display:none;'>
+      <param name='host_url' value='https://public.tableau.com/' />
+      <param name='embed_code_version' value='3' />
+      <param name='name' value='BCCNewera/BCCMainDashboard' />
+      <param name='tabs' value='no' />
+      <param name='toolbar' value='yes' />
+    </object>
+  </div>
+</div>
+
+
 
 <!-- TABLEAU -->
 <script>
