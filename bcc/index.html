@@ -61,28 +61,48 @@ input, select{
 button{
   cursor:pointer;
 }
+<style>
+/* Existing styles ... */
+
 #homeQuick{
   display:none;
   margin-top:15px;
   text-align:left;
 }
+
+/* BCC Stats button styling */
 #homeQuick button{
   width:100%;
-  padding:8px;
-  margin-bottom:8px;
+  padding:12px 0;
+  margin-bottom:12px;
   border:none;
-  border-radius:5px;
-  background:#0a2342;
+  border-radius:25px;
+  background: linear-gradient(90deg, #f7b733, #fc4a1a);
   color:white;
+  font-weight:700;
+  font-size:16px;
+  box-shadow:0 5px 15px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
 }
-#dashboard{
-  display:none;
-  height:100vh;
+
+#homeQuick button:hover{
+  transform: translateY(-3px);
+  box-shadow:0 8px 20px rgba(0,0,0,0.3);
 }
-.tableauPlaceholder{
-  width:100%;
-  height:100%;
+
+/* Game info styling */
+.game-info{
+  background:#1e4a8f;
+  color:white;
+  padding:10px 12px;
+  border-radius:10px;
+  margin-bottom:8px;
+  font-size:14px;
 }
+.game-info strong{
+  color:#ffd700;
+}
+</style>
 </style>
 </head>
 
@@ -127,12 +147,16 @@ button{
     <!-- QUICK DASHBOARD + GAMES -->
     <div id="homeQuick">
       <button onclick="goToDashboard()">BCC Stats</button>
-      <div style="margin-bottom:5px;"><strong>Last Game:</strong> <span id="lastGame">Loading...</span></div>
-      <div><strong>Next Game:</strong> <span id="nextGame">Loading...</span></div>
+  
+      <div class="game-info">
+        <strong>Last Game:</strong> Imran (Green Team) v Saleem (Blue Team) - Round 2, Knockout - March 22nd, 2026 - <strong>Winner: Imran</strong>
+      </div>
+  
+      <div class="game-info">
+        <strong>Next Game:</strong> Aamir Noor v Fahad - Round 2, Knockout - March 29th, 2026
+      </div>
     </div>
-  </div>
-</div>
-
+  
 <!-- DASHBOARD -->
 <div id="dashboard">
   <div class='tableauPlaceholder' id='viz1773374423253'>
