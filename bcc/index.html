@@ -140,34 +140,33 @@ input, select{
 <!-- LOGIN -->
 <div id="loginPage">
   <div class="login-box">
-  <h4>BCC Access</h4>
+    
+    <h4>BCC Access</h4>
 
-  <select id="name"><option>Select Name</option></select>
-  <input type="password" id="pin" placeholder="Enter PIN">
+    <select id="name"><option>Select Name</option></select>
+    <input type="password" id="pin" placeholder="Enter PIN">
 
-  <button class="cta-btn" id="enterBtn" onclick="login()">Enter</button>
+    <button class="cta-btn" id="enterBtn" onclick="login()">Enter</button>
 
-  <p id="welcomeMsg" style="margin-top:10px; font-weight:600;"></p>
-  <p id="error"></p>
+    <p id="welcomeMsg"></p>
+    <p id="error"></p>
 
-  <div id="homeQuick">
-    <button class="cta-btn" onclick="goToDashboard()">BCC Stats</button>
-    <p style="margin-top:10px; font-size:13px; color:#ffd700;">
-      ⚠️ Login again to access dashboard
-    </p>
+    <div id="homeQuick">
+      <button class="cta-btn" onclick="goToDashboard()">BCC Stats</button>
 
-    <div class="game-info">
-      <strong>Next Game:</strong>
-      <div id="nextGame">Loading...</div>
+      <div class="game-info">
+        <strong>Next Game:</strong>
+        <div id="nextGame">Loading...</div>
+      </div>
+
+      <div class="game-info">
+        <strong>Last Game:</strong>
+        <div id="lastGame">Loading...</div>
+      </div>
     </div>
 
-    <div class="game-info">
-      <strong>Last Game:</strong>
-      <div id="lastGame">Loading...</div>
-    </div>
-  </div>
-</div>
-
+  </div> <!-- ✅ CLOSE login-box -->
+</div>   <!-- ✅ CLOSE loginPage -->
 <!-- DASHBOARD -->
 <div id="dashboard" style="display:none;">
   <div class='tableauPlaceholder' id='viz1773374423253'>
@@ -386,6 +385,7 @@ function loadTableau(){
 function goToDashboard(){
   document.getElementById("dashboard").style.display="block";
   setTimeout(loadTableau,100);
+  window.scrollTo({ top: document.getElementById("dashboard").offsetTop, behavior: "smooth" });
 }
 </script>
 
@@ -436,6 +436,10 @@ async function loadMatchInfo(){
 
 // LOGIN
 async function login(){
+  if(name === "Select Name"){
+  document.getElementById("error").innerText="Select a name";
+  return;
+}
   const name = document.getElementById("name").value;
   const pin = document.getElementById("pin").value;
 
@@ -448,37 +452,37 @@ async function login(){
   }
 
   const user = snapshot.docs[0].data();
-
+  
   if(user.pin === pin){
 
-    startTime = new Date();
+  // ✅ CLEAR any previous error
+  document.getElementById("error").innerText = "";
 
-    db.collection("logins").add({
-      user:name,
-      time:new Date()
-    });
+  startTime = new Date();
 
-    // ✅ Hide Enter button
-    document.getElementById("enterBtn").style.display = "none";
+  db.collection("logins").add({
+    user:name,
+    time:new Date()
+  });
 
-    // ✅ Show welcome message
-    document.getElementById("welcomeMsg").innerText = 
-      "Welcome, " + name;
+  document.getElementById("enterBtn").style.display = "none";
 
-    // ✅ Show dashboard button section
-    document.getElementById("homeQuick").style.display="block";
+  document.getElementById("welcomeMsg").innerText = 
+    "Welcome, " + name;
 
-    document.getElementById("name").disabled=true;
-    document.getElementById("pin").disabled=true;
+  document.getElementById("homeQuick").style.display="block";
 
-    loadMatchInfo();
-    startCountdown();
+  document.getElementById("name").disabled=true;
+  document.getElementById("pin").disabled=true;
 
-    localStorage.setItem("user", name);
-    localStorage.setItem("startTime", startTime);
+  loadMatchInfo();
+  startCountdown();
+
+  localStorage.setItem("user", name);
+  localStorage.setItem("startTime", startTime);
 
   } else {
-    document.getElementById("error").innerText="Wrong PIN";
+  document.getElementById("error").innerText="Wrong PIN";
   }
 }
 
@@ -500,8 +504,10 @@ window.addEventListener("beforeunload", function(){
 function getNextSundaySunrise(){
   const now = new Date();
 
-  let nextSunday = new Date();
-  nextSunday.setDate(now.getDate() + (7 - now.getDay()));
+  let daysToSunday = (7 - now.getDay()) % 7;
+  if(daysToSunday === 0) daysToSunday = 7;
+
+nextSunday.setDate(now.getDate() + daysToSunday);
 
   // 🌅 Sunrise approx (6:30 AM)
   nextSunday.setHours(6,30,0,0);
