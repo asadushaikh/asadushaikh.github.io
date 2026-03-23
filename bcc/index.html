@@ -435,13 +435,15 @@ async function loadMatchInfo(){
 }
 
 // LOGIN
+
 async function login(){
-  if(name === "Select Name"){
-  document.getElementById("error").innerText="Select a name";
-  return;
-}
   const name = document.getElementById("name").value;
   const pin = document.getElementById("pin").value;
+
+  if(name === "Select Name"){
+    document.getElementById("error").innerText="Select a name";
+    return;
+  }
 
   const snapshot = await db.collection("users")
     .where("name","==",name).get();
@@ -454,38 +456,31 @@ async function login(){
   const user = snapshot.docs[0].data();
   
   if(user.pin === pin){
+    document.getElementById("error").innerText = ""; // clear any previous error
 
-  // ✅ CLEAR any previous error
-  document.getElementById("error").innerText = "";
+    startTime = new Date();
 
-  startTime = new Date();
+    db.collection("logins").add({
+      user:name,
+      time:new Date()
+    });
 
-  db.collection("logins").add({
-    user:name,
-    time:new Date()
-  });
+    document.getElementById("enterBtn").style.display = "none";
+    document.getElementById("welcomeMsg").innerText = "Welcome, " + name;
+    document.getElementById("homeQuick").style.display="block";
+    document.getElementById("name").disabled=true;
+    document.getElementById("pin").disabled=true;
 
-  document.getElementById("enterBtn").style.display = "none";
+    loadMatchInfo();
+    startCountdown();
 
-  document.getElementById("welcomeMsg").innerText = 
-    "Welcome, " + name;
-
-  document.getElementById("homeQuick").style.display="block";
-
-  document.getElementById("name").disabled=true;
-  document.getElementById("pin").disabled=true;
-
-  loadMatchInfo();
-  startCountdown();
-
-  localStorage.setItem("user", name);
-  localStorage.setItem("startTime", startTime);
+    localStorage.setItem("user", name);
+    localStorage.setItem("startTime", startTime);
 
   } else {
-  document.getElementById("error").innerText="Wrong PIN";
+    document.getElementById("error").innerText="Wrong PIN";
   }
 }
-
 // SESSION TRACKING
 window.addEventListener("beforeunload", function(){
   const user = localStorage.getItem("user");
