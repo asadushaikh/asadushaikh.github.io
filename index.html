@@ -29,8 +29,13 @@ body{
 
 .hero img{
     width:140px;
-    border-radius:50%;
+    height:140px;           /* force equal height */
+    object-fit:cover;       /* prevents stretching */
+    border-radius:50%;      /* perfect circle */
     margin-bottom:20px;
+
+    border:3px solid #0a2342;  /* optional: clean frame */
+    box-shadow:0 4px 12px rgba(0,0,0,0.15); /* crisp look */
 }
 
 .hero h1{
