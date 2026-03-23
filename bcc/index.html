@@ -121,18 +121,6 @@ button{
   </div>
 </section>
 
-<!-- HERO SECTION -->
-<section class="hero">
-  <div class="container">
-    <h1>BCC Cricket Club</h1>
-    <div class="hero-tagline">Brotherhood • Competition • Passion for Cricket</div>
-    <p class="hero-sub">
-      A friendly, brotherly cricket group established in 2013, built on trust, respect, and love for the game.
-      More than just cricket — BCC is family.
-    </p>
-  </div>
-</section>
-
 <!-- LOGIN / ACCESS + QUICK DASHBOARD -->
 <div id="loginPage">
   <div class="login-box">
@@ -147,16 +135,12 @@ button{
     <!-- QUICK DASHBOARD + GAMES -->
     <div id="homeQuick">
       <button onclick="goToDashboard()">BCC Stats</button>
-  
-      <div class="game-info">
-        <strong>Last Game:</strong> Imran (Green Team) v Saleem (Blue Team) - Round 2, Knockout - March 22nd, 2026 - <strong>Winner: Imran</strong>
-      </div>
-  
-      <div class="game-info">
-        <strong>Next Game:</strong> Aamir Noor v Fahad - Round 2, Knockout - March 29th, 2026
-      </div>
+      <div style="margin-bottom:5px;"><strong>Last Game:</strong> <span id="lastGame">Loading...</span></div>
+      <div><strong>Next Game:</strong> <span id="nextGame">Loading...</span></div>
     </div>
-  
+  </div>
+</div>
+
 <!-- DASHBOARD -->
 <div id="dashboard">
   <div class='tableauPlaceholder' id='viz1773374423253'>
@@ -265,6 +249,20 @@ window.addEventListener("beforeunload", function(){
   }
 });
 </script>
+
+
+<!-- HERO SECTION -->
+<section class="hero">
+  <div class="container">
+    <h1>BCC Cricket Club</h1>
+    <div class="hero-tagline">Brotherhood • Competition • Passion for Cricket</div>
+    <p class="hero-sub">
+      A friendly, brotherly cricket group established in 2013, built on trust, respect, and love for the game.
+      More than just cricket — BCC is family.
+    </p>
+  </div>
+</section>
+
 
 <!-- MEMBERS SECTION -->
 <section class="members" style="padding:60px 20px; text-align:center; background:white;">
