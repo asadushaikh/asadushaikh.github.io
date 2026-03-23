@@ -38,25 +38,42 @@ body{
 #loginPage{
   display:flex;
   justify-content:center;
-  align-items:center;
-  padding:40px 20px;
+  align-items:flex-start;
+  padding:20px;
+  background:#123b70;
 }
 .login-box{
-  background:white;
-  padding:30px;
+  background:#1e4a8f;
+  color:white;
+  padding:20px;
   border-radius:10px;
   text-align:center;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
+  box-shadow:0 2px 10px rgba(0,0,0,0.2);
+  width:250px;
 }
 input, select{
   width:100%;
-  padding:10px;
-  margin:10px 0;
+  padding:8px;
+  margin:5px 0;
+  border-radius:5px;
+  border:none;
 }
-#homePage{
+button{
+  cursor:pointer;
+}
+#homeQuick{
   display:none;
-  padding:20px;
-  text-align:center;
+  margin-top:15px;
+  text-align:left;
+}
+#homeQuick button{
+  width:100%;
+  padding:8px;
+  margin-bottom:8px;
+  border:none;
+  border-radius:5px;
+  background:#0a2342;
+  color:white;
 }
 #dashboard{
   display:none;
@@ -95,33 +112,25 @@ input, select{
     </p>
   </div>
 </section>
-<!-- LOGIN / ACCESS SECTION -->
-<div id="loginPage" style="display:flex; justify-content:center; padding:20px; background:#123b70;">
-  <div class="login-box" style="background:#1e4a8f; color:white; padding:15px 20px; border-radius:10px; text-align:center; box-shadow:0 2px 10px rgba(0,0,0,0.2); width:250px;">
+
+<!-- LOGIN / ACCESS + QUICK DASHBOARD -->
+<div id="loginPage">
+  <div class="login-box">
     <h4 style="margin-bottom:10px;">BCC Access</h4>
-    <select id="name" style="width:100%; padding:8px; margin:5px 0; border-radius:5px; border:none;">
+    <select id="name">
       <option value="">Select Name</option>
     </select>
-    <input type="password" id="pin" placeholder="Enter PIN" 
-           style="width:100%; padding:8px; margin:5px 0; border-radius:5px; border:none;">
-    <button onclick="login()" 
-            style="width:100%; padding:8px; margin-top:8px; border:none; border-radius:5px; background:#0a2342; color:white; cursor:pointer;">
-      Enter
-    </button>
+    <input type="password" id="pin" placeholder="Enter PIN">
+    <button onclick="login()">Enter</button>
     <p id="error" style="color:#ffcccb; margin-top:5px; font-size:13px;"></p>
-  </div>
-</div>
 
-<!-- HOME PAGE -->
-<div id="homePage">
-  <h2 id="welcomeText">Welcome</h2>
-  <div style="background:white; padding:20px; border-radius:10px; margin:20px;">
-    <h3>Last Game</h3>
-    <p id="lastGame">Loading...</p>
-    <h3>Next Game</h3>
-    <p id="nextGame">Loading...</p>
+    <!-- QUICK DASHBOARD + GAMES -->
+    <div id="homeQuick">
+      <button onclick="goToDashboard()">Dashboard</button>
+      <div style="margin-bottom:5px;"><strong>Last Game:</strong> <span id="lastGame">Loading...</span></div>
+      <div><strong>Next Game:</strong> <span id="nextGame">Loading...</span></div>
+    </div>
   </div>
-  <button onclick="goToDashboard()" style="padding:12px 20px; font-size:16px;">Go to BCC Stats</button>
 </div>
 
 <!-- DASHBOARD -->
@@ -151,9 +160,8 @@ function loadTableau(){
 
 // SHOW DASHBOARD
 function goToDashboard(){
-  document.getElementById("homePage").style.display = "none";
   document.getElementById("dashboard").style.display = "block";
-  setTimeout(loadTableau, 100); // ensures Tableau renders correctly
+  setTimeout(loadTableau, 100); 
 }
 </script>
 
@@ -211,9 +219,10 @@ async function login(){
   if(user.pin === pin){
     startTime = new Date();
     db.collection("logins").add({user:name,time:new Date()});
-    document.getElementById("loginPage").style.display = "none";
-    document.getElementById("homePage").style.display = "block";
-    document.getElementById("welcomeText").innerText = "Welcome, " + name;
+    document.getElementById("error").innerText = "";
+    document.getElementById("homeQuick").style.display = "block";
+    document.getElementById("name").disabled = true;
+    document.getElementById("pin").disabled = true;
     loadMatchInfo();
     localStorage.setItem("user", name);
     localStorage.setItem("startTime", startTime);
@@ -231,23 +240,13 @@ window.addEventListener("beforeunload", function(){
     db.collection("sessions").add({user:user,duration:duration,exitTime:new Date()});
   }
 });
-
-
-<!-- HERO SECTION -->
-<section class="hero">
-  <div class="container">
-    <h1>BCC Cricket Club</h1>
-    <div class="hero-tagline">Brotherhood • Competition • Passion for Cricket</div>
-    <p class="hero-sub">
-      A friendly, brotherly cricket group established in 2013, built on trust, respect, and love for the game.
-      More than just cricket — BCC is family.
-    </p>
-  </div>
-</section>
+</script>
 
 <!-- MEMBERS SECTION -->
 <section class="members" style="padding:60px 20px; text-align:center; background:white;">
   <div class="members-container" style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center;">
+    <!-- MEMBER CARDS HERE (same as before, omitted for brevity) -->
+    <div class="members-container" style="display:flex; flex-wrap:wrap; gap:20px; justify-content:center;">
 
   <div class="member-card" style="width:180px; text-align:center; border:1px solid #eee; border-radius:10px; padding:15px; box-shadow:0 0 10px rgba(0,0,0,0.05);">
     <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/aamir khan.jpg" 
@@ -429,8 +428,8 @@ window.addEventListener("beforeunload", function(){
     <p style="color:#777; font-size:14px; margin:5px 0;">Bowling: Right Hand</p>
   </div>
 </div>
+  </div>
 </section>
-</script>
 
 </body>
 </html>
