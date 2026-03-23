@@ -140,24 +140,30 @@ input, select{
 <!-- LOGIN -->
 <div id="loginPage">
   <div class="login-box">
-    <h4>BCC Access</h4>
-    <select id="name"><option>Select Name</option></select>
-    <input type="password" id="pin" placeholder="Enter PIN">
-    <button class="cta-btn" onclick="login()">Enter</button>
-    <p id="error"></p>
+  <h4>BCC Access</h4>
 
-    <div id="homeQuick">
-      <button class="cta-btn" onclick="goToDashboard()">BCC Stats</button>
+  <select id="name"><option>Select Name</option></select>
+  <input type="password" id="pin" placeholder="Enter PIN">
 
-      <div class="game-info">
-        <strong>Next Game:</strong>
-        <div id="nextGame">Loading...</div>
-      </div>
+  <button class="cta-btn" id="enterBtn" onclick="login()">Enter</button>
 
-      <div class="game-info">
-        <strong>Last Game:</strong>
-        <div id="lastGame">Loading...</div>
-      </div>
+  <p id="welcomeMsg" style="margin-top:10px; font-weight:600;"></p>
+  <p id="error"></p>
+
+  <div id="homeQuick">
+    <button class="cta-btn" onclick="goToDashboard()">BCC Stats</button>
+    <p style="margin-top:10px; font-size:13px; color:#ffd700;">
+      ⚠️ Login again to access dashboard
+    </p>
+
+    <div class="game-info">
+      <strong>Next Game:</strong>
+      <div id="nextGame">Loading...</div>
+    </div>
+
+    <div class="game-info">
+      <strong>Last Game:</strong>
+      <div id="lastGame">Loading...</div>
     </div>
   </div>
 </div>
@@ -416,10 +422,15 @@ loadUsers();
 // LOAD MATCH INFO
 async function loadMatchInfo(){
   const doc = await db.collection("matches").doc("current").get();
+
   if(doc.exists){
     const data = doc.data();
-    document.getElementById("lastGame").innerText = data.lastGame;
-    document.getElementById("nextGame").innerText = data.nextGame;
+
+    document.getElementById("lastGame").innerHTML = `
+      Imran vs Saleem<br>
+      3/22/2026<br>
+      Winner: Imran
+    `;
   }
 }
 
@@ -439,6 +450,7 @@ async function login(){
   const user = snapshot.docs[0].data();
 
   if(user.pin === pin){
+
     startTime = new Date();
 
     db.collection("logins").add({
@@ -446,14 +458,25 @@ async function login(){
       time:new Date()
     });
 
+    // ✅ Hide Enter button
+    document.getElementById("enterBtn").style.display = "none";
+
+    // ✅ Show welcome message
+    document.getElementById("welcomeMsg").innerText = 
+      "Welcome, " + name;
+
+    // ✅ Show dashboard button section
     document.getElementById("homeQuick").style.display="block";
+
     document.getElementById("name").disabled=true;
     document.getElementById("pin").disabled=true;
 
     loadMatchInfo();
+    startCountdown();
 
     localStorage.setItem("user", name);
     localStorage.setItem("startTime", startTime);
+
   } else {
     document.getElementById("error").innerText="Wrong PIN";
   }
@@ -473,6 +496,46 @@ window.addEventListener("beforeunload", function(){
     });
   }
 });
+
+function getNextSundaySunrise(){
+  const now = new Date();
+
+  let nextSunday = new Date();
+  nextSunday.setDate(now.getDate() + (7 - now.getDay()));
+
+  // 🌅 Sunrise approx (6:30 AM)
+  nextSunday.setHours(6,30,0,0);
+
+  return nextSunday;
+}
+
+function startCountdown(){
+  const timer = setInterval(() => {
+
+    const now = new Date();
+    const target = getNextSundaySunrise();
+
+    const diff = target - now;
+
+    if(diff <= 0){
+      document.getElementById("nextGame").innerHTML = "Game time!";
+      clearInterval(timer);
+      return;
+    }
+
+    const days = Math.floor(diff / (1000*60*60*24));
+    const hrs = Math.floor((diff / (1000*60*60)) % 24);
+    const mins = Math.floor((diff / (1000*60)) % 60);
+    const secs = Math.floor((diff / 1000) % 60);
+
+    document.getElementById("nextGame").innerHTML = `
+      Imran vs Saleem<br>
+      3/29/2026<br>
+      ⏳ ${days}d ${hrs}h ${mins}m ${secs}s
+    `;
+
+  }, 1000);
+}
 </script>
 
 </body>
