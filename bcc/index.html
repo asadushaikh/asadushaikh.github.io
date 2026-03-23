@@ -407,15 +407,26 @@ let startTime;
 
 // LOAD USERS
 async function loadUsers(){
-  const snapshot = await db.collection("users").get();
-  const select = document.getElementById("name");
-  snapshot.forEach(doc=>{
-    const user = doc.data();
-    let option = document.createElement("option");
-    option.value = user.name;
-    option.text = user.name;
-    select.appendChild(option);
-  });
+  try {
+    const snapshot = await db.collection("users").get();
+    const select = document.getElementById("name");
+
+    if(snapshot.empty){
+      console.log("No users found in Firestore!");
+      return;
+    }
+
+    snapshot.forEach(doc=>{
+      const user = doc.data();
+      console.log("Loaded user:", user); // check in console
+      let option = document.createElement("option");
+      option.value = user.name;
+      option.text = user.name;
+      select.appendChild(option);
+    });
+  } catch(err){
+    console.error("Error loading users:", err);
+  }
 }
 loadUsers();
 
@@ -507,7 +518,6 @@ function getNextSundaySunrise(){
   nextSunday.setDate(now.getDate() + daysToSunday);
   // 🌅 Approx sunrise at 6:30 AM
   nextSunday.setHours(6,30,0,0);
-  nextSunday.setMinutes(30);
   nextSunday.setSeconds(0);
   nextSunday.setMilliseconds(0);
 
