@@ -18,6 +18,28 @@ section{
   margin-bottom:30px;
 }
 
+/* BANNER */
+.bcc-banner{
+  background: linear-gradient(90deg,#0a2342,#123b70,#1e4a8f);
+  color:white;
+  text-align:center;
+  padding:18px 10px;
+  box-shadow:0 2px 8px rgba(0,0,0,0.2);
+}
+
+.bcc-banner h1{
+  margin:0;
+  font-size:24px;
+  font-weight:700;
+  letter-spacing:1px;
+}
+
+.bcc-banner p{
+  margin:5px 0 0;
+  font-size:13px;
+  color:#ffd700;
+}
+
 /* LOGIN */
 #loginPage{
   display:flex;
@@ -76,46 +98,84 @@ input, select{
   color:#ffd700;
 }
 
-/* HERO */
+/* HERO IMPROVEMENT */
 .hero{
-  padding:80px 20px;
-  text-align:center;
-  background:white;
-}
-
-/* MEMBERS */
-.members{
   padding:60px 20px;
   text-align:center;
   background:white;
 }
+
+.hero h1{
+  font-size:32px;
+  color:#0a2342;
+}
+
+.hero-tagline{
+  color:#f7b733;
+  font-weight:600;
+  margin-top:5px;
+}
+
+/* MEMBERS - SMALLER + CLEAN */
+.members{
+  padding:50px 20px;
+  background:#f9fbfd;
+}
+
 .members-container{
   display:flex;
   flex-wrap:wrap;
-  gap:20px;
+  gap:15px;
   justify-content:center;
 }
-.member-card img {
-  border-radius: 50%;
-  width: 150px;
-  height: 150px;
-  object-fit: cover;
+
+/* CARD */
+.member-card{
+  width:140px;
+  padding:12px;
+  border-radius:12px;
+  background:white;
+  box-shadow:0 3px 10px rgba(0,0,0,0.08);
+  transition:0.2s;
 }
 
-.member-card h4 {
-  margin-top: 10px;
-  color: #123b70;
+.member-card:hover{
+  transform:translateY(-5px);
 }
 
-.member-card p {
-  color: #777;
-  font-size: 14px;
-  margin: 5px 0;
+/* IMAGE SMALLER */
+.member-card img{
+  width:80px;
+  height:80px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #123b70;
+}
+
+/* TEXT SMALLER */
+.member-card h4{
+  margin-top:8px;
+  font-size:14px;
+  color:#0a2342;
+}
+
+.member-card p{
+  font-size:11px;
+  margin:2px 0;
+  color:#666;
 }
 </style>
 </head>
 
 <body>
+
+<!-- TOP BANNER -->
+<div class="bcc-banner">
+  <div class="container">
+    <h1>Brothers' Cricket Club - BCC</h1>
+    <p>Katy, TX • Brotherhood • Competition • Passion</p>
+  </div>
+</div>
 
 <!-- INTRO SECTION -->
 <!-- INTRO SECTION -->
