@@ -422,18 +422,15 @@ window.addEventListener('DOMContentLoaded', async () => {
 });
 
 // LOAD MATCH INFO
-async function loadMatchInfo(){
-  const doc = await db.collection("matches").doc("current").get();
+function loadMatchInfo(){
+  // Hardcoded last game info
+  const lastGameHTML = `
+    Imran v Saleem<br>
+    3/22/2026<br>
+    Winner: Imran
+  `;
 
-  if(doc.exists){
-    const data = doc.data();
-
-    document.getElementById("lastGame").innerHTML = `
-		Imran v Saleem<br>
-		3/22/2026<br>
-		Winner: Imran
-`;
-  }
+  document.getElementById("lastGame").innerHTML = lastGameHTML;
 }
 
 // LOGIN
@@ -482,6 +479,8 @@ async function login(){
   } else {
     document.getElementById("error").innerText="Wrong PIN";
   }
+  
+  
 }
 // SESSION TRACKING
 window.addEventListener("beforeunload", function(){
@@ -532,7 +531,7 @@ function startCountdown(){
     const secs = Math.floor((diff / 1000) % 60);
 
     document.getElementById("nextGame").innerHTML = `
-      Captain1 vs Captain2<br>
+      Aamir Noor v Fahad<br>
       ${target.toLocaleDateString()}<br>
       ⏳ ${days}d ${hrs}h ${mins}m ${secs}s
     `;
