@@ -427,9 +427,10 @@ async function loadMatchInfo(){
     const data = doc.data();
 
     document.getElementById("lastGame").innerHTML = `
-      Imran vs Saleem<br>
-      3/22/2026<br>
-      Winner: Imran
+		Imran v Saleem<br>
+		3/22/2026<br>
+		Winner: Imran
+`;
     `;
   }
 }
@@ -498,24 +499,25 @@ window.addEventListener("beforeunload", function(){
 
 function getNextSundaySunrise(){
   const now = new Date();
+  let nextSunday = new Date();
 
   let daysToSunday = (7 - now.getDay()) % 7;
-  if(daysToSunday === 0) daysToSunday = 7;
+  if(daysToSunday === 0) daysToSunday = 7; // if today is Sunday, go to next Sunday
 
-nextSunday.setDate(now.getDate() + daysToSunday);
-
-  // 🌅 Sunrise approx (6:30 AM)
+  nextSunday.setDate(now.getDate() + daysToSunday);
+  // 🌅 Approx sunrise at 6:30 AM
   nextSunday.setHours(6,30,0,0);
+  nextSunday.setMinutes(30);
+  nextSunday.setSeconds(0);
+  nextSunday.setMilliseconds(0);
 
   return nextSunday;
 }
 
 function startCountdown(){
   const timer = setInterval(() => {
-
     const now = new Date();
     const target = getNextSundaySunrise();
-
     const diff = target - now;
 
     if(diff <= 0){
@@ -530,11 +532,10 @@ function startCountdown(){
     const secs = Math.floor((diff / 1000) % 60);
 
     document.getElementById("nextGame").innerHTML = `
-      Imran vs Saleem<br>
-      3/29/2026<br>
+      Captain1 vs Captain2<br>
+      ${target.toLocaleDateString()}<br>
       ⏳ ${days}d ${hrs}h ${mins}m ${secs}s
     `;
-
   }, 1000);
 }
 </script>
