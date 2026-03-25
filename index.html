@@ -8,10 +8,8 @@
 <title>Asad Shaikh</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
 
 <style>
-
 body{
     background:#f4f6f8;
     font-family: Arial, Helvetica, sans-serif;
@@ -31,12 +29,24 @@ body{
 
 .hero img{
     width:140px;
-    height:140px;
-    object-fit:cover;
-    border-radius:50%;
+    height:140px;           /* force equal height */
+    object-fit:cover;       /* prevents stretching */
+    border-radius:50%;      /* perfect circle */
     margin-bottom:20px;
-    border:3px solid #0a2342;
-    box-shadow:0 4px 12px rgba(0,0,0,0.15);
+
+    border:3px solid #0a2342;  /* optional: clean frame */
+    box-shadow:0 4px 12px rgba(0,0,0,0.15); /* crisp look */
+}
+
+.card{
+    border:none;
+    border-radius:12px;
+    transition:all 0.3s ease;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+    box-shadow:0 8px 20px rgba(0,0,0,0.15);
 }
 
 .hero h1{
@@ -48,39 +58,28 @@ body{
     font-size:20px;
     font-weight:600;
     color:#123b70;
+    margin-top:10px;
 }
 
 .hero-sub{
     max-width:700px;
     margin:auto;
     margin-top:15px;
+    font-size:16px;
     color:#555;
 }
 
-/* SECTIONS */
+/* SECTION TITLE */
 .section-title{
     color:#0a2342;
     font-weight:700;
     margin-bottom:30px;
 }
 
-/* CARDS */
-.card{
-    border:none;
-    border-radius:12px;
-    transition:all 0.3s ease;
-}
-
-.card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 10px 25px rgba(0,0,0,0.15);
-}
-
-/* ICON STYLE */
-.icon{
-    font-size:30px;
-    color:#0a2342;
-    margin-bottom:10px;
+/* PASSION BUTTONS */
+.passion-btn{
+    width:200px;
+    margin:10px;
 }
 
 /* BUTTON */
@@ -93,34 +92,11 @@ body{
     background:#123b70;
 }
 
-/* ANIMATION */
-.fade-in{
-    opacity:0;
-    transform:translateY(20px);
-    animation:fadeIn 1s ease forwards;
-}
-
-@keyframes fadeIn{
-    to{
-        opacity:1;
-        transform:translateY(0);
-    }
-}
-
-/* CTA STRIP */
-.cta-strip{
-    background:#0a2342;
-    color:white;
-    padding:20px;
-    text-align:center;
-}
-
-/* FORM */
-.form-control{
-    border-radius:10px;
-}
-
+<button onclick="goToDashboard()" style="padding:12px 20px; font-size:16px;">
+  Go to BCC Stats
+</button>
 </style>
+
 </head>
 
 <body>
@@ -132,152 +108,171 @@ body{
 </div>
 </nav>
 
-<!-- HERO -->
-<section class="hero fade-in">
+<!-- HERO SECTION -->
+<section class="hero">
 <div class="container">
 
-<img src="asadushaikh.jpg">
+<img src="asadushaikh.jpg" alt="Asad Shaikh">
 
 <h1>From Tando to Triumph</h1>
 
 <div class="hero-tagline">
-Data Engineer • Speaker • Traveler
+Data Engineer • Public Speaker • Traveler 
 </div>
 
 <p class="hero-sub">
-I help businesses and organizations turn data into insights, automate workflows, and make smarter decisions.
+I turn data into insight, challenges into opportunities, and experiences into stories that inspire.
+From humble beginnings to building a professional journey in data technologies,
+my path is driven by hardwork, resilience, and a passion for impact.
 </p>
-
-<a href="#contact" class="btn btn-primary mt-3">Work With Me</a>
 
 </div>
 </section>
 
-<!-- WHO I HELP -->
-<section class="p-5 text-center bg-light fade-in">
+<!-- ABOUT / STORY -->
+<section class="p-5 text-center">
 <div class="container">
 
-<h2 class="section-title">Who I Help</h2>
+<!-- DATA TOOLS SECTION -->
+<section class="container py-5">
+  <h2 class="section-title text-center">My Expertise</h2>
+
+  <div class="row g-4">
+
+    <!-- CARD -->
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm p-3">
+        <h5>SQL / PL-SQL (Oracle & SQL Server)</h5>
+        <p><strong>What:</strong> Core database technologies for managing structured data.</p>
+        <p><strong>Business Value:</strong> Reliable, fast data access and reporting.</p>
+        <p><strong>How I Help:</strong> Query optimization, stored procedures, performance tuning.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm p-3">
+        <h5>Databricks (PySpark)</h5>
+        <p><strong>What:</strong> Unified analytics platform for big data processing.</p>
+        <p><strong>Business Value:</strong> Scalable data processing and faster insights.</p>
+        <p><strong>How I Help:</strong> Build scalable pipelines and optimize big data workflows.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm p-3">
+        <h5>AWS (Glue, Athena, S3, Redshift)</h5>
+        <p><strong>What:</strong> Cloud ecosystem for storage, ETL, and analytics.</p>
+        <p><strong>Business Value:</strong> Cost-effective, scalable data solutions.</p>
+        <p><strong>How I Help:</strong> Build data lakes, pipelines, and cloud architectures.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm p-3">
+        <h5>Informatica (ETL)</h5>
+        <p><strong>What:</strong> Enterprise data integration tool.</p>
+        <p><strong>Business Value:</strong> Reliable and governed data movement.</p>
+        <p><strong>How I Help:</strong> Build automated ETL pipelines and workflows.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm p-3">
+        <h5>Python (Pandas, NumPy)</h5>
+        <p><strong>What:</strong> Programming for data processing and analytics.</p>
+        <p><strong>Business Value:</strong> Automation and advanced analytics.</p>
+        <p><strong>How I Help:</strong> Build scripts, automation, and data models.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm p-3">
+        <h5>Visualization (Tableau, Power BI, ThoughtSpot)</h5>
+        <p><strong>What:</strong> BI tools for dashboards and reporting.</p>
+        <p><strong>Business Value:</strong> Clear insights and decision-making.</p>
+        <p><strong>How I Help:</strong> Build interactive dashboards and reports.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm p-3">
+        <h5>SQL Developer / TOAD</h5>
+        <p><strong>What:</strong> Database development tools.</p>
+        <p><strong>Business Value:</strong> Efficient database management and debugging.</p>
+        <p><strong>How I Help:</strong> Streamline development and troubleshooting processes.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm p-3">
+        <h5>Performance Optimization</h5>
+        <p><strong>What:</strong> Improving system and query performance.</p>
+        <p><strong>Business Value:</strong> Faster systems and reduced costs.</p>
+        <p><strong>How I Help:</strong> Identify bottlenecks and optimize workloads.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm p-3">
+        <h5>Snyk (Security)</h5>
+        <p><strong>What:</strong> Vulnerability scanning and security tool.</p>
+        <p><strong>Business Value:</strong> Protects systems and ensures compliance.</p>
+        <p><strong>How I Help:</strong> Identify risks and secure applications.</p>
+      </div>
+    </div>
+
+    <div class="col-md-6 col-lg-4">
+      <div class="card h-100 shadow-sm p-3">
+        <h5>Agile / Scrum / Jira</h5>
+        <p><strong>What:</strong> Project management and collaboration tools.</p>
+        <p><strong>Business Value:</strong> Faster delivery and better teamwork.</p>
+        <p><strong>How I Help:</strong> Manage workflows, sprints, and communication.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<h2 class="section-title">My Journey</h2>
 
 <p style="max-width:800px; margin:auto;">
-Small businesses, startups, and cricket clubs that have data but don’t know how to use it effectively.
+My journey began in Tando Muhammad Khan, Sindh, Pakistan, where life was simple yet deeply rooted in resilience, faith, and hard work. 
+Those early experiences shaped my perspective and continue to influence the way I approach challenges today.
+My father was a hard working salt merchant who carried heavy bags on his shoulders to earn a living. He taught me values of hard work.
+Over time, I have built a career in data engineering, analytics, and visualization—transforming complex datasets into meaningful insights that empower organizations to make smarter, data-driven decisions. 
+I bring expertise across cloud and on-premise environments, along with hands-on experience in AI and machine learning technologies, enabling me to design scalable and impactful data solutions.
+</p>
+
+<p style="max-width:800px; margin:auto; margin-top:15px;">
+Beyond my professional work, I serve as a public speaker and teacher, sharing both my expertise in data and my passion for purpose, faith, and community. 
+Through these platforms, I aim to inspire others to grow, think critically, and use knowledge to create meaningful impact.
+I am also a passionate traveler, driven by a curiosity to explore diverse cultures, rich histories, and the stories that connect us all.
 </p>
 
 </div>
 </section>
 
-<!-- HOW I HELP -->
-<section class="p-5 text-center fade-in">
+<!-- PASSIONS -->
+<section class="p-5 text-center">
 <div class="container">
 
-<h2 class="section-title">How I Help</h2>
+<h2 class="section-title">What I Do</h2>
 
-<div class="row g-4">
+<div class="d-flex justify-content-center flex-wrap">
 
-<div class="col-md-4">
-<i class="bi bi-database icon"></i>
-<h5>Data Organization</h5>
-<p>Clean, structure, and optimize your data systems.</p>
-</div>
+<a href="data/" class="btn btn-primary passion-btn">
+Data Engineering & Analytics
+</a>
 
-<div class="col-md-4">
-<i class="bi bi-bar-chart-line icon"></i>
-<h5>Dashboards</h5>
-<p>Visual insights to drive better decisions.</p>
-</div>
+<a href="publicspeaking/" class="btn btn-primary passion-btn">
+Public Speaking & Khutbahs
+</a>
 
-<div class="col-md-4">
-<i class="bi bi-gear icon"></i>
-<h5>Automation</h5>
-<p>Save time with automated workflows.</p>
-</div>
+<a href="travel/" class="btn btn-primary passion-btn">
+Travel & Exploration
+</a>
 
 </div>
-
-</div>
-</section>
-
-<!-- EXPERTISE -->
-<section class="container py-5 fade-in">
-<h2 class="section-title text-center">My Expertise</h2>
-
-<div class="row g-4">
-
-<div class="col-md-4">
-<div class="card p-3">
-<h5>SQL / Databases</h5>
-<p>Performance tuning, queries, optimization.</p>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="card p-3">
-<h5>AWS & Cloud</h5>
-<p>Glue, S3, Athena, Redshift pipelines.</p>
-</div>
-</div>
-
-<div class="col-md-4">
-<div class="card p-3">
-<h5>Python & PySpark</h5>
-<p>Automation, big data processing.</p>
-</div>
-</div>
-
-</div>
-</section>
-
-<!-- CRICKET EDGE -->
-<section class="p-5 text-center bg-light fade-in">
-<div class="container">
-
-<h2 class="section-title">Cricket + Data</h2>
-
-<p style="max-width:800px; margin:auto;">
-I combine my passion for cricket with data analytics to help teams track performance,
-analyze matches, and improve strategy.
-</p>
-
-</div>
-</section>
-
-<!-- HUMAN SIDE -->
-<section class="p-5 text-center fade-in">
-<div class="container">
-
-<h2 class="section-title">Beyond Data</h2>
-
-<p style="max-width:800px; margin:auto;">
-Traveler, speaker, and team player. I bring communication, leadership, and real-world perspective to every project.
-</p>
-
-</div>
-</section>
-
-<!-- TEAM STRIP -->
-<div class="cta-strip">
-✔ Team Player | ✔ Independent Contributor | ✔ Strong Communicator
-</div>
-
-<!-- CONTACT / FUNNEL -->
-<section id="contact" class="p-5 text-center fade-in">
-<div class="container">
-
-<h2 class="section-title">Get Free Data Consultation</h2>
-
-<p>Tell me about your data challenges — I’ll suggest solutions.</p>
-
-<form action="https://formspree.io/f/your-id" method="POST" style="max-width:500px; margin:auto;">
-
-<input type="text" name="name" class="form-control mb-3" placeholder="Your Name" required>
-
-<input type="email" name="email" class="form-control mb-3" placeholder="Your Email" required>
-
-<textarea name="message" class="form-control mb-3" placeholder="Your Data Problem"></textarea>
-
-<button type="submit" class="btn btn-primary w-100">Submit</button>
-
-</form>
 
 </div>
 </section>
