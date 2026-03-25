@@ -39,14 +39,33 @@ body{
 }
 
 .card{
-    border:none;
-    border-radius:12px;
-    transition:all 0.3s ease;
+    border:1px solid #e6eaf0;          /* subtle border */
+    border-radius:10px;                /* slightly tighter */
+    padding:16px;                      /* smaller padding */
+    transition:all 0.25s ease;
+    background:#ffffff;
 }
 
+/* tighter text inside cards */
+.card h5{
+    font-size:16px;
+    font-weight:600;
+    margin-bottom:8px;
+    color:#0a2342;
+}
+
+.card p{
+    font-size:13.5px;
+    margin-bottom:6px;
+    color:#555;
+    line-height:1.4;
+}
+
+/* hover effect (clean, not too heavy) */
 .card:hover{
-    transform:translateY(-5px);
-    box-shadow:0 8px 20px rgba(0,0,0,0.15);
+    transform:translateY(-4px);
+    box-shadow:0 6px 14px rgba(0,0,0,0.08);
+    border-color:#d0d7e2;
 }
 
 .hero h1{
@@ -136,7 +155,7 @@ I help businesses turn raw data into powerful insights using cloud, AI, and mode
 <section class="container py-5 text-center">
   <h2 class="section-title">How I Help You</h2>
 
-  <div class="row g-4">
+  <div class="row g-3">
 
     <div class="col-md-4">
       <div class="card p-3">
@@ -171,7 +190,7 @@ I help businesses turn raw data into powerful insights using cloud, AI, and mode
 <section class="container py-5">
   <h2 class="section-title text-center">My Expertise</h2>
 
-  <div class="row g-4">
+  <div class="row g-3">
 
     <!-- CARD -->
     <div class="col-md-6 col-lg-4">
@@ -328,7 +347,7 @@ I am also a passionate traveler, driven by a curiosity to explore diverse cultur
 <section class="p-5 text-center">
 <div class="container">
 
-<h2 class="section-title">What I Do</h2>
+<h2 class="section-title">Projects</h2>
 
 <div class="d-flex justify-content-center flex-wrap">
 
