@@ -37,6 +37,11 @@ table th, table td {
   </select>
 </div>
 
+<div style="text-align:center; margin-bottom:25px;">
+  <h3>🏆 Top 5 Players</h3>
+  <div id="leaderboard" style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap;"></div>
+</div>
+
 <table class="table table-striped table-bordered" id="statsTable">
   <thead class="table-dark">
     <tr>
@@ -84,7 +89,7 @@ function renderTable(season) {
     if (!row["Player Name"]) return false;
 
     // ❌ Remove guests (G)
-    if (row["Player Name"].endsWith("(G)")) return false;
+    if (row["Player Name"].startsWith("(G)")) return false;
 
     const matchDate = new Date(row["Date"]);
 
@@ -134,34 +139,72 @@ function renderTable(season) {
     if (runs > p.hs) p.hs = runs;
   });
 
+  // Calculate stats
+  Object.keys(players).forEach(name => {
+    const p = players[name];
+    p.matches = p.dates.size;
+    p.sr = p.balls ? ((p.runs / p.balls) * 100).toFixed(1) : 0;
+    p.avg = p.outs ? (p.runs / p.outs).toFixed(1) : p.runs;
+  });
+
+  // Find best SR and Avg
+  let bestSR = 0, bestAvg = 0;
+  Object.values(players).forEach(p => {
+    if (parseFloat(p.sr) > bestSR) bestSR = parseFloat(p.sr);
+    if (parseFloat(p.avg) > bestAvg) bestAvg = parseFloat(p.avg);
+  });
+
+  // Render Table sorted by runs
   const tbody = document.querySelector("#statsTable tbody");
   tbody.innerHTML = "";
 
-  Object.keys(players).forEach(name => {
+  Object.entries(players)
+    .sort((a,b) => b[1].runs - a[1].runs)
+    .forEach(([name, p]) => {
 
-    const p = players[name];
+      const row = `
+        <tr>
+          <td>${name}</td>
+          <td>${p.matches}</td>
+          <td>${p.innings}</td>
+          <td>${p.runs}</td>
+          <td>${p.balls}</td>
+          <td>${p.sixes}</td>
+          <td>${p.fours}</td>
+          <td>${p.dots}</td>
+          <td style="background:${p.sr==bestSR?'#d4edda':''}">${p.sr}</td>
+          <td style="background:${p.avg==bestAvg?'#fff3cd':''}">${p.avg}</td>
+          <td>${p.hs}</td>
+        </tr>
+      `;
 
-    const matches = p.dates.size;
-    const sr = p.balls ? ((p.runs / p.balls) * 100).toFixed(1) : 0;
-    const avg = p.outs ? (p.runs / p.outs).toFixed(1) : p.runs;
+      tbody.innerHTML += row;
+    });
 
-    const row = `
-      <tr>
-        <td>${name}</td>
-        <td>${matches}</td>
-        <td>${p.innings}</td>
-        <td>${p.runs}</td>
-        <td>${p.balls}</td>
-        <td>${p.sixes}</td>
-        <td>${p.fours}</td>
-        <td>${p.dots}</td>
-        <td>${sr}</td>
-        <td>${avg}</td>
-        <td>${p.hs}</td>
-      </tr>
+  // Render Leaderboard (Top 5 by runs)
+  const top5 = Object.entries(players)
+    .sort((a,b) => b[1].runs - a[1].runs)
+    .slice(0,5);
+
+  const leaderboard = document.getElementById("leaderboard");
+  leaderboard.innerHTML = "";
+
+  top5.forEach(([name, p], index) => {
+    const div = document.createElement("div");
+    div.style.background = "#fff";
+    div.style.padding = "15px";
+    div.style.borderRadius = "8px";
+    div.style.boxShadow = "0 2px 6px rgba(0,0,0,0.15)";
+    div.style.width = "150px";
+
+    div.innerHTML = `
+      <h4 style="margin:0">${index+1}. ${name}</h4>
+      <p style="margin:5px 0 0;"><b>Runs:</b> ${p.runs}</p>
+      <p style="margin:2px 0 0;"><b>Avg:</b> ${p.avg}</p>
+      <p style="margin:2px 0 0;"><b>SR:</b> ${p.sr}</p>
     `;
 
-    tbody.innerHTML += row;
+    leaderboard.appendChild(div);
   });
 }
 </script>
