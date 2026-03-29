@@ -32,10 +32,25 @@ table tbody tr:nth-child(odd) { background:#eef2f7; }
 .high-avg { background:#fff3cd; font-weight:bold; } /* light yellow */
 
 /* Leaderboard */
-#leaderboard { display:flex; justify-content:center; gap:15px; flex-wrap:wrap; margin-bottom:25px; }
-.leader-card { background:#fff; padding:12px; border-radius:8px; box-shadow:0 2px 5px rgba(0,0,0,0.1); width:140px; text-align:center; }
-.leader-card h4 { margin:0 0 5px 0; font-size:1rem; color:#1b3a57; }
-.leader-card p { margin:2px 0; font-size:0.85rem; }
+#leaderboard {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 15px;
+  justify-items: center;
+  margin-bottom: 25px;
+}
+
+@media(max-width:768px){
+  #leaderboard {
+    grid-template-columns: repeat(3, 1fr); /* first row 3 cards */
+    grid-auto-rows: auto;
+  }
+  /* Optional: second row will automatically contain remaining 2 cards */
+  table th, table td {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+  }
+}
 
 /* Responsive for mobile */
 @media(max-width:768px){
