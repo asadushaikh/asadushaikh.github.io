@@ -43,9 +43,10 @@ table tbody tr:nth-child(odd) { background:#eef2f7; }
     font-size: 0.75rem;
     padding: 4px 6px;
   }
+  /* Keep leaderboard cards side by side */
   #leaderboard {
-    flex-direction: column;
-    gap: 10px;
+    flex-wrap: nowrap;
+    overflow-x:auto;
   }
 }
 </style>
@@ -75,11 +76,11 @@ table tbody tr:nth-child(odd) { background:#eef2f7; }
 <table class="table table-bordered" id="statsTable">
   <thead class="table-dark">
     <tr>
-      <th>Player Name</th>
-      <th>Matches</th>
-      <th>Innings</th>
-      <th>Runs</th>
-      <th>Balls</th>
+      <th>Name</th>
+      <th>M</th>
+      <th>I</th>
+      <th>R</th>
+      <th>B</th>
       <th>6s</th>
       <th>4s</th>
       <th>Dots</th>
@@ -94,7 +95,11 @@ table tbody tr:nth-child(odd) { background:#eef2f7; }
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 <script>
 let fullData = [];
-const excludePlayers = ["Asam","Hasnain","Irfan","Khairul","Muddassir","Nafees","Misbah","Waseem","Misbah"];
+const excludePlayers = [
+  "Asam","Hasnain","Irfan","Khairul","Muddassir","Nafees",
+  "Misbah","Waseem","Nayeem","Idrees","Deewan Waqas Jamil",
+  "Deewaan Rashid (For Anas)","Sheraz (For Majid)","Misbah"
+];
 
 Papa.parse("bcc_data.csv", {
   download: true,
@@ -110,19 +115,13 @@ Papa.parse("bcc_data.csv", {
 });
 
 function renderTable(season) {
-
   const players = {};
   const cutoffDate = new Date("2025-04-20");
 
   const filteredData = fullData.filter(row => {
-    if (!row["Player Name"]) return false;
-
-    // Remove guests (G) anywhere in name
-    if (row["Player Name"].includes("(G)")) return false;
-
-    // Remove specific excluded players
-    if (excludePlayers.includes(row["Player Name"])) return false;
-
+    if (!row["Player Name"] || row["Player Name"].trim()==="") return false;
+    if (row["Player Name"].includes("(G)")) return false; // remove guests
+    if (excludePlayers.includes(row["Player Name"])) return false; // remove excluded
     const matchDate = new Date(row["Date"]);
     if (season === "s1") return matchDate < cutoffDate;
     if (season === "s2") return matchDate >= cutoffDate;
