@@ -488,9 +488,9 @@ window.addEventListener('DOMContentLoaded', async () => {
 function loadMatchInfo(){
   // Hardcoded last game info
   const lastGameHTML = `
-    Imran v Saleem<br>
+    Aamir Noor v Fahad<br>
     3/22/2026<br>
-    Winner: Imran
+    Winner: Aamir Noor
   `;
 
   document.getElementById("lastGame").innerHTML = lastGameHTML;
@@ -594,7 +594,7 @@ function startCountdown(){
     const secs = Math.floor((diff / 1000) % 60);
 
     document.getElementById("nextGame").innerHTML = `
-      Aamir Noor v Fahad<br>
+      Atif v Hafiz Atiq<br>
       ${target.toLocaleDateString()}<br>
       ⏳ ${days}d ${hrs}h ${mins}m ${secs}s
     `;
