@@ -399,8 +399,7 @@ input, select{
     <p id="welcomeMsg"></p>
     <p id="error"></p>
 
-    <div id="homeQuick">
-      <button class="cta-btn" onclick="goToDashboard()">BCC Stats</button>
+    <button class="cta-btn" onclick="goToStats()">BCC Stats</button>
 
       <div class="game-info">
         <strong>Next Game:</strong>
@@ -446,6 +445,10 @@ function goToDashboard(){
   document.getElementById("dashboard").style.display="block";
   setTimeout(loadTableau,100);
   window.scrollTo({ top: document.getElementById("dashboard").offsetTop, behavior: "smooth" });
+}
+
+function goToStats(){
+  window.location.href = "bcc-stats.html";
 }
 </script>
 
@@ -597,6 +600,7 @@ function startCountdown(){
     `;
   }, 1000);
 }
+
 </script>
 
 </body>
