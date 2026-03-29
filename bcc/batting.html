@@ -40,6 +40,12 @@ table tbody tr:nth-child(odd) { background:#eef2f7; }
   margin-bottom: 25px;
 }
 
+/* Highlight Top 5 players in table */
+.top5 {
+  background-color: #cfe2ff !important; /* light blue */
+  font-weight: bold;
+}
+
 @media(max-width:768px){
   #leaderboard {
     grid-template-columns: repeat(3, 1fr); /* first row 3 cards */
@@ -179,29 +185,55 @@ function renderTable(season) {
     if(parseFloat(p.avg)>bestAvg) bestAvg=parseFloat(p.avg);
   });
 
-  // Render table sorted by runs
-  const tbody = document.querySelector("#statsTable tbody");
-  tbody.innerHTML="";
-  Object.entries(players)
-    .sort((a,b)=>b[1].runs - a[1].runs)
-    .forEach(([name,p])=>{
-      const row = document.createElement("tr");
-      row.innerHTML = `
-        <td>${name}</td>
-        <td>${p.matches}</td>
-        <td>${p.innings}</td>
-        <td>${p.runs}</td>
-        <td>${p.balls}</td>
-        <td>${p.sixes}</td>
-        <td>${p.fours}</td>
-        <td>${p.dots}</td>
-        <td class="${p.sr==bestSR?'high-sr':''}">${p.sr}</td>
-        <td class="${p.avg==bestAvg?'high-avg':''}">${p.avg}</td>
-        <td>${p.hs}</td>
-      `;
-      tbody.appendChild(row);
-    });
+  // Get top 5 player names
+const top5Names = top5.map(([name]) => name);
 
+// Render table: first top 5, then rest
+const tbody = document.querySelector("#statsTable tbody");
+tbody.innerHTML="";
+
+// First render top 5
+top5.forEach(([name, p])=>{
+  const row = document.createElement("tr");
+  row.className = "top5"; // highlight top 5
+  row.innerHTML = `
+    <td>${name}</td>
+    <td>${p.matches}</td>
+    <td>${p.innings}</td>
+    <td>${p.runs}</td>
+    <td>${p.balls}</td>
+    <td>${p.sixes}</td>
+    <td>${p.fours}</td>
+    <td>${p.dots}</td>
+    <td class="${p.sr==bestSR?'high-sr':''}">${p.sr}</td>
+    <td class="${p.avg==bestAvg?'high-avg':''}">${p.avg}</td>
+    <td>${p.hs}</td>
+  `;
+  tbody.appendChild(row);
+});
+
+// Then render the rest excluding top 5
+Object.entries(players)
+  .filter(([name]) => !top5Names.includes(name))
+  .sort((a,b)=>b[1].runs - a[1].runs)
+  .forEach(([name,p])=>{
+    const row = document.createElement("tr");
+    row.innerHTML = `
+      <td>${name}</td>
+      <td>${p.matches}</td>
+      <td>${p.innings}</td>
+      <td>${p.runs}</td>
+      <td>${p.balls}</td>
+      <td>${p.sixes}</td>
+      <td>${p.fours}</td>
+      <td>${p.dots}</td>
+      <td class="${p.sr==bestSR?'high-sr':''}">${p.sr}</td>
+      <td class="${p.avg==bestAvg?'high-avg':''}">${p.avg}</td>
+      <td>${p.hs}</td>
+    `;
+    tbody.appendChild(row);
+  });
+  
   // Render Top 5 leaderboard
   const top5 = Object.entries(players).sort((a,b)=>b[1].runs - a[1].runs).slice(0,5);
   const leaderboard = document.getElementById("leaderboard");
