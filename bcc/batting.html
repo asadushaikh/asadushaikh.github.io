@@ -28,6 +28,15 @@ table th, table td {
 
 <h2>BCC Batting Stats</h2>
 
+<div style="text-align:center; margin-bottom:15px;">
+  <label><b>Filter Season:</b></label>
+  <select id="seasonFilter" class="form-select" style="width:200px; display:inline-block;">
+    <option value="all">All Seasons</option>
+    <option value="s1">Season 1</option>
+    <option value="s2">Season 2</option>
+  </select>
+</div>
+
 <table class="table table-striped table-bordered" id="statsTable">
   <thead class="table-dark">
     <tr>
@@ -50,84 +59,111 @@ table th, table td {
 <script src="https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js"></script>
 
 <script>
+let fullData = [];
+
 Papa.parse("bcc_data.csv", {
   download: true,
   header: true,
   complete: function(results) {
+    fullData = results.data;
+    renderTable("all");
 
-    const data = results.data;
-    const players = {};
-
-    data.forEach(row => {
-      const name = row["Player Name"];
-      const date = row["Date"];
-
-      if (!name) return;
-
-      if (!players[name]) {
-        players[name] = {
-          dates: new Set(),
-          innings: 0,
-          runs: 0,
-          balls: 0,
-          sixes: 0,
-          fours: 0,
-          dots: 0,
-          outs: 0,
-          hs: 0
-        };
-      }
-
-      let p = players[name];
-
-      p.dates.add(date);
-      p.innings++;
-
-      let runs = parseInt(row["Runs Scored"]) || 0;
-      let balls = parseInt(row["Balls Played"]) || 0;
-
-      p.runs += runs;
-      p.balls += balls;
-      p.sixes += parseInt(row["6s"]) || 0;
-      p.fours += parseInt(row["4s"]) || 0;
-      p.dots += parseInt(row["DOTS Played"]) || 0;
-
-      if ((row["Not Out"] || "0") == "0") {
-        p.outs++;
-      }
-
-      if (runs > p.hs) p.hs = runs;
-    });
-
-    const tbody = document.querySelector("#statsTable tbody");
-
-    Object.keys(players).forEach(name => {
-      const p = players[name];
-
-      const matches = p.dates.size;
-      const sr = p.balls ? ((p.runs / p.balls) * 100).toFixed(1) : 0;
-      const avg = p.outs ? (p.runs / p.outs).toFixed(1) : p.runs;
-
-      const row = `
-        <tr>
-          <td>${name}</td>
-          <td>${matches}</td>
-          <td>${p.innings}</td>
-          <td>${p.runs}</td>
-          <td>${p.balls}</td>
-          <td>${p.sixes}</td>
-          <td>${p.fours}</td>
-          <td>${p.dots}</td>
-          <td>${sr}</td>
-          <td>${avg}</td>
-          <td>${p.hs}</td>
-        </tr>
-      `;
-
-      tbody.innerHTML += row;
+    document.getElementById("seasonFilter").addEventListener("change", function() {
+      renderTable(this.value);
     });
   }
 });
+
+function renderTable(season) {
+
+  const players = {};
+  const cutoffDate = new Date("2025-04-20");
+
+  const filteredData = fullData.filter(row => {
+
+    if (!row["Player Name"]) return false;
+
+    // ❌ Remove guests (G)
+    if (row["Player Name"].endsWith("(G)")) return false;
+
+    const matchDate = new Date(row["Date"]);
+
+    if (season === "s1") return matchDate < cutoffDate;
+    if (season === "s2") return matchDate >= cutoffDate;
+
+    return true; // all
+  });
+
+  filteredData.forEach(row => {
+
+    const name = row["Player Name"];
+    const date = row["Date"];
+
+    if (!players[name]) {
+      players[name] = {
+        dates: new Set(),
+        innings: 0,
+        runs: 0,
+        balls: 0,
+        sixes: 0,
+        fours: 0,
+        dots: 0,
+        outs: 0,
+        hs: 0
+      };
+    }
+
+    let p = players[name];
+
+    p.dates.add(date);
+    p.innings++;
+
+    let runs = parseInt(row["Runs Scored"]) || 0;
+    let balls = parseInt(row["Balls Played"]) || 0;
+
+    p.runs += runs;
+    p.balls += balls;
+    p.sixes += parseInt(row["6s"]) || 0;
+    p.fours += parseInt(row["4s"]) || 0;
+    p.dots += parseInt(row["DOTS Played"]) || 0;
+
+    if ((row["Not Out"] || "0") == "0") {
+      p.outs++;
+    }
+
+    if (runs > p.hs) p.hs = runs;
+  });
+
+  const tbody = document.querySelector("#statsTable tbody");
+  tbody.innerHTML = "";
+
+  Object.keys(players).forEach(name => {
+
+    const p = players[name];
+
+    const matches = p.dates.size;
+    const sr = p.balls ? ((p.runs / p.balls) * 100).toFixed(1) : 0;
+    const avg = p.outs ? (p.runs / p.outs).toFixed(1) : p.runs;
+
+    const row = `
+      <tr>
+        <td>${name}</td>
+        <td>${matches}</td>
+        <td>${p.innings}</td>
+        <td>${p.runs}</td>
+        <td>${p.balls}</td>
+        <td>${p.sixes}</td>
+        <td>${p.fours}</td>
+        <td>${p.dots}</td>
+        <td>${sr}</td>
+        <td>${avg}</td>
+        <td>${p.hs}</td>
+      </tr>
+    `;
+
+    tbody.innerHTML += row;
+  });
+}
 </script>
 
 </body>
