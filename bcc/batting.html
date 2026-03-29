@@ -23,7 +23,7 @@ h2, h3 { text-align:center; color:#1b3a57; margin-bottom:15px; }
 
 /* Table */
 table { width:100%; border-collapse:collapse; }
-table th, table td { text-align:center; padding:6px; font-size:0.9rem; }
+table th, table td { text-align:center; padding:8px; font-size:0.9rem; }
 table th { background:#1b3a57; color:#fff; }
 table tbody tr:nth-child(odd) { background:#eef2f7; }
 
@@ -37,18 +37,16 @@ table tbody tr:nth-child(odd) { background:#eef2f7; }
 .leader-card h4 { margin:0 0 5px 0; font-size:1rem; color:#1b3a57; }
 .leader-card p { margin:2px 0; font-size:0.85rem; }
 
-/* Responsive abbreviations */
+/* Responsive for mobile */
 @media(max-width:768px){
-  table th:nth-child(2)::after { content:"M"; }
-  table th:nth-child(3)::after { content:"Inn"; }
-  table th:nth-child(4)::after { content:"R"; }
-  table th:nth-child(5)::after { content:"B"; }
-  table th:nth-child(6)::after { content:"6s"; }
-  table th:nth-child(7)::after { content:"4s"; }
-  table th:nth-child(8)::after { content:"D"; }
-  table th:nth-child(9)::after { content:"S/R"; }
-  table th:nth-child(10)::after { content:"Avg"; }
-  table th:nth-child(11)::after { content:"HS"; }
+  table th, table td {
+    font-size: 0.75rem;
+    padding: 4px 6px;
+  }
+  #leaderboard {
+    flex-direction: column;
+    gap: 10px;
+  }
 }
 </style>
 </head>
@@ -118,8 +116,13 @@ function renderTable(season) {
 
   const filteredData = fullData.filter(row => {
     if (!row["Player Name"]) return false;
-    if (row["Player Name"].startsWith("(G)")) return false; // remove guests
-    if (excludePlayers.includes(row["Player Name"])) return false; // remove excluded
+
+    // Remove guests (G) anywhere in name
+    if (row["Player Name"].includes("(G)")) return false;
+
+    // Remove specific excluded players
+    if (excludePlayers.includes(row["Player Name"])) return false;
+
     const matchDate = new Date(row["Date"]);
     if (season === "s1") return matchDate < cutoffDate;
     if (season === "s2") return matchDate >= cutoffDate;
