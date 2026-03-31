@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>BCC Login</title>
+<title>BCC Stats + Dashboard</title>
 
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -14,9 +14,50 @@ body{
   background:#f4f6f8;
 }
 
-section{
-  margin-bottom:30px;
+/* ===================== BCC STATS SECTION ===================== */
+h1{
+    text-align:center;
 }
+
+/* Frame Styling */
+.frame{
+    background:white;
+    padding:20px;
+    margin:30px auto;
+    border-radius:12px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.1);
+    max-width:1000px;
+}
+
+.frame h2{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+/* Player Cards */
+.grid{
+    display:flex;
+    flex-wrap:wrap;
+    gap:20px;
+    justify-content:center;
+}
+
+.card{
+    width:180px;
+    text-align:center;
+    background:#fafafa;
+    padding:10px;
+    border-radius:10px;
+}
+
+.card img{
+    width:100%;
+    height:180px;
+    object-fit:cover;
+    border-radius:10px;
+}
+
+/* ===================== EXISTING STYLES ===================== */
 
 /* BANNER */
 .bcc-banner{
@@ -51,64 +92,6 @@ section{
   margin-right:auto;
   color:#e0e6ed;
   line-height:1.4;
-}
-
-/* LOGIN */
-#loginPage{
-  display:flex;
-  justify-content:center;
-  padding:20px;
-}
-.login-box{
-  background:#1e4a8f;
-  color:white;
-  padding:20px;
-  border-radius:10px;
-  text-align:center;
-  box-shadow:0 2px 10px rgba(0,0,0,0.2);
-  width:260px;
-}
-
-input, select{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border-radius:5px;
-  border:none;
-}
-
-.cta-btn{
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:25px;
-  background: linear-gradient(90deg,#f7b733,#fc4a1a);
-  color:white;
-  font-weight:700;
-  font-size:16px;
-  margin-top:10px;
-  transition:0.3s;
-}
-.cta-btn:hover{
-  transform:translateY(-3px);
-}
-
-/* QUICK SECTION */
-#homeQuick{
-  display:none;
-  margin-top:15px;
-  text-align:left;
-}
-
-.game-info{
-  background:#123b70;
-  padding:12px;
-  border-radius:10px;
-  margin-bottom:10px;
-  font-size:14px;
-}
-.game-info strong{
-  color:#ffd700;
 }
 
 /* MEMBERS - SMALLER + CLEAN */
@@ -159,31 +142,189 @@ input, select{
   margin:2px 0;
   color:#666;
 }
+
+/* LOGIN */
+#loginPage{
+  display:flex;
+  justify-content:center;
+  padding:20px;
+}
+.login-box{
+  background:#1e4a8f;
+  color:white;
+  padding:20px;
+  border-radius:10px;
+  text-align:center;
+  box-shadow:0 2px 10px rgba(0,0,0,0.2);
+  width:260px;
+}
+
+input, select{
+  width:100%;
+  padding:10px;
+  margin:8px 0;
+  border-radius:5px;
+  border:none;
+}
+
+.cta-btn{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:25px;
+  background: linear-gradient(90deg,#f7b733,#fc4a1a);
+  color:white;
+  font-weight:700;
+  font-size:16px;
+  margin-top:10px;
+  transition:0.3s;
+}
+.cta-btn:hover{
+  transform:translateY(-3px);
+}
 </style>
 </head>
 
 <body>
 
-<!-- TOP BANNER -->
-<!-- TOP BANNER -->
+<!-- ===================== BCC STATS SECTION ===================== -->
+<h1>BCC Stats Home</h1>
+
+<!-- CENTURIONS -->
+<div class="frame">
+    <h2>Centurions</h2>
+    <div id="centurions" class="grid"></div>
+</div>
+
+<!-- TOP 5 -->
+<div class="frame">
+    <h2>Top 5 Batsmen</h2>
+    <div id="top5" class="grid"></div>
+</div>
+
+<script>
+fetch("data/bcc_data.csv")
+.then(res => res.text())
+.then(data => {
+
+    const rows = data.split("\n").slice(1);
+
+    let players = {};
+    let centurions = [];
+
+    rows.forEach(row => {
+        const cols = row.split(",");
+
+        if(cols.length < 8) return;
+
+        const name = cols[0];              // Player Name
+        const date = cols[3];              // Date
+        const runs = parseInt(cols[6]);    // Runs Scored
+        const balls = parseInt(cols[7]);   // Balls Played
+
+        if(isNaN(runs) || isNaN(balls)) return;
+
+        // TRACK PLAYER STATS
+        if(!players[name]){
+            players[name] = {
+                runs:0,
+                balls:0,
+                innings:0
+            };
+        }
+
+        players[name].runs += runs;
+        players[name].balls += balls;
+        players[name].innings += 1;
+
+        // CENTURIONS (100+ in a match)
+        if(runs >= 100){
+            centurions.push({
+                name, date, runs, balls
+            });
+        }
+    });
+
+    // ======================
+    // RENDER CENTURIONS
+    // ======================
+    const centDiv = document.getElementById("centurions");
+    centDiv.innerHTML = "";
+
+    centurions.forEach(p => {
+        const imgName = p.name.toLowerCase().replace(/\s+/g, "_");
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <img src="bcc/images/${imgName}.jpg" onerror="this.src='images/default.jpg'">
+            <p><b>${p.name}</b></p>
+            <p>${p.date}</p>
+            <p>${p.runs} (${p.balls})</p>
+        `;
+
+        centDiv.appendChild(card);
+    });
+
+    // ======================
+    // TOP 5 BATSMEN
+    // ======================
+    let stats = Object.entries(players).map(([name, p]) => {
+        return {
+            name,
+            runs: p.runs,
+            avg: (p.runs / p.innings).toFixed(1),
+            sr: ((p.runs / p.balls) * 100).toFixed(1)
+        };
+    });
+
+    stats.sort((a,b) => b.runs - a.runs);
+    const top5 = stats.slice(0,5);
+
+    const topDiv = document.getElementById("top5");
+    topDiv.innerHTML = "";
+
+    top5.forEach(p => {
+        const imgName = p.name.toLowerCase().replace(/\s+/g, "_");
+
+        const card = document.createElement("div");
+        card.className = "card";
+
+        card.innerHTML = `
+            <img src="images/${imgName}.jpg" onerror="this.src='images/default.jpg'">
+            <p><b>${p.name}</b></p>
+            <p>Runs: ${p.runs}</p>
+            <p>Avg: ${p.avg}</p>
+            <p>S/R: ${p.sr}</p>
+        `;
+
+        topDiv.appendChild(card);
+    });
+
+});
+</script>
+
+<!-- ===================== EXISTING BCC BANNER & MEMBERS ===================== -->
+
 <div class="bcc-banner">
   <div class="container">
-
     <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
-
-    <div class="banner-tagline">
-      Brotherhood • Competition • Passion for Cricket
-    </div>
-
+    <div class="banner-tagline">Brotherhood • Competition • Passion for Cricket</div>
     <p class="banner-sub">
       A brotherhood of passionate cricket lovers and hardworking professionals, united by trust, respect, and a shared love for the game.
       Balancing careers and families, we come together each week to unwind, compete, and enjoy the game of cricket.
     </p>
-
   </div>
 </div>
 
-<!-- MEMBERS -->
+<!-- MEMBERS SECTION -->
+<section class="members">
+  <div style="font-size:14px; font-weight:600; color:#0a2342; text-transform:uppercase; letter-spacing:1px;">
+      Meet the BCC Members
+  </div>
+  <div class="members-container">
+	<!-- MEMBERS -->
 <section class="members">
   <div style="font-size:14px; font-weight:600; color:#0a2342; text-transform:uppercase; letter-spacing:1px;">
       Meet the BCC Members
@@ -358,250 +499,22 @@ input, select{
       <p>Batting: Right-hand</p>
       <p>Bowling: Right Hand</p>
     </div>
-
+    <!-- All member-cards here (same as your existing HTML) -->
   </div>
 </section>
 
-<!-- INTRO SECTION -->
-<!-- INTRO SECTION -->
-<section class="intro" style="padding:40px 20px; text-align:center; background:#eaf1f8;">
-  <div style="max-width:700px; margin:auto; display:flex; flex-direction:column; align-items:center; gap:12px;">
-    
-    <div style="font-size:14px; font-weight:600; color:#0a2342; text-transform:uppercase; letter-spacing:1px;">
-      Meet the Developer
-    </div>
-
-    <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/asadullah.jpg" 
-         alt="Asad Shaikh" 
-         style="border-radius:50%; width:140px; height:140px; object-fit:cover; border:3px solid #123b70;">
-
-    <h2 style="color:#0a2342; font-size:22px; margin:0;">Asad Shaikh</h2>
-
-    <p style="color:#123b70; font-size:14px; max-width:600px; text-align:center; line-height:1.4;">
-      I’m a data enthusiast and cricket lover, merging analytics and technology to elevate the game. 
-      I built a full tech stack for BCC Cricket Club to track stats, games, and player performance.
-    </p>
-
-  </div>
-</section>
-
-<!-- LOGIN -->
+<!-- LOGIN SECTION -->
 <div id="loginPage">
   <div class="login-box">
-    
     <h4>BCC Access</h4>
-
     <select id="name"><option>Select Name</option></select>
     <input type="password" id="pin" placeholder="Enter PIN">
-
     <button class="cta-btn" id="enterBtn" onclick="login()">Enter</button>
-
     <p id="welcomeMsg"></p>
     <p id="error"></p>
-
     <button class="cta-btn" onclick="goToStats()">BCC Stats</button>
-
-      <div class="game-info">
-        <strong>Next Game:</strong>
-        <div id="nextGame">Loading...</div>
-      </div>
-
-      <div class="game-info">
-        <strong>Last Game:</strong>
-        <div id="lastGame">Loading...</div>
-      </div>
-    </div>
-
-  </div> <!-- ✅ CLOSE login-box -->
-</div>   <!-- ✅ CLOSE loginPage -->
-<!-- DASHBOARD -->
-<div id="dashboard" style="display:none;">
-  <div class='tableauPlaceholder' id='viz1773374423253'>
-    <object class='tableauViz' style='display:none;'>
-      <param name='host_url' value='https://public.tableau.com/' />
-      <param name='embed_code_version' value='3' />
-      <param name='name' value='BCCNewera/BCCMainDashboard' />
-      <param name='tabs' value='no' />
-      <param name='toolbar' value='yes' />
-    </object>
   </div>
 </div>
-
-
-
-<!-- TABLEAU -->
-<script>
-function loadTableau(){
-  const div = document.getElementById('viz1773374423253');
-  const viz = div.getElementsByTagName('object')[0];
-  viz.style.width='100%';
-  viz.style.height='100vh';
-  const script=document.createElement('script');
-  script.src='https://public.tableau.com/javascripts/api/viz_v1.js';
-  viz.parentNode.insertBefore(script,viz);
-}
-
-function goToDashboard(){
-  document.getElementById("dashboard").style.display="block";
-  setTimeout(loadTableau,100);
-  window.scrollTo({ top: document.getElementById("dashboard").offsetTop, behavior: "smooth" });
-}
-
-function goToStats(){
-  window.location.href = "bcc-stats.html";
-}
-</script>
-
-<!-- FIREBASE -->
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
-
-<script>
-const firebaseConfig = {
-  apiKey: "AIzaSyB9p0Tj2wxHM-T469gTtFxeT7Eaxdz-7Rk",
-  authDomain: "asadushaikh-tracker.firebaseapp.com",
-  projectId: "asadushaikh-tracker"
-};
-
-firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
-
-let startTime;
-
-// LOAD USERS
-async function loadUsers(){
-  const snapshot = await db.collection("users").get();
-  const select = document.getElementById("name");
-  snapshot.forEach(doc=>{
-    const user = doc.data();
-    let option = document.createElement("option");
-    option.value = user.name;
-    option.text = user.name;
-    select.appendChild(option);
-  });
-}
-window.addEventListener('DOMContentLoaded', async () => {
-  await loadUsers();
-});
-
-// LOAD MATCH INFO
-function loadMatchInfo(){
-  // Hardcoded last game info
-  const lastGameHTML = `
-    Aamir Noor v Fahad<br>
-    3/22/2026<br>
-    Winner: Aamir Noor
-  `;
-
-  document.getElementById("lastGame").innerHTML = lastGameHTML;
-}
-
-// LOGIN
-
-async function login(){
-  const name = document.getElementById("name").value;
-  const pin = document.getElementById("pin").value;
-
-  if(name === "Select Name"){
-    document.getElementById("error").innerText="Select a name";
-    return;
-  }
-
-  const snapshot = await db.collection("users")
-    .where("name","==",name).get();
-
-  if(snapshot.empty){
-    document.getElementById("error").innerText="User not found";
-    return;
-  }
-
-  const user = snapshot.docs[0].data();
-  
-  if(user.pin === pin){
-    document.getElementById("error").innerText = ""; // clear any previous error
-
-    startTime = new Date();
-
-    db.collection("logins").add({
-      user:name,
-      time:new Date()
-    });
-
-    document.getElementById("enterBtn").style.display = "none";
-    document.getElementById("welcomeMsg").innerText = "Welcome, " + name;
-    document.getElementById("homeQuick").style.display="block";
-    document.getElementById("name").disabled=true;
-    document.getElementById("pin").disabled=true;
-
-    loadMatchInfo();
-    startCountdown();
-
-    localStorage.setItem("user", name);
-    localStorage.setItem("startTime", startTime);
-
-  } else {
-    document.getElementById("error").innerText="Wrong PIN";
-  }
-  
-  
-}
-// SESSION TRACKING
-window.addEventListener("beforeunload", function(){
-  const user = localStorage.getItem("user");
-  const start = new Date(localStorage.getItem("startTime"));
-
-  if(user && start){
-    const duration = (new Date() - start)/1000;
-    db.collection("sessions").add({
-      user:user,
-      duration:duration,
-      exitTime:new Date()
-    });
-  }
-});
-
-function getNextSundaySunrise(){
-  const now = new Date();
-  let nextSunday = new Date();
-
-  let daysToSunday = (7 - now.getDay()) % 7;
-  if(daysToSunday === 0) daysToSunday = 7; // if today is Sunday, go to next Sunday
-
-  nextSunday.setDate(now.getDate() + daysToSunday);
-  // 🌅 Approx sunrise at 6:30 AM
-  nextSunday.setHours(6,30,0,0);
-  nextSunday.setSeconds(0);
-  nextSunday.setMilliseconds(0);
-
-  return nextSunday;
-}
-
-function startCountdown(){
-  const timer = setInterval(() => {
-    const now = new Date();
-    const target = getNextSundaySunrise();
-    const diff = target - now;
-
-    if(diff <= 0){
-      document.getElementById("nextGame").innerHTML = "Game time!";
-      clearInterval(timer);
-      return;
-    }
-
-    const days = Math.floor(diff / (1000*60*60*24));
-    const hrs = Math.floor((diff / (1000*60*60)) % 24);
-    const mins = Math.floor((diff / (1000*60)) % 60);
-    const secs = Math.floor((diff / 1000) % 60);
-
-    document.getElementById("nextGame").innerHTML = `
-      Atif v Hafiz Atiq<br>
-      ${target.toLocaleDateString()}<br>
-      ⏳ ${days}d ${hrs}h ${mins}m ${secs}s
-    `;
-  }, 1000);
-}
-
-</script>
 
 </body>
 </html>
