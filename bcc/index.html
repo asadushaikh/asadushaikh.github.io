@@ -208,17 +208,47 @@ body {
 </div>
 
 <script>
-fetch("data/bcc_data.csv")
-.then(res => res.text())
-.then(data => {
-    const rows = data.split("\n").slice(1);
+// ====== CONFIG ======
+const seasonStartDates = {
+    "2024-25": new Date("2024-04-20"),
+    "2025-26": new Date("2025-04-20")
+};
+
+let allRows = []; // store all rows after reading CSV
+let playersAll = {};
+let centurionsAll = [];
+
+// ====== UTILITY ======
+function parseDate(str) {
+    const parts = str.split("-"); // assuming date is YYYY-MM-DD
+    if(parts.length !== 3) return null;
+    return new Date(parts[0], parts[1]-1, parts[2]);
+}
+
+// ====== FILTER FUNCTION ======
+function filterSeason(season) {
+    const centDiv = document.getElementById("centurions");
+    const topDiv = document.getElementById("top5");
+
+    let filteredRows = [];
+    const start2025 = seasonStartDates["2025-26"];
+    const start2024 = seasonStartDates["2024-25"];
+
+    filteredRows = allRows.filter(cols => {
+        const dateObj = parseDate(cols[3].trim());
+        if(!dateObj) return false;
+
+        if(season === "All") return true;
+        if(season === "2025-26") return dateObj >= start2025;
+        if(season === "2024-25") return dateObj >= start2024 && dateObj < start2025;
+        return true;
+    });
+
+    // ====== REBUILD PLAYERS & CENTURIONS ======
     let players = {};
     let centurions = [];
 
-    rows.forEach(row => {
-        const cols = row.split(",");
-        if(cols.length < 8) return;
-
+    filteredRows.forEach(cols => {
         const name = cols[0].trim().replace(/\s+/g, " ");
         const date = cols[3].trim();
         const runs = parseInt(cols[6]);
@@ -234,17 +264,16 @@ fetch("data/bcc_data.csv")
     });
 
     // ===== CENTURIONS =====
-    const centDiv = document.getElementById("centurions");
     centDiv.innerHTML = "";
     centurions.forEach(p => {
         const card = document.createElement("div");
         card.className = "highlight-card centurion-card";
         card.innerHTML = `
             <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
-			<h4>${p.name}</h4>
-    		<p>${p.runs} (${p.balls})</p>
-			<p>${p.date}<p>
-		`; 
+            <h4>${p.name}</h4>
+            <p>${p.runs} (${p.balls})</p>
+            <p>${p.date}</p>
+        `;
         centDiv.appendChild(card);
     });
 
@@ -256,23 +285,48 @@ fetch("data/bcc_data.csv")
         sr: ((p.runs / p.balls) * 100).toFixed(1)
     })).sort((a,b) => b.runs - a.runs).slice(0,5);
 
-    const topDiv = document.getElementById("top5");
     topDiv.innerHTML = "";
     stats.forEach(p => {
         const card = document.createElement("div");
         card.className = "highlight-card top5-card";
-		
         card.innerHTML = `
             <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
-               <h4>${p.name}</h4>
-    		   <p>Runs: ${p.runs}</p>
-               <p>Avg: ${p.avg}</p>
-               <p>S/R: ${p.sr}</p>
+            <h4>${p.name}</h4>
+            <p>Runs: ${p.runs}</p>
+            <p>Avg: ${p.avg}</p>
+            <p>S/R: ${p.sr}</p>
         `;
         topDiv.appendChild(card);
     });
+}
+
+// ====== CREATE SEASON SELECT ======
+const filterDiv = document.createElement("div");
+filterDiv.style.textAlign = "center";
+filterDiv.style.marginBottom = "20px";
+filterDiv.innerHTML = `
+    <label for="seasonFilter" style="margin-right:10px; font-weight:600;">Select Season:</label>
+    <select id="seasonFilter">
+        <option value="2025-26" selected>2025-26</option>
+        <option value="2024-25">2024-25</option>
+        <option value="All">All Seasons</option>
+    </select>
+`;
+document.querySelector(".frame").before(filterDiv);
+
+document.getElementById("seasonFilter").addEventListener("change", (e) => {
+    filterSeason(e.target.value);
 });
-</script>
+
+// ====== FETCH CSV ======
+fetch("data/bcc_data.csv")
+.then(res => res.text())
+.then(data => {
+    const rows = data.split("\n").slice(1).map(r => r.split(","));
+    allRows = rows.filter(cols => cols.length >= 8);
+    filterSeason("2025-26"); // default view
+});
+</script>	
 
 <!-- ===================== MEMBERS ===================== -->
 <section class="members">
