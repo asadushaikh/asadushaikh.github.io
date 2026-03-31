@@ -252,7 +252,7 @@ fetch("data/bcc_data.csv")
     centDiv.innerHTML = "";
 
     centurions.forEach(p => {
-        const imgName = p.name.toLowerCase().replace(/\s+/g, "_");
+        const imgName = p.name;
 
         const card = document.createElement("div");
         card.className = "card";
