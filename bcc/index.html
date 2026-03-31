@@ -210,7 +210,7 @@ fetch("data/bcc_data.csv")
         const cols = row.split(",");
         if(cols.length < 8) return;
 
-        const name = cols[0].trim();
+        const name = cols[0].trim().replace(/\s+/g, " ");
         const date = cols[3].trim();
         const runs = parseInt(cols[6]);
         const balls = parseInt(cols[7]);
