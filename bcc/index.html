@@ -200,9 +200,16 @@ function filterSeason(season) {
     });
 
     // TOP 5
+    // TOP 5
     const stats = Object.entries(players).map(([name,p]) => ({
-        name, runs: p.runs, avg: (p.runs/p.innings).toFixed(1), sr: ((p.runs/p.balls)*100).toFixed(1)
-    })).sort((a,b)=>b.runs-b.runs).slice(0,5);
+        name,
+        runs: p.runs,
+        avg: (p.runs / p.innings).toFixed(1),
+        sr: ((p.runs / p.balls) * 100).toFixed(1)
+    }))
+    .sort((a,b) => b.runs - a.runs) // <-- fixed
+    .slice(0,5);
+    
 
     topDiv.innerHTML="";
     stats.forEach(p=>{
