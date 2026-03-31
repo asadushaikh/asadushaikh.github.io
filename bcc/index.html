@@ -71,27 +71,33 @@ body {
     margin-bottom: 30px;
 }
 
+/* Highlight cards square container */
 .highlight-card {
     width: 100px;
+    height: 100px;       /* make it square */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     text-align: center;
     background: #fff;
-    padding: 8px;
-    border-radius: 50%;
+    padding: 5px;        /* small padding */
+    border-radius: 50%;  /* keeps it circular */
     overflow: hidden;
     box-shadow: 0 3px 8px rgba(0,0,0,0.1);
     transition: transform 0.2s;
 }
 
-.highlight-card:hover {
-    transform: translateY(-3px);
-}
-
 .highlight-card img {
     width: 80px;
     height: 80px;
-    object-fit: cover;
     border-radius: 50%;
+    object-fit: cover;
     border: 3px solid;
+}
+
+.highlight-card:hover {
+    transform: translateY(-3px);
 }
 
 .centurion-card img { border-color: #ffd700; }
