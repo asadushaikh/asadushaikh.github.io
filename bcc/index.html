@@ -208,52 +208,48 @@ body {
 </div>
 
 <script>
-// ====== CONFIG ======
 const seasonStartDates = {
     "2024-25": new Date("2024-04-20"),
     "2025-26": new Date("2025-04-20")
 };
 
 let allRows = []; // store all rows after reading CSV
-let playersAll = {};
-let centurionsAll = [];
 
-// ====== UTILITY ======
 function parseDate(str) {
-    const parts = str.split("-"); // assuming date is YYYY-MM-DD
-    if(parts.length !== 3) return null;
-    return new Date(parts[0], parts[1]-1, parts[2]);
+    // assuming date format is YYYY-MM-DD or MM/DD/YYYY
+    if(str.includes("-")) {
+        const parts = str.split("-");
+        return new Date(parts[0], parts[1]-1, parts[2]);
+    } else if(str.includes("/")) {
+        const parts = str.split("/");
+        return new Date(parts[2], parts[0]-1, parts[1]);
+    }
+    return null;
 }
 
-// ====== FILTER FUNCTION ======
 function filterSeason(season) {
     const centDiv = document.getElementById("centurions");
     const topDiv = document.getElementById("top5");
 
-    let filteredRows = [];
-    const start2025 = seasonStartDates["2025-26"];
-    const start2024 = seasonStartDates["2024-25"];
-
-    filteredRows = allRows.filter(cols => {
+    const filteredRows = allRows.filter(cols => {
         const dateObj = parseDate(cols[3].trim());
         if(!dateObj) return false;
 
         if(season === "All") return true;
-        if(season === "2025-26") return dateObj >= start2025;
-        if(season === "2024-25") return dateObj >= start2024 && dateObj < start2025;
+        if(season === "2025-26") return dateObj >= seasonStartDates["2025-26"];
+        if(season === "2024-25") return dateObj >= seasonStartDates["2024-25"] && dateObj < seasonStartDates["2025-26"];
         return true;
     });
 
-    // ====== REBUILD PLAYERS & CENTURIONS ======
     let players = {};
     let centurions = [];
 
     filteredRows.forEach(cols => {
-        const name = cols[0].trim().replace(/\s+/g, " ");
+        const name = cols[0].trim();
         const date = cols[3].trim();
         const runs = parseInt(cols[6]);
         const balls = parseInt(cols[7]);
-        if(isNaN(runs) || isNaN(balls)) return;
+        if(!name || isNaN(runs) || isNaN(balls)) return;
 
         if(!players[name]) players[name] = { runs:0, balls:0, innings:0 };
         players[name].runs += runs;
@@ -269,7 +265,7 @@ function filterSeason(season) {
         const card = document.createElement("div");
         card.className = "highlight-card centurion-card";
         card.innerHTML = `
-            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
+            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
             <h4>${p.name}</h4>
             <p>${p.runs} (${p.balls})</p>
             <p>${p.date}</p>
@@ -277,20 +273,20 @@ function filterSeason(season) {
         centDiv.appendChild(card);
     });
 
-    // ===== TOP 5 BATSMEN =====
+    // ===== TOP 5 =====
     const stats = Object.entries(players).map(([name,p]) => ({
         name,
         runs: p.runs,
-        avg: (p.runs / p.innings).toFixed(1),
-        sr: ((p.runs / p.balls) * 100).toFixed(1)
-    })).sort((a,b) => b.runs - a.runs).slice(0,5);
+        avg: (p.runs/p.innings).toFixed(1),
+        sr: ((p.runs/p.balls)*100).toFixed(1)
+    })).sort((a,b)=>b.runs - a.runs).slice(0,5);
 
     topDiv.innerHTML = "";
     stats.forEach(p => {
         const card = document.createElement("div");
         card.className = "highlight-card top5-card";
         card.innerHTML = `
-            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
+            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
             <h4>${p.name}</h4>
             <p>Runs: ${p.runs}</p>
             <p>Avg: ${p.avg}</p>
@@ -300,7 +296,7 @@ function filterSeason(season) {
     });
 }
 
-// ====== CREATE SEASON SELECT ======
+// ===== CREATE FILTER DROPDOWN =====
 const filterDiv = document.createElement("div");
 filterDiv.style.textAlign = "center";
 filterDiv.style.marginBottom = "20px";
@@ -314,20 +310,18 @@ filterDiv.innerHTML = `
 `;
 document.querySelector(".frame").before(filterDiv);
 
-document.getElementById("seasonFilter").addEventListener("change", (e) => {
-    filterSeason(e.target.value);
-});
+document.getElementById("seasonFilter").addEventListener("change", e => filterSeason(e.target.value));
 
-// ====== FETCH CSV ======
+// ===== FETCH CSV =====
 fetch("data/bcc_data.csv")
 .then(res => res.text())
 .then(data => {
-    const rows = data.split("\n").slice(1).map(r => r.split(","));
-    allRows = rows.filter(cols => cols.length >= 8);
-    filterSeason("2025-26"); // default view
+    allRows = data.split("\n").slice(1)
+        .map(r => r.split(",").map(c => c.trim()))
+        .filter(cols => cols.length >= 8);
+    filterSeason("2025-26");
 });
-</script>	
-
+</script>
 <!-- ===================== MEMBERS ===================== -->
 <section class="members">
     <div style="font-size:14px; font-weight:600; color:#0a2342; text-transform:uppercase; letter-spacing:1px;">
