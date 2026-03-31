@@ -8,345 +8,290 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
 <style>
-body{
-  margin:0;
-  font-family:Arial;
-  background:#f4f6f8;
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: #f4f6f8;
 }
 
-/* ===================== BCC STATS SECTION ===================== */
-h1{
-    text-align:center;
+/* ===================== BCC BANNER ===================== */
+.bcc-banner {
+    background: linear-gradient(90deg,#0a2342,#123b70,#1e4a8f);
+    color: white;
+    text-align: center;
+    padding: 25px 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.2);
 }
 
-/* Frame Styling */
-.frame{
-    background:white;
-    padding:20px;
-    margin:30px auto;
-    border-radius:12px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.1);
-    max-width:1000px;
+.bcc-banner h1 {
+    margin: 0;
+    font-size: 26px;
+    font-weight: 700;
+    letter-spacing: 1px;
 }
 
-.frame h2{
-    text-align:center;
-    margin-bottom:20px;
+.banner-tagline {
+    margin-top: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffd700;
 }
 
-/* Player Cards */
-.grid{
-    display:flex;
-    flex-wrap:wrap;
-    gap:20px;
-    justify-content:center;
+.banner-sub {
+    margin-top: 8px;
+    font-size: 13px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    color: #e0e6ed;
+    line-height: 1.4;
 }
 
-.card{
-    width:180px;
-    text-align:center;
-    background:#fafafa;
-    padding:10px;
-    border-radius:10px;
+/* ===================== FRAMES ===================== */
+.frame {
+    background: white;
+    padding: 20px;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 1000px;
+    text-align: center;
 }
 
-.card img{
-    width:100%;
-    height:180px;
-    object-fit:cover;
-    border-radius:10px;
+.frame h2 {
+    margin-bottom: 20px;
 }
 
-/* ===================== EXISTING STYLES ===================== */
-
-/* BANNER */
-.bcc-banner{
-  background: linear-gradient(90deg,#0a2342,#123b70,#1e4a8f);
-  color:white;
-  text-align:center;
-  padding:25px 15px;
-  box-shadow:0 3px 10px rgba(0,0,0,0.2);
+/* ===================== HIGHLIGHT CARDS ===================== */
+.highlight-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin-bottom: 30px;
 }
 
-.bcc-banner h1{
-  margin:0;
-  font-size:26px;
-  font-weight:700;
-  letter-spacing:1px;
+.highlight-card {
+    width: 100px;
+    text-align: center;
+    background: #fff;
+    padding: 8px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+    transition: transform 0.2s;
 }
 
-/* TAGLINE */
-.banner-tagline{
-  margin-top:8px;
-  font-size:14px;
-  font-weight:600;
-  color:#ffd700;
+.highlight-card:hover {
+    transform: translateY(-3px);
 }
 
-/* DESCRIPTION */
-.banner-sub{
-  margin-top:8px;
-  font-size:13px;
-  max-width:700px;
-  margin-left:auto;
-  margin-right:auto;
-  color:#e0e6ed;
-  line-height:1.4;
+.highlight-card img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid;
 }
 
-/* MEMBERS - SMALLER + CLEAN */
-.members{
-  padding:50px 20px;
-  background:#f9fbfd;
+.centurion-card img { border-color: #ffd700; }
+.top5-card img { border-color: #123b70; }
+
+.highlight-card p { font-size: 10px; margin: 2px 0; color: #333; }
+.highlight-card b { font-size: 11px; }
+
+/* ===================== MEMBERS ===================== */
+.members {
+    padding: 50px 20px;
+    background: #f9fbfd;
 }
 
-.members-container{
-  display:flex;
-  flex-wrap:wrap;
-  gap:15px;
-  justify-content:center;
+.members-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
 }
 
-/* CARD */
-.member-card{
-  width:140px;
-  padding:12px;
-  border-radius:12px;
-  background:white;
-  box-shadow:0 3px 10px rgba(0,0,0,0.08);
-  transition:0.2s;
+.member-card {
+    width: 140px;
+    padding: 12px;
+    border-radius: 12px;
+    background: white;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    transition: 0.2s;
+    text-align: center;
 }
 
-.member-card:hover{
-  transform:translateY(-5px);
+.member-card:hover { transform: translateY(-5px); }
+
+.member-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #123b70;
 }
 
-/* IMAGE SMALLER */
-.member-card img{
-  width:80px;
-  height:80px;
-  border-radius:50%;
-  object-fit:cover;
-  border:2px solid #123b70;
+.member-card h4 { margin-top: 8px; font-size: 14px; color: #0a2342; }
+.member-card p { font-size: 11px; margin: 2px 0; color: #666; }
+
+/* ===================== LOGIN ===================== */
+#loginPage {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
 }
 
-/* TEXT SMALLER */
-.member-card h4{
-  margin-top:8px;
-  font-size:14px;
-  color:#0a2342;
+.login-box {
+    background: #1e4a8f;
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+    width: 260px;
 }
 
-.member-card p{
-  font-size:11px;
-  margin:2px 0;
-  color:#666;
+.login-box input, .login-box select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border-radius: 5px;
+    border: none;
 }
 
-/* LOGIN */
-#loginPage{
-  display:flex;
-  justify-content:center;
-  padding:20px;
-}
-.login-box{
-  background:#1e4a8f;
-  color:white;
-  padding:20px;
-  border-radius:10px;
-  text-align:center;
-  box-shadow:0 2px 10px rgba(0,0,0,0.2);
-  width:260px;
+.cta-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 25px;
+    background: linear-gradient(90deg,#f7b733,#fc4a1a);
+    color: white;
+    font-weight: 700;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: 0.3s;
 }
 
-input, select{
-  width:100%;
-  padding:10px;
-  margin:8px 0;
-  border-radius:5px;
-  border:none;
-}
-
-.cta-btn{
-  width:100%;
-  padding:12px;
-  border:none;
-  border-radius:25px;
-  background: linear-gradient(90deg,#f7b733,#fc4a1a);
-  color:white;
-  font-weight:700;
-  font-size:16px;
-  margin-top:10px;
-  transition:0.3s;
-}
-.cta-btn:hover{
-  transform:translateY(-3px);
-}
+.cta-btn:hover { transform: translateY(-3px); }
 </style>
 </head>
 
 <body>
 
-<!-- ===================== BCC STATS SECTION ===================== -->
-<h1>BCC Stats Home</h1>
-
-<!-- CENTURIONS -->
+<!-- ===================== HIGHLIGHTS ===================== -->
 <div class="frame">
     <h2>Centurions</h2>
-    <div id="centurions" class="grid"></div>
+    <div id="centurions" class="highlight-grid"></div>
 </div>
 
-<!-- TOP 5 -->
 <div class="frame">
     <h2>Top 5 Batsmen</h2>
-    <div id="top5" class="grid"></div>
+    <div id="top5" class="highlight-grid"></div>
 </div>
 
 <script>
 fetch("data/bcc_data.csv")
 .then(res => res.text())
 .then(data => {
-
     const rows = data.split("\n").slice(1);
-
     let players = {};
     let centurions = [];
 
     rows.forEach(row => {
         const cols = row.split(",");
-
         if(cols.length < 8) return;
 
-        const name = cols[0];              // Player Name
-        const date = cols[3];              // Date
-        const runs = parseInt(cols[6]);    // Runs Scored
-        const balls = parseInt(cols[7]);   // Balls Played
-
+        const name = cols[0];
+        const date = cols[3];
+        const runs = parseInt(cols[6]);
+        const balls = parseInt(cols[7]);
         if(isNaN(runs) || isNaN(balls)) return;
 
-        // TRACK PLAYER STATS
-        if(!players[name]){
-            players[name] = {
-                runs:0,
-                balls:0,
-                innings:0
-            };
+        if(!players[name]) {
+            players[name] = { runs:0, balls:0, innings:0 };
         }
-
         players[name].runs += runs;
         players[name].balls += balls;
         players[name].innings += 1;
 
-        // CENTURIONS (100+ in a match)
-        if(runs >= 100){
-            centurions.push({
-                name, date, runs, balls
-            });
+        if(runs >= 100) {
+            centurions.push({ name, date, runs, balls });
         }
     });
 
-    // ======================
-    // RENDER CENTURIONS
-    // ======================
+    // ===== CENTURIONS =====
     const centDiv = document.getElementById("centurions");
     centDiv.innerHTML = "";
-
     centurions.forEach(p => {
-        const imgName = p.name;
-
         const card = document.createElement("div");
-        card.className = "card";
-
+        card.className = "highlight-card centurion-card";
         card.innerHTML = `
-            <img src="bcc/images/${imgName}.jpg" onerror="this.src='images/default.jpg'">
+            <img src="bcc/images/${p.name}.jpg" onerror="this.src='images/default.jpg'">
             <p><b>${p.name}</b></p>
-            <p>${p.date}</p>
             <p>${p.runs} (${p.balls})</p>
         `;
-
         centDiv.appendChild(card);
     });
 
-    // ======================
-    // TOP 5 BATSMEN
-    // ======================
-    let stats = Object.entries(players).map(([name, p]) => {
-        return {
-            name,
-            runs: p.runs,
-            avg: (p.runs / p.innings).toFixed(1),
-            sr: ((p.runs / p.balls) * 100).toFixed(1)
-        };
-    });
-
+    // ===== TOP 5 BATSMEN =====
+    let stats = Object.entries(players).map(([name,p]) => ({
+        name,
+        runs: p.runs,
+        avg: (p.runs / p.innings).toFixed(1),
+        sr: ((p.runs / p.balls) * 100).toFixed(1)
+    }));
     stats.sort((a,b) => b.runs - a.runs);
     const top5 = stats.slice(0,5);
 
     const topDiv = document.getElementById("top5");
     topDiv.innerHTML = "";
-
     top5.forEach(p => {
-        const imgName = p.name;
-
         const card = document.createElement("div");
-        card.className = "card";
-
+        card.className = "highlight-card top5-card";
         card.innerHTML = `
-            <img src="images/${imgName}.jpg" onerror="this.src='images/default.jpg'">
+            <img src="bcc/images/${p.name}.jpg" onerror="this.src='images/default.jpg'">
             <p><b>${p.name}</b></p>
             <p>Runs: ${p.runs}</p>
             <p>Avg: ${p.avg}</p>
             <p>S/R: ${p.sr}</p>
         `;
-
         topDiv.appendChild(card);
     });
-
 });
 </script>
 
-<!-- ===================== EXISTING BCC BANNER & MEMBERS ===================== -->
-
+<!-- ===================== BCC BANNER ===================== -->
 <div class="bcc-banner">
-  <div class="container">
     <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
     <div class="banner-tagline">Brotherhood • Competition • Passion for Cricket</div>
     <p class="banner-sub">
       A brotherhood of passionate cricket lovers and hardworking professionals, united by trust, respect, and a shared love for the game.
       Balancing careers and families, we come together each week to unwind, compete, and enjoy the game of cricket.
     </p>
-  </div>
 </div>
 
-<!-- MEMBERS SECTION -->
+<!-- ===================== MEMBERS ===================== -->
 <section class="members">
-  <div style="font-size:14px; font-weight:600; color:#0a2342; text-transform:uppercase; letter-spacing:1px;">
-      Meet the BCC Members
-  </div>
-  <div class="members-container">
-	<!-- MEMBERS -->
-<section class="members">
-  <div style="font-size:14px; font-weight:600; color:#0a2342; text-transform:uppercase; letter-spacing:1px;">
-      Meet the BCC Members
-  </div>
-  <div class="members-container">
-
-    <!-- MEMBER -->
-    <div class="member-card">
-      <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/aamir khan.jpg" alt="Aamir Khan">
-      <h4>Aamir Khan</h4>
-      <p>Batting: Right-hand</p>
-      <p>Bowling: Right Hand</p>
+    <div style="font-size:14px; font-weight:600; color:#0a2342; text-transform:uppercase; letter-spacing:1px;">
+        Meet the BCC Members
     </div>
-
-    <div class="member-card">
-      <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/aamir noor.JPG" alt="Aamir Noor">
-      <h4>Aamir Noor</h4>
-      <p>Batting: Right-hand</p>
-      <p>Bowling: Right Hand</p>
-    </div>
-
-    <div class="member-card">
+    <div class="members-container">
+        <!-- MEMBER CARDS -->
+        <div class="member-card">
+            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/aamir khan.jpg" alt="Aamir Khan">
+            <h4>Aamir Khan</h4>
+            <p>Batting: Right-hand</p>
+            <p>Bowling: Right Hand</p>
+        </div>
+        <div class="member-card">
+            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/aamir noor.JPG" alt="Aamir Noor">
+            <h4>Aamir Noor</h4>
+            <p>Batting: Right-hand</p>
+            <p>Bowling: Right Hand</p>
+        </div>
+		    <div class="member-card">
       <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/adeel.jpg" alt="Adeel Mirza">
       <h4>Adeel Mirza</h4>
       <p>Batting: Right-hand</p>
@@ -500,20 +445,22 @@ fetch("data/bcc_data.csv")
       <p>Bowling: Right Hand</p>
     </div>
     <!-- All member-cards here (same as your existing HTML) -->
-  </div>
+
+        <!-- Repeat all other member cards here -->
+    </div>
 </section>
 
-<!-- LOGIN SECTION -->
+<!-- ===================== LOGIN ===================== -->
 <div id="loginPage">
-  <div class="login-box">
-    <h4>BCC Access</h4>
-    <select id="name"><option>Select Name</option></select>
-    <input type="password" id="pin" placeholder="Enter PIN">
-    <button class="cta-btn" id="enterBtn" onclick="login()">Enter</button>
-    <p id="welcomeMsg"></p>
-    <p id="error"></p>
-    <button class="cta-btn" onclick="goToStats()">BCC Stats</button>
-  </div>
+    <div class="login-box">
+        <h4>BCC Access</h4>
+        <select id="name"><option>Select Name</option></select>
+        <input type="password" id="pin" placeholder="Enter PIN">
+        <button class="cta-btn" id="enterBtn" onclick="login()">Enter</button>
+        <p id="welcomeMsg"></p>
+        <p id="error"></p>
+        <button class="cta-btn" onclick="goToStats()">BCC Stats</button>
+    </div>
 </div>
 
 </body>
