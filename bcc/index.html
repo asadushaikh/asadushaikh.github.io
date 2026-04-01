@@ -283,29 +283,32 @@ function filterSeason(season){
     });
 
     // Render Centurions
-    centDiv.innerHTML="";
-    centurions.forEach(p=>{
-        const card = document.createElement("div");
-        card.className="highlight-card";
-        card.innerHTML=`
-            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
-            <h4>${p.name}</h4>
-            <p>${p.runs} (${p.balls})</p>
-            <p>${p.date}</p>
-        `;
-        centDiv.appendChild(card);
-    });
-	
-	// Add special highlight card (Asad Hat-trick)
-	const specialCard = document.createElement("div");
-	specialCard.className = "highlight-card";
-	specialCard.innerHTML = `
-		<img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/Asad.jpg" alt="Asad">
-		<h4>Asad</h4>
-		<p>Hat-trick</p>
-		<p>06/01/2025</p>
-	`;
-	centDiv.appendChild(specialCard);
+    // Render Centurions
+centDiv.innerHTML="";
+centurions.forEach(p=>{
+    const card = document.createElement("div");
+    card.className="highlight-card";
+    card.innerHTML=`
+        <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
+        <h4>${p.name}</h4>
+        <p>${p.runs} (${p.balls})</p>
+        <p>${p.date}</p>
+    `;
+    centDiv.appendChild(card);
+});
+
+// Add special highlight card (Asad Hat-trick) only for 2025-26 and All
+if(season === "2025-26" || season === "All") {
+    const specialCard = document.createElement("div");
+    specialCard.className = "highlight-card";
+    specialCard.innerHTML = `
+        <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/Asad.jpg" alt="Asad">
+        <h4>Asad</h4>
+        <p>Hat-trick</p>
+        <p>06/01/2025</p>
+    `;
+    centDiv.appendChild(specialCard);
+}
 
     // Top 5
     const topStats = Object.entries(players)
