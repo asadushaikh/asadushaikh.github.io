@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -17,7 +17,7 @@ body {
     background: linear-gradient(90deg,#0a2342,#123b70,#1e4a8f);
     color: white;
     text-align: center;
-    padding: 12px 10px; /* reduced */
+    padding: 12px 10px;
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -25,7 +25,7 @@ body {
 }
 .bcc-banner h1 { 
     margin: 0; 
-    font-size: 16px; /* smaller */
+    font-size: 16px; 
     font-weight: 700; 
     letter-spacing: 0.5px; 
 }
@@ -46,8 +46,8 @@ body {
 .top-bar {
     display: flex;
     align-items: stretch;
-    gap: 8px; /* tighter */
-    padding: 8px 10px; /* reduced */
+    gap: 8px; 
+    padding: 8px 10px; 
 }
 
 .game-widget {
@@ -55,9 +55,9 @@ body {
     background: linear-gradient(180deg,#123b70,#1e4a8f);
     color: white;
     border-radius: 10px;
-    padding: 10px 8px; /* reduced */
+    padding: 10px 8px; 
     box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-    min-height: auto; /* remove forced height */
+    min-height: auto; 
     text-align: center;
     display: flex;
     flex-direction: column;
@@ -74,73 +74,81 @@ body {
     font-size: 9px;
 }
 
-/* ===================== COUNTDOWN (IMPROVED) ===================== */
+/* ===================== COUNTDOWN ===================== */
 .countdown {
     margin-top: 4px;
     font-weight: 700;
     font-size: 11px;
-    color: #00ffcc; /* bright teal-green */
+    color: #00ffcc;
     text-shadow: 0 0 6px rgba(0,255,200,0.6);
 }
-
 .countdown span {
     font-size: 12px;
     font-weight: 800;
     letter-spacing: 0.5px;
 }
 
-
 /* ===================== FRAMES ===================== */
 .frame {
-    background: white;
     padding: 20px;
     margin: 30px auto;
     border-radius: 12px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
     max-width: 1000px;
     text-align: center;
+    background: white;
+    border: 2px solid transparent;
 }
 .frame h2 { 
     margin-bottom: 15px; 
-    font-size: 16px;    /* smaller than before */
-    font-weight: 600;   /* slightly lighter */
+    font-size: 16px; 
+    font-weight: 600; 
 }
 
-/* ===================== HIGHLIGHT CARDS (COMPACT) ===================== */
+/* Highlights Frame */
+.frame#highlights {
+    background: #fff8dc; /* light gold */
+    border-color: #ffd700; /* gold border */
+}
+
+/* Top 5 Frames */
+.frame.top5-frame {
+    background: #e6f2ff; /* light blue */
+    border-color: #80bfff; /* blue border */
+}
+
+/* Members frame stays as default */
+
+/* ===================== HIGHLIGHT CARDS & MEMBERS ===================== */
 .highlight-card, .member-card {
-    width: 75px;              /* was 140px */
-    padding: 6px;             /* reduced */
+    width: 75px; 
+    padding: 6px; 
     border-radius: 10px;
     text-align: center;
     transition: 0.2s;
 }
-
 .highlight-card img, .member-card img {
-    width: 42px;              /* was 80px */
+    width: 42px; 
     height: 42px;
     border-radius: 50%;
     object-fit: cover;
 }
-
 .highlight-card h4, .member-card h4 { 
     margin-top: 4px; 
     font-size: 9px; 
 }
-
 .highlight-card p, .member-card p { 
     font-size: 8px; 
     margin: 1px 0; 
 }
 
-/* ===================== HIGHLIGHT CARDS & MEMBERS CONTAINER FIX ===================== */
+/* ===================== HIGHLIGHT CARDS & MEMBERS CONTAINER ===================== */
 .highlight-grid, .members-container {
-    display: flex;         /* add this */
-    flex-wrap: wrap;       /* allow wrapping to next row if too many cards */
-    justify-content: center; /* center cards in the frame */
-    gap: 10px;             /* spacing between cards */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
-
-/* ===================== MEMBERS ===================== */
 .members-container { 
     padding: 10px; 
 }
@@ -148,85 +156,75 @@ body {
 </head>
 
 <body>
-
-
-        <!-- ===================== BATTING TAB ===================== -->
-        <div class="tab-pane fade show active" id="batting" role="tabpanel">
-            <!-- Game Widgets + Banner -->
-            <div class="top-bar">
-                <div class="game-widget" id="nextGame">
-                    <h3>Next Game</h3>
-                    <p>Loading...</p>
-                </div>
-                <div class="bcc-banner" style="flex:1.6;">
-                    <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
-                    <div class="banner-tagline">Brotherhood • Competition • Passion for Cricket</div>
-                    <p class="banner-sub">
-                        A brotherhood of passionate cricket lovers and hardworking professionals, united by trust, respect, and a shared love for the game.
-                    </p>
-                </div>
-                <div class="game-widget" id="lastGame">
-                    <h3>Last Game</h3>
-                    <p>Loading...</p>
-                </div>
+    <div class="tab-pane fade show active" id="batting" role="tabpanel">
+        <!-- Game Widgets + Banner -->
+        <div class="top-bar">
+            <div class="game-widget" id="nextGame">
+                <h3>Next Game</h3>
+                <p>Loading...</p>
             </div>
-			
-			<!-- Season Filter + PDF Links -->
-			<div style="text-align:center; margin:10px 0; display:flex; justify-content:center; align-items:center; gap:10px; font-size:12px; font-weight:400;">
-				
-				<!-- Bowling/Fielding/Keeping PDF -->
-				<a href="data/bowling.pdf" target="_blank" style="display:flex; align-items:center; gap:4px; text-decoration:underline; color:#123b70;">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" style="width:14px; height:14px;">
-					Ball/Fld PDF
-				</a>
-
-				<!-- Season Dropdown -->
-				<div style="margin:0 5px; display:flex; align-items:center; gap:5px;">
-					<label for="seasonFilter" style="font-weight:400; font-size:12px;">Season:</label>
-					<select id="seasonFilter" style="font-size:12px; padding:2px 4px;">
-						<option value="2025-26" selected>2025-26</option>
-						<option value="2024-25">2024-25</option>
-						<option value="All">All Seasons</option>
-					</select>
-				</div>
-
-				<!-- Batting PDF -->
-				<a href="data/batting.pdf" target="_blank" style="display:flex; align-items:center; gap:4px; text-decoration:underline; color:#123b70;">
-					<img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" style="width:14px; height:14px;">
-					Batting PDF
-				</a>
-			</div>	
-            
-            <!-- Centurions -->
-            <div class="frame">
-                <h2>Highlights</h2>
-                <div id="centurions" class="highlight-grid"></div>
+            <div class="bcc-banner" style="flex:1.6;">
+                <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
+                <div class="banner-tagline">Brotherhood • Competition • Passion for Cricket</div>
+                <p class="banner-sub">
+                    A brotherhood of passionate cricket lovers and hardworking professionals, united by trust, respect, and a shared love for the game.
+                </p>
             </div>
-
-            <!-- Top 5 -->
-            <div class="frame">
-                <h2>Top 5 Batsmen</h2>
-                <div id="top5" class="highlight-grid"></div>
-            </div>
-			
-			<div class="frame">
-				<h2>Top 5 Bowlers</h2>
-				<div id="topBowlers" class="highlight-grid"></div>
-			</div>
-
-            <!-- All Members -->
-            <div class="frame">
-                <div id="allMembers" class="members-container"></div>
+            <div class="game-widget" id="lastGame">
+                <h3>Last Game</h3>
+                <p>Loading...</p>
             </div>
         </div>
+		
+        <!-- Season Filter + PDF Links -->
+        <div style="text-align:center; margin:10px 0; display:flex; justify-content:center; align-items:center; gap:10px; font-size:12px; font-weight:400;">
+            <a href="data/bowling.pdf" target="_blank" style="display:flex; align-items:center; gap:4px; text-decoration:underline; color:#123b70;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" style="width:14px; height:14px;">
+                Ball/Fld PDF
+            </a>
+            <div style="margin:0 5px; display:flex; align-items:center; gap:5px;">
+                <label for="seasonFilter" style="font-weight:400; font-size:12px;">Season:</label>
+                <select id="seasonFilter" style="font-size:12px; padding:2px 4px;">
+                    <option value="2025-26" selected>2025-26</option>
+                    <option value="2024-25">2024-25</option>
+                    <option value="All">All Seasons</option>
+                </select>
+            </div>
+            <a href="data/batting.pdf" target="_blank" style="display:flex; align-items:center; gap:4px; text-decoration:underline; color:#123b70;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" style="width:14px; height:14px;">
+                Batting PDF
+            </a>
+        </div>	
+		
+        <!-- Centurions / Highlights -->
+        <div class="frame" id="highlights">
+            <h2>Highlights</h2>
+            <div id="centurions" class="highlight-grid"></div>
+        </div>
 
-    
+        <!-- Top 5 Batsmen -->
+        <div class="frame top5-frame">
+            <h2>Top 5 Batsmen</h2>
+            <div id="top5" class="highlight-grid"></div>
+        </div>
+		
+        <!-- Top 5 Bowlers -->
+        <div class="frame top5-frame">
+            <h2>Top 5 Bowlers</h2>
+            <div id="topBowlers" class="highlight-grid"></div>
+        </div>
 
+        <!-- All Members -->
+        <div class="frame">
+            <div id="allMembers" class="members-container"></div>
+        </div>
+    </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- ===================== EXISTING JS ===================== -->
 <script>
+// All your existing JS goes here (season filter, renderAllMembers, renderGameWidgets etc.)
+// Nothing changed in JS, only frame styles updated
 const seasonStartDates = { "2024-25": new Date("2024-04-20"), "2025-26": new Date("2025-04-20") };
 let allRows = [], matchRows = [];
 
@@ -444,7 +442,7 @@ fetch("data/bcc_data.csv")
     allRows=data.split("\n").slice(1).map(r=>r.split(",").map(c=>c.trim())).filter(r=>r.length>=8);
     filterSeason("2025-26");
 });
-</script>
 
+</script>
 </body>
 </html>
