@@ -202,11 +202,32 @@ body {
         </div>
 
         <!-- ===================== BOWLING/FIELDING TAB ===================== -->
-        <div class="tab-pane fade" id="bowling" role="tabpanel">
-            <div class="frame">
-                <h2>Bowling/Fielding Stats Coming Soon...</h2>
-            </div>
-        </div>
+		
+		<!-- ===================== BOWLING/FIELDING TAB ===================== -->
+		<div class="tab-pane fade" id="bowling" role="tabpanel">
+
+			<!-- Season Filter -->
+			<div style="text-align:center; margin:10px 0;">
+				<label for="seasonFilterBowling" style="margin-right:10px; font-weight:600;">Select Season:</label>
+				<select id="seasonFilterBowling">
+					<option value="2025-26" selected>2025-26</option>
+					<option value="2024-25">2024-25</option>
+					<option value="All">All Seasons</option>
+				</select>
+			</div>
+
+			<!-- Top 5 Bowlers -->
+			<div class="frame">
+				<h2>Top 5 Bowlers</h2>
+				<div id="top5Bowling" class="highlight-grid"></div>
+			</div>
+
+			<!-- All Members -->
+			<div class="frame">
+				<div id="allMembersBowling" class="members-container"></div>
+			</div>
+
+		</div>
     </div>
 </div>
 
@@ -394,6 +415,114 @@ fetch("data/bcc_data.csv")
     allRows=data.split("\n").slice(1).map(r=>r.split(",").map(c=>c.trim())).filter(r=>r.length>=8);
     filterSeason("2025-26");
 });
+
+
+function renderAllMembersBowling(players, top5Names = new Set()){
+    const div = document.getElementById("allMembersBowling");
+    div.innerHTML = "";
+
+    Object.entries(players)
+        .filter(([name]) => !top5Names.has(name))
+        .sort((a,b) => b[1].wickets - a[1].wickets)
+        .forEach(([name,p])=>{
+
+            const avg = p.wickets > 0 ? (p.runsConceded / p.wickets).toFixed(1) : "-";
+            const eco = p.overs > 0 ? (p.runsConceded / p.overs).toFixed(1) : "-";
+
+            const card = document.createElement("div");
+            card.className = "member-card";
+            card.innerHTML = `
+                <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${name}.jpg">
+                <h4>${name}</h4>
+                <p>Wickets: ${p.wickets}</p>
+                <p>Avg: ${avg}</p>
+                <p>Eco: ${eco}</p>
+            `;
+            div.appendChild(card);
+        });
+}
+
+function filterSeasonBowling(season){
+
+    const topDiv = document.getElementById("top5Bowling");
+
+    const allowedPlayers = ["Aamir","Aamir Noor","Adeel","Anas","Asad","Atif","Fahad","Farhan","Hafiz Atiq","Hafiz Rizwan","Imran","Imtiaz","Luqmaan","Majid","Nouman","Patel","Rony","Saleem","Salman","Saud","Shakeel","Sheraz","Umar","Nabeel","Zain","Suhaib","Monis","Faraz"];
+
+    const filteredRows = allRows
+        .filter(cols => allowedPlayers.includes(cols[0]?.trim()))
+        .filter(cols=>{
+            const dateObj = parseDate(cols[3]);
+            if(!dateObj) return false;
+
+            if(season==="All") return true;
+            if(season==="2025-26") return dateObj >= seasonStartDates["2025-26"];
+            if(season==="2024-25") return dateObj >= seasonStartDates["2024-25"] && dateObj < seasonStartDates["2025-26"];
+
+            return true;
+        });
+
+    let players = {};
+
+    filteredRows.forEach(cols=>{
+        const name = cols[0].trim();
+
+        // ⚠️ UPDATE THESE INDEXES BASED ON YOUR CSV
+        const wickets = parseInt(cols[25]);       // wickets column
+        const runsConceded = parseInt(cols[24]);  // runs conceded
+        const overs = parseFloat(cols[23]);       // overs bowled
+
+        if(!name || isNaN(wickets)) return;
+
+        if(!players[name]) players[name] = {
+            wickets:0,
+            runsConceded:0,
+            overs:0
+        };
+
+        players[name].wickets += wickets;
+        players[name].runsConceded += isNaN(runsConceded) ? 0 : runsConceded;
+        players[name].overs += isNaN(overs) ? 0 : overs;
+    });
+
+    // ===== TOP 5 BY WICKETS =====
+    const topStats = Object.entries(players)
+        .map(([name,p])=>{
+            const avg = p.wickets > 0 ? (p.runsConceded / p.wickets).toFixed(1) : "-";
+            const eco = p.overs > 0 ? (p.runsConceded / p.overs).toFixed(1) : "-";
+
+            return {
+                name,
+                wickets: p.wickets,
+                avg,
+                eco
+            };
+        })
+        .sort((a,b)=>b.wickets - a.wickets)
+        .slice(0,5);
+
+    const top5Names = new Set(topStats.map(p=>p.name));
+
+    topDiv.innerHTML = "";
+
+    topStats.forEach(p=>{
+        const card = document.createElement("div");
+        card.className = "highlight-card";
+        card.innerHTML = `
+            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
+            <h4>${p.name}</h4>
+            <p>Wickets: ${p.wickets}</p>
+            <p>Avg: ${p.avg}</p>
+            <p>Eco: ${p.eco}</p>
+        `;
+        topDiv.appendChild(card);
+    });
+
+    renderAllMembersBowling(players, top5Names);
+}
+
+// FILTER EVENT
+document.getElementById("seasonFilterBowling")
+    .addEventListener("change", e => filterSeasonBowling(e.target.value));
 </script>
 
 </body>
