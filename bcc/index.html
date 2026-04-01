@@ -376,9 +376,8 @@ function renderGameWidgets(){
     if(lastGame){
         const lgEl=document.getElementById("lastGame");
         lgEl.innerHTML=`
-            <h3>Last Game</h3>
+            <h3>Last Game: ${lastGame.date.toDateString()}</h3>
             <p><b>${lastGame.capt1}</b> vs <b>${lastGame.capt2}</b></p>
-            <p>${lastGame.date.toDateString()}</p>
             <p><b>Winner:</b> ${lastGame.winner}</p>
         `;
     }
