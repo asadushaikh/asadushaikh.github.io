@@ -43,6 +43,41 @@ body {
     line-height: 1.4; 
 }
 
+/* ===================== GAME WIDGETS ===================== */
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 15px;
+    padding: 10px 15px;
+}
+
+.game-widget {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 3px 10px rgba(0,0,0,0.15);
+    min-height: 140px;
+}
+
+.game-widget h3 {
+    font-size: 16px;
+    margin-bottom: 8px;
+    color: #0a2342;
+}
+
+.game-widget p {
+    margin: 3px 0;
+    font-size: 13px;
+}
+
+.countdown {
+    font-weight: bold;
+    color: #d62828;
+    margin-top: 8px;
+}
+
 /* ===================== FRAMES ===================== */
 .frame {
     background: white;
@@ -146,13 +181,29 @@ body {
 <body>
 
 <!-- ===================== BCC BANNER ===================== -->
-<div class="bcc-banner">
-    <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
-    <div class="banner-tagline">Brotherhood • Competition • Passion for Cricket</div>
-    <p class="banner-sub">
-        A brotherhood of passionate cricket lovers and hardworking professionals, united by trust, respect, and a shared love for the game.
-        Balancing careers and families, we come together each week to unwind, compete, and enjoy the game of cricket.
-    </p>
+<div class="top-bar">
+
+    <!-- NEXT GAME -->
+    <div class="game-widget" id="nextGame">
+        <h3>Next Game</h3>
+        <p>Loading...</p>
+    </div>
+
+    <!-- BANNER -->
+    <div class="bcc-banner" style="flex:2;">
+        <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
+        <div class="banner-tagline">Brotherhood • Competition • Passion for Cricket</div>
+        <p class="banner-sub">
+            A brotherhood of passionate cricket lovers and hardworking professionals, united by trust, respect, and a shared love for the game.
+        </p>
+    </div>
+
+    <!-- LAST GAME -->
+    <div class="game-widget" id="lastGame">
+        <h3>Last Game</h3>
+        <p>Loading...</p>
+    </div>
+
 </div>
 
 <!-- ===================== SEASON FILTER ===================== -->
@@ -308,11 +359,141 @@ function filterSeason(season) {
 // FILTER CHANGE EVENT
 document.getElementById("seasonFilter").addEventListener("change", e => filterSeason(e.target.value));
 
-// FETCH CSV
+<script>
+
+// ================= MATCH WIDGET CODE =================
+let matchRows = [];
+
+function parseDate(str) {
+    if(str.includes("-")) { 
+        const p = str.split("-"); 
+        return new Date(p[0], p[1]-1, p[2]); 
+    }
+    if(str.includes("/")) { 
+        const p = str.split("/"); 
+        return new Date(p[2], p[0]-1, p[1]); 
+    }
+    return null;
+}
+
+function getNextSundaySunrise() {
+    const now = new Date();
+    const day = now.getDay();
+    const diff = (7 - day) % 7 || 7;
+
+    const nextSunday = new Date(now);
+    nextSunday.setDate(now.getDate() + diff);
+    nextSunday.setHours(6,30,0,0);
+
+    return nextSunday;
+}
+
+function startCountdown(targetDate) {
+    const el = document.getElementById("countdown");
+
+    function update() {
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if(diff <= 0){
+            el.innerHTML = "Match Day!";
+            return;
+        }
+
+        const d = Math.floor(diff / (1000*60*60*24));
+        const h = Math.floor((diff / (1000*60*60)) % 24);
+        const m = Math.floor((diff / (1000*60)) % 60);
+
+        el.innerHTML = `${d}d ${h}h ${m}m`;
+    }
+
+    update();
+    setInterval(update, 60000);
+}
+
+function renderGameWidgets() {
+
+    const now = new Date();
+    let nextGame = null;
+    let lastGame = null;
+
+    matchRows.forEach(cols => {
+
+        const date  = parseDate(cols[1]);
+        const capt1 = cols[2];
+        const color1 = cols[3];  // Capt 1 color
+        const capt2 = cols[4];
+        const color2 = cols[5];  // Capt 2 color
+        const winner = cols[6];
+
+        if(!date) return;
+
+        // NEXT GAME
+        if(date >= now) {
+            if(!nextGame || date < nextGame.date) {
+                nextGame = {date, capt1, capt2, color1, color2};
+            }
+        }
+
+        // LAST GAME
+        if(date < now) {
+            if(!lastGame || date > lastGame.date) {
+                lastGame = {date, capt1, capt2, winner};
+            }
+        }
+    });
+
+    // ===== NEXT GAME =====
+    if(nextGame){
+        const sunrise = getNextSundaySunrise();
+
+        document.getElementById("nextGame").innerHTML = `
+            <h3>Next Game</h3>
+            <p>
+                <span style="color:${nextGame.color1}; font-weight:700;">${nextGame.capt1}</span> 
+                vs 
+                <span style="color:${nextGame.color2}; font-weight:700;">${nextGame.capt2}</span>
+            </p>
+            <p>${nextGame.date.toDateString()}</p>
+            <p class="countdown">Starts in: <span id="countdown"></span></p>
+        `;
+
+        startCountdown(sunrise);
+    }
+
+    // ===== LAST GAME =====
+    if(lastGame){
+        document.getElementById("lastGame").innerHTML = `
+            <h3>Last Game</h3>
+            <p><b>${lastGame.capt1}</b> vs <b>${lastGame.capt2}</b></p>
+            <p>${lastGame.date.toDateString()}</p>
+            <p><b>Winner:</b> ${lastGame.winner}</p>
+        `;
+    }
+}
+
+// FETCH MATCH DATA
+fetch("data/mat_summary.csv")
+.then(r => r.text())
+.then(data => {
+    matchRows = data.split("\n")
+        .slice(1)
+        .map(r => r.split(",").map(c => c.trim()))
+        .filter(r => r.length > 5);
+
+    renderGameWidgets();
+});
+
+
+// ================= YOUR EXISTING CODE BELOW =================
+
+// (your bcc_data.csv fetch stays here unchanged)
+
 fetch("data/bcc_data.csv").then(r => r.text()).then(data => {
     allRows = data.split("\n").slice(1).map(r => r.split(",").map(c => c.trim())).filter(c => c.length >= 8);
     filterSeason("2025-26");
 });
+
 </script>
 
 </body>
