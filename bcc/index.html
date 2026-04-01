@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>BCC Stats + Dashboard</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-
 <style>
 body {
     margin: 0;
@@ -202,9 +201,7 @@ body {
     <!-- LAST GAME -->
     <div class="game-widget" id="lastGame">
         <h3>Last Game</h3>
-        <p><b>Green Team</b> vs <b>Blue Team</b></p>
-        <p>Sun Mar 30 2026</p>
-        <p><b>Winner:</b> Green Team</p>
+        <p>Loading...</p>
     </div>
 
 </div>
@@ -238,17 +235,12 @@ body {
 
 <script>
 const seasonStartDates = { "2024-25": new Date("2024-04-20"), "2025-26": new Date("2025-04-20") };
-let allRows = []; // CSV rows
+let allRows = [], matchRows = [];
 
 function parseDate(str) {
-    if(str.includes("-")) { 
-        const p = str.split("-"); 
-        return new Date(p[0], p[1]-1, p[2]); 
-    }
-    if(str.includes("/")) { 
-        const p = str.split("/"); 
-        return new Date(p[2], p[0]-1, p[1]); 
-    }
+    if(!str) return null;
+    if(str.includes("-")) { const p = str.split("-"); return new Date(p[0], p[1]-1, p[2]); }
+    if(str.includes("/")) { const p = str.split("/"); return new Date(p[2], p[0]-1, p[1]); }
     return null;
 }
 
@@ -260,14 +252,16 @@ function renderAllMembers(players, top5Names = new Set()){
         .filter(([name]) => !top5Names.has(name))
         .sort((a,b) => b[1].runs - a[1].runs)
         .forEach(([name,p])=>{
+            const avg = p.outs>0 ? (p.runs/p.outs).toFixed(1) : p.runs;
+            const sr = ((p.runs/p.balls)*100).toFixed(1);
             const card = document.createElement("div");
             card.className = "member-card";
             card.innerHTML = `
                 <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${name}.jpg" alt="${name}">
                 <h4>${name}</h4>
                 <p>Runs: ${p.runs}</p>
-                <p>Avg: ${(p.runs/p.innings).toFixed(1)}</p>
-                <p>S/R: ${((p.runs/p.balls)*100).toFixed(1)}</p>
+                <p>Avg: ${avg}</p>
+                <p>S/R: ${sr}</p>
             `;
             allDiv.appendChild(card);
         });
@@ -291,12 +285,20 @@ function filterSeason(season){
         });
 
     let players = {}, centurions=[];
+
     filteredRows.forEach(cols=>{
         const name=cols[0].trim(), date=cols[3].trim(), runs=parseInt(cols[6]), balls=parseInt(cols[7]);
         if(!name || isNaN(runs)||isNaN(balls)) return;
-        if(!players[name]) players[name]={runs:0,balls:0,innings:0};
-        players[name].runs+=runs; players[name].balls+=balls; players[name].innings+=1;
-        if(runs>=100) centurions.push({name,date,runs,balls});
+        if(!players[name]) players[name] = {runs:0, balls:0, innings:0, outs:0};
+
+        let status = cols[8]?.toLowerCase() || "out"; // adjust index if CSV differs
+        if(!["n/o","not out","retired","dnb"].includes(status)) players[name].outs += 1;
+
+        players[name].runs += runs;
+        players[name].balls += balls;
+        players[name].innings += 1;
+
+        if(runs >= 100) centurions.push({name,runs,balls,date});
     });
 
     // Render Centurions
@@ -314,10 +316,16 @@ function filterSeason(season){
     });
 
     // Top 5
-    const topStats = Object.entries(players).map(([name,p])=>({name,runs:p.runs,avg:(p.runs/p.innings).toFixed(1),sr:((p.runs/p.balls)*100).toFixed(1)}))
-                     .sort((a,b)=>b.runs-a.runs).slice(0,5);
-    const top5Names = new Set(topStats.map(p=>p.name));
+    const topStats = Object.entries(players)
+        .map(([name,p])=>{
+            const avg = p.outs>0 ? (p.runs/p.outs).toFixed(1) : p.runs;
+            const sr = ((p.runs/p.balls)*100).toFixed(1);
+            return {name,runs:p.runs,avg,sr};
+        })
+        .sort((a,b)=>b.runs-a.runs)
+        .slice(0,5);
 
+    const top5Names = new Set(topStats.map(p=>p.name));
     topDiv.innerHTML="";
     topStats.forEach(p=>{
         const card = document.createElement("div");
@@ -338,24 +346,22 @@ function filterSeason(season){
 document.getElementById("seasonFilter").addEventListener("change", e=>filterSeason(e.target.value));
 
 // ===================== MATCH WIDGET =====================
-function getNextSundaySunrise(){
-    const now = new Date();
-    const diff = (7 - now.getDay()) % 7 || 7;
-    const next = new Date(now);
-    next.setDate(now.getDate()+diff);
-    next.setHours(6,30,0,0);
-    return next;
-}
-
 function startCountdown(el, targetDate){
     function update(){
         const diff = targetDate - new Date();
-        if(diff<=0){ el.innerHTML="Match Day!"; return; }
-        const d=Math.floor(diff/(1000*60*60*24)), h=Math.floor(diff/(1000*60*60)%24), m=Math.floor(diff/(1000*60)%60);
-        el.innerHTML=`${d}d ${h}h ${m}m`;
+        if(diff <= 0){ 
+            el.innerHTML = "Match Day!"; 
+            clearInterval(interval); 
+            return; 
+        }
+        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const h = Math.floor(diff / (1000 * 60 * 60) % 24);
+        const m = Math.floor(diff / (1000 * 60) % 60);
+        const s = Math.floor(diff / 1000 % 60);
+        el.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
     }
     update();
-    setInterval(update,60000);
+    const interval = setInterval(update, 1000);
 }
 
 function renderGameWidgets(){
@@ -379,7 +385,7 @@ function renderGameWidgets(){
             <p>${nextGame.date.toDateString()}</p>
             <p class="countdown">Starts in: <span id="countdown"></span></p>
         `;
-        startCountdown(document.querySelector("#nextGame .countdown span"), getNextSundaySunrise());
+        startCountdown(document.querySelector("#nextGame .countdown span"), nextGame.date);
     }
 
     // Last Game
