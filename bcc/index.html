@@ -291,7 +291,7 @@ function filterSeason(season){
         if(!name || isNaN(runs)||isNaN(balls)) return;
         if(!players[name]) players[name] = {runs:0, balls:0, innings:0, outs:0};
 
-        let status = cols[8]?.toLowerCase() || "out"; // adjust index if CSV differs
+        let status = cols[17]?.toLowerCase() || "how out"; // adjust index if CSV differs
         if(!["n/o","Not Out","Retired","DNB"].includes(status)) players[name].outs += 1;
 
         players[name].runs += runs;
