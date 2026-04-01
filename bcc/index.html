@@ -170,16 +170,32 @@ body {
                     <p>Loading...</p>
                 </div>
             </div>
+			<!-- Season Filter + PDF Links -->
+<div style="text-align:center; margin:20px 0; display:flex; justify-content:center; align-items:center; gap:20px;">
+    
+    <!-- Bowling/Fielding/Keeping PDF -->
+    <a href="data/bowling_fielding_keeping.pdf" target="_blank" style="display:flex; align-items:center; gap:5px; text-decoration:none; color:#123b70; font-weight:600;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" style="width:18px; height:18px;">
+        Download Bowling/Fielding/Keeping PDF
+    </a>
 
-            <!-- Season Filter -->
-            <div style="text-align:center; margin:20px 0;">
-                <label for="seasonFilter" style="margin-right:10px; font-weight:600;">Select Season:</label>
-                <select id="seasonFilter">
-                    <option value="2025-26" selected>2025-26</option>
-                    <option value="2024-25">2024-25</option>
-                    <option value="All">All Seasons</option>
-                </select>
-            </div>
+    <!-- Season Dropdown -->
+    <div style="margin:0 10px;">
+        <label for="seasonFilter" style="margin-right:10px; font-weight:600;">Select Season:</label>
+        <select id="seasonFilter">
+            <option value="2025-26" selected>2025-26</option>
+            <option value="2024-25">2024-25</option>
+            <option value="All">All Seasons</option>
+        </select>
+    </div>
+
+    <!-- Batting PDF -->
+    <a href="data/batting_stats.pdf" target="_blank" style="display:flex; align-items:center; gap:5px; text-decoration:none; color:#123b70; font-weight:600;">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" style="width:18px; height:18px;">
+        Download Batting PDF
+    </a>
+</div>	
+            
 
             <!-- Centurions -->
             <div class="frame">
