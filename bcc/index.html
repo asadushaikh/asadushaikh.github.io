@@ -365,9 +365,8 @@ function renderGameWidgets(){
     if(nextGame){
         const ngEl=document.getElementById("nextGame");
         ngEl.innerHTML=`
-            <h3>Next Game</h3>
+            <h3>Next Game: ${nextGame.date.toDateString()}</h3>
             <p><span style="color:${nextGame.color1}; font-weight:700;">${nextGame.capt1}</span> vs <span style="color:${nextGame.color2}; font-weight:700;">${nextGame.capt2}</span></p>
-            <p>${nextGame.date.toDateString()}</p>
             <p class="countdown">Starts in: <span id="countdown"></span></p>
         `;
         startCountdown(document.querySelector("#nextGame .countdown span"), nextGame.date);
