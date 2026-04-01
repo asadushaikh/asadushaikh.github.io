@@ -151,6 +151,7 @@ body {
 }
 
 /* ===================== NEWS TICKER ===================== */
+
 .ticker-wrapper {
     width: 100%;
     overflow: hidden;
@@ -158,22 +159,31 @@ body {
     border-radius: 8px;
     margin: 6px 10px 0 10px;
 }
+
 .ticker {
     display: inline-block;
     white-space: nowrap;
     color: #fff;
     font-size: 12px;
     padding: 6px 0;
-    animation: scrollTicker 60s linear infinite;
+    animation: scrollTicker 60s linear infinite; /* slower, starts immediately */
 }
+
 .ticker span {
     margin-right: 40px;
     font-weight: 500;
 }
+
 @keyframes scrollTicker {
-    0% { transform: translateX(100%); }
-    100% { transform: translateX(-100%); }
+    0% { transform: translateX(100%); }   /* offscreen right at start */
+    100% { transform: translateX(-100%); } /* exit left */
 }
+
+/* Optional: pause on hover */
+.ticker:hover {
+    animation-play-state: paused;
+}
+
 </style>
 </head>
 
