@@ -226,7 +226,7 @@ function renderAllMembers(players, top5Names = new Set()){
     const allDiv = document.getElementById("allMembers");
     allDiv.innerHTML = "";
     Object.entries(players)
-        .filter(([name]) => !top5Names.has(name))
+        //.filter(([name]) => !top5Names.has(name))
         .sort((a,b) => b[1].runs - a[1].runs)
         .forEach(([name,p])=>{
             const avg = p.outs>0 ? (p.runs/p.outs).toFixed(1) : p.runs;
@@ -237,6 +237,7 @@ function renderAllMembers(players, top5Names = new Set()){
                 <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${name}.jpg" alt="${name}">
                 <h4>${name}</h4>
                 <p>Runs: ${p.runs}</p>
+				<p>Wkts: ${p.wickets}</p>
                 <!--//<p>Avg: ${avg}</p>-->
                 <!--<p>S/R: ${sr}</p>-->
             `;
@@ -277,7 +278,7 @@ function filterSeason(season){
 
         if(runs >= 100) centurions.push({name,runs,balls,date});
 		
-		const wickets = parseInt(cols[24]) || 0;
+		const wickets = parseInt(cols[25]) || 0;
 		players[name].wickets += wickets;
     });
 
@@ -345,7 +346,7 @@ topBowlers.forEach(p => {
     card.innerHTML = `
         <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
         <h4>${p.name}</h4>
-        <p>Wkts: ${p.wickets}</p>
+		<p>Wkts: ${p.wickets}</p>
     `;
     bowlDiv.appendChild(card);
 });
