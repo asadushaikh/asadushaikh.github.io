@@ -49,7 +49,6 @@ body {
     gap: 8px; 
     padding: 8px 10px; 
 }
-
 .game-widget {
     flex: 1;
     background: linear-gradient(180deg,#123b70,#1e4a8f);
@@ -117,28 +116,26 @@ body {
     border-color: #80bfff; /* blue border */
 }
 
-/* Members frame stays as default */
-
 /* ===================== HIGHLIGHT CARDS & MEMBERS ===================== */
 .highlight-card, .member-card {
-    width: 75px; 
-    padding: 6px; 
+    width: 90px;   /* increased from 75 */
+    padding: 8px;
     border-radius: 10px;
     text-align: center;
     transition: 0.2s;
 }
 .highlight-card img, .member-card img {
-    width: 42px; 
-    height: 42px;
+    width: 52px;   /* increased */
+    height: 52px;
     border-radius: 50%;
     object-fit: cover;
 }
-.highlight-card h4, .member-card h4 { 
+.highlight-card h4, .member-card h4 {
+    font-size: 10px;
     margin-top: 4px; 
-    font-size: 9px; 
 }
-.highlight-card p, .member-card p { 
-    font-size: 8px; 
+.highlight-card p, .member-card p {
+    font-size: 9px;
     margin: 1px 0; 
 }
 
@@ -152,10 +149,53 @@ body {
 .members-container { 
     padding: 10px; 
 }
+
+/* ===================== NEWS TICKER ===================== */
+.ticker-wrapper {
+    width: 100%;
+    overflow: hidden;
+    background: #0a2342;
+    border-radius: 8px;
+    margin: 6px 10px 0 10px;
+}
+.ticker {
+    display: inline-block;
+    white-space: nowrap;
+    color: #fff;
+    font-size: 12px;
+    padding: 6px 0;
+    animation: scrollTicker 25s linear infinite;
+}
+.ticker span {
+    margin-right: 40px;
+    font-weight: 500;
+}
+@keyframes scrollTicker {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(-100%); }
+}
 </style>
 </head>
 
 <body>
+    <!-- ===================== NEWS TICKER ===================== -->
+    <div class="ticker-wrapper">
+        <div class="ticker">
+            <span>👏 Saud shows true team spirit by stepping up for umpiring</span>
+            <span>🍽️ Thanks to Aamir Khan for the delicious brunch</span>
+            <span>🏏 Atif represents Aamir Noor brilliantly as stand-in captain — leads team to Quarter Finals</span>
+            <span>🔥 Tight race in the 1000 Club between Fahad, Farhan & Majid</span>
+            <span>🎯 Hafiz Atiq surges ahead with an outstanding 38 wickets</span>
+
+            <!-- duplicate for seamless loop -->
+            <span>👏 Saud shows true team spirit by stepping up for umpiring</span>
+            <span>🍽️ Thanks to Aamir Khan for the delicious brunch</span>
+            <span>🏏 Atif represents Aamir Noor brilliantly as stand-in captain — leads team to Quarter Finals</span>
+            <span>🔥 Tight race in the 1000 Club between Fahad, Farhan & Majid</span>
+            <span>🎯 Hafiz Atiq surges ahead with an outstanding 38 wickets</span>
+        </div>
+    </div>
+
     <div class="tab-pane fade show active" id="batting" role="tabpanel">
         <!-- Game Widgets + Banner -->
         <div class="top-bar">
@@ -175,7 +215,7 @@ body {
                 <p>Loading...</p>
             </div>
         </div>
-		
+
         <!-- Season Filter + PDF Links -->
         <div style="text-align:center; margin:10px 0; display:flex; justify-content:center; align-items:center; gap:10px; font-size:12px; font-weight:400;">
             <a href="data/bowling.pdf" target="_blank" style="display:flex; align-items:center; gap:4px; text-decoration:underline; color:#123b70;">
@@ -194,8 +234,8 @@ body {
                 <img src="https://upload.wikimedia.org/wikipedia/commons/8/87/PDF_file_icon.svg" alt="PDF" style="width:14px; height:14px;">
                 Batting PDF
             </a>
-        </div>	
-		
+        </div>
+
         <!-- Centurions / Highlights -->
         <div class="frame" id="highlights">
             <h2>Highlights</h2>
@@ -207,7 +247,7 @@ body {
             <h2>Top 5 Batsmen</h2>
             <div id="top5" class="highlight-grid"></div>
         </div>
-		
+
         <!-- Top 5 Bowlers -->
         <div class="frame top5-frame">
             <h2>Top 5 Bowlers</h2>
