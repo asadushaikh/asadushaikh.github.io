@@ -101,7 +101,9 @@ body {
     text-align: center;
 }
 .frame h2 { 
-    margin-bottom: 20px; 
+    margin-bottom: 15px; 
+    font-size: 16px;    /* smaller than before */
+    font-weight: 600;   /* slightly lighter */
 }
 
 /* ===================== HIGHLIGHT CARDS (COMPACT) ===================== */
@@ -130,8 +132,12 @@ body {
     margin: 1px 0; 
 }
 
+/* ===================== HIGHLIGHT CARDS & MEMBERS CONTAINER FIX ===================== */
 .highlight-grid, .members-container {
-    gap: 10px; /* tighter */
+    display: flex;         /* add this */
+    flex-wrap: wrap;       /* allow wrapping to next row if too many cards */
+    justify-content: center; /* center cards in the frame */
+    gap: 10px;             /* spacing between cards */
 }
 
 /* ===================== MEMBERS ===================== */
