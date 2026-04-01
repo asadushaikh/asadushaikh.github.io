@@ -137,102 +137,96 @@ body {
 .members-container { 
     padding: 10px; 
 }
-
-/* ===================== LOGIN ===================== */
-#loginPage { 
-    display: flex; 
-    justify-content: center; 
-    padding: 20px; 
-}
-.login-box {
-    background: #1e4a8f; 
-    color: white; 
-    padding: 20px; 
-    border-radius: 10px;
-    text-align: center; 
-    box-shadow: 0 2px 10px rgba(0,0,0,0.2); 
-    width: 260px;
-}
-.login-box input, .login-box select {
-    width: 100%; 
-    padding: 10px; 
-    margin: 8px 0; 
-    border-radius: 5px; 
-    border: none;
-}
-.cta-btn {
-    width: 100%; 
-    padding: 12px; 
-    border: none; 
-    border-radius: 25px;
-    background: linear-gradient(90deg,#f7b733,#fc4a1a); 
-    color: white;
-    font-weight: 700; 
-    font-size: 16px; 
-    margin-top: 10px; 
-    transition: 0.3s;
-}
-.cta-btn:hover { 
-    transform: translateY(-3px); 
-}
 </style>
 </head>
 
 <body>
 
-<!-- ===================== BCC BANNER ===================== -->
-<div class="top-bar">
+<!-- ===================== TAB NAVIGATION ===================== -->
+<div class="container mt-3">
+    <ul class="nav nav-tabs" id="bccTabs" role="tablist">
+        <li class="nav-item" role="presentation">
+            <button class="nav-link active" id="batting-tab" data-bs-toggle="tab" data-bs-target="#batting" type="button" role="tab">Batting</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="bowling-tab" data-bs-toggle="tab" data-bs-target="#bowling" type="button" role="tab">Bowling</button>
+        </li>
+        <li class="nav-item" role="presentation">
+            <button class="nav-link" id="fielding-tab" data-bs-toggle="tab" data-bs-target="#fielding" type="button" role="tab">Fielding/Keeping</button>
+        </li>
+    </ul>
 
-    <!-- NEXT GAME -->
-    <div class="game-widget" id="nextGame">
-        <h3>Next Game</h3>
-        <p>Loading...</p>
+    <div class="tab-content mt-3">
+        <!-- ===================== BATTING TAB ===================== -->
+        <div class="tab-pane fade show active" id="batting" role="tabpanel">
+            <!-- Game Widgets + Banner -->
+            <div class="top-bar">
+                <div class="game-widget" id="nextGame">
+                    <h3>Next Game</h3>
+                    <p>Loading...</p>
+                </div>
+                <div class="bcc-banner" style="flex:2;">
+                    <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
+                    <div class="banner-tagline">Brotherhood • Competition • Passion for Cricket</div>
+                    <p class="banner-sub">
+                        A brotherhood of passionate cricket lovers and hardworking professionals, united by trust, respect, and a shared love for the game.
+                    </p>
+                </div>
+                <div class="game-widget" id="lastGame">
+                    <h3>Last Game</h3>
+                    <p>Loading...</p>
+                </div>
+            </div>
+
+            <!-- Season Filter -->
+            <div style="text-align:center; margin:20px 0;">
+                <label for="seasonFilter" style="margin-right:10px; font-weight:600;">Select Season:</label>
+                <select id="seasonFilter">
+                    <option value="2025-26" selected>2025-26</option>
+                    <option value="2024-25">2024-25</option>
+                    <option value="All">All Seasons</option>
+                </select>
+            </div>
+
+            <!-- Centurions -->
+            <div class="frame">
+                <h2>Centurions</h2>
+                <div id="centurions" class="highlight-grid"></div>
+            </div>
+
+            <!-- Top 5 -->
+            <div class="frame">
+                <h2>Top 5 Batsmen</h2>
+                <div id="top5" class="highlight-grid"></div>
+            </div>
+
+            <!-- All Members -->
+            <div class="frame">
+                <div id="allMembers" class="members-container"></div>
+            </div>
+        </div>
+
+        <!-- ===================== BOWLING TAB ===================== -->
+        <div class="tab-pane fade" id="bowling" role="tabpanel">
+            <div class="frame">
+                <h2>Bowling Stats Coming Soon...</h2>
+                <p>Under construction</p>
+            </div>
+        </div>
+
+        <!-- ===================== FIELDING TAB ===================== -->
+        <div class="tab-pane fade" id="fielding" role="tabpanel">
+            <div class="frame">
+                <h2>Fielding/Keeping Stats Coming Soon...</h2>
+                <p>Under construction</p>
+            </div>
+        </div>
     </div>
-
-    <!-- BANNER -->
-    <div class="bcc-banner" style="flex:2;">
-        <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
-        <div class="banner-tagline">Brotherhood • Competition • Passion for Cricket</div>
-        <p class="banner-sub">
-            A brotherhood of passionate cricket lovers and hardworking professionals, united by trust, respect, and a shared love for the game.
-        </p>
-    </div>
-
-    <!-- LAST GAME -->
-    <div class="game-widget" id="lastGame">
-        <h3>Last Game</h3>
-        <p>Loading...</p>
-    </div>
-
 </div>
 
-<!-- ===================== SEASON FILTER ===================== -->
-<div style="text-align:center; margin:20px 0;">
-    <label for="seasonFilter" style="margin-right:10px; font-weight:600;">Select Season:</label>
-    <select id="seasonFilter">
-        <option value="2025-26" selected>2025-26</option>
-        <option value="2024-25">2024-25</option>
-        <option value="All">All Seasons</option>
-    </select>
-</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- ===================== CENTURIONS ===================== -->
-<div class="frame">
-    <h2>Centurions</h2>
-    <div id="centurions" class="highlight-grid"></div>
-</div>
-
-<!-- ===================== TOP 5 ===================== -->
-<div class="frame">
-    <h2>Top 5 Batsmen</h2>
-    <div id="top5" class="highlight-grid"></div>
-</div>
-
-<!-- ===================== ALL MEMBERS SORTED BY RUNS ===================== -->
-<div class="frame">
-    <div id="allMembers" class="members-container"></div>
-</div>
-
+<!-- ===================== EXISTING JS ===================== -->
 <script>
 const seasonStartDates = { "2024-25": new Date("2024-04-20"), "2025-26": new Date("2025-04-20") };
 let allRows = [], matchRows = [];
