@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -6,146 +6,32 @@
 <title>BCC Stats + Dashboard</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 <style>
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: #f4f6f8;
-}
-
-/* ===================== BCC BANNER ===================== */
-.bcc-banner {
-    background: linear-gradient(90deg,#0a2342,#123b70,#1e4a8f);
-    color: white;
-    text-align: center;
-    padding: 10px 5px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-.bcc-banner h1 { 
-    margin: 0; 
-    font-size: 20px; 
-    font-weight: 700; 
-    letter-spacing: 1px; 
-}
-.banner-tagline { 
-    margin-top: 5px; 
-    font-size: 12px; 
-    font-weight: 600; 
-    color: #ffd700; 
-}
-.banner-sub { 
-    margin-top: 5px; 
-    font-size: 11px; 
-    max-width: 600px; 
-    margin-left: auto;
-    margin-right: auto;
-    color: #e0e6ed; 
-    line-height: 1.3; 
-}
-
-/* ===================== GAME WIDGETS ===================== */
-.top-bar {
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 10px;
-    padding: 8px 10px;
-}
-
-.game-widget {
-    flex: 1;
-    background: linear-gradient(180deg,#123b70,#1e4a8f);
-    color: white;
-    border-radius: 10px;
-    padding: 10px;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    min-height: 100px;
-    text-align: center;
-}
-.game-widget h3 {
-    font-size: 14px;
-    margin-bottom: 5px;
-    font-weight: 700;
-    color: #ffd700;
-}
-.game-widget p {
-    margin: 2px 0;
-    font-size: 12px;
-    color: #fff;
-}
-.countdown {
-    font-weight: bold;
-    color: #ffd700;
-    margin-top: 5px;
-    font-size: 12px;
-}
-
-/* ===================== FRAMES ===================== */
-.frame {
-    background: white;
-    padding: 15px;
-    margin: 20px auto;
-    border-radius: 10px;
-    box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-    max-width: 900px;
-    text-align: center;
-}
-.frame h2 { 
-    margin-bottom: 15px; 
-    font-size: 16px;
-}
-
-/* ===================== HIGHLIGHT CARDS ===================== */
-.highlight-card, .member-card {
-    width: 120px;
-    padding: 8px;
-    border-radius: 10px;
-    text-align: center;
-    transition: 0.2s;
-}
-.highlight-card:hover, .member-card:hover { 
-    transform: translateY(-3px); 
-}
-.highlight-card img, .member-card img {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-    object-fit: cover;
-}
-.highlight-card {
-    background: linear-gradient(180deg, #fff8dc, #fff);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    border: 2px solid gold;
-}
-.highlight-card h4, .member-card h4 { 
-    margin-top: 5px; 
-    font-size: 12px; 
-    color: #0a2342; 
-}
-.highlight-card p, .member-card p { 
-    font-size: 10px; 
-    margin: 1px 0; 
-    color: #555; 
-}
-
-.highlight-grid, .members-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 12px;
-    margin: auto;
-}
-
-/* ===================== MEMBERS ===================== */
-.members-container { 
-    padding: 5px; 
-}
+/* --- Styles same as your existing code --- */
+body { margin:0; font-family: Arial,sans-serif; background:#f4f6f8; }
+.bcc-banner { background:linear-gradient(90deg,#0a2342,#123b70,#1e4a8f); color:white; text-align:center; padding:10px 5px; box-shadow:0 2px 6px rgba(0,0,0,0.2);}
+.bcc-banner h1 { margin:0; font-size:20px; font-weight:700; letter-spacing:1px;}
+.banner-tagline { margin-top:5px; font-size:12px; font-weight:600; color:#ffd700;}
+.top-bar { display:flex; justify-content:space-between; align-items:stretch; gap:10px; padding:8px 10px;}
+.game-widget { flex:1; background:linear-gradient(180deg,#123b70,#1e4a8f); color:white; border-radius:10px; padding:10px; box-shadow:0 2px 6px rgba(0,0,0,0.2); min-height:100px; text-align:center;}
+.game-widget h3 { font-size:14px; margin-bottom:5px; font-weight:700; color:#ffd700;}
+.game-widget p { margin:2px 0; font-size:12px; color:#fff;}
+.countdown { font-weight:bold; color:#ffd700; margin-top:5px; font-size:12px;}
+.frame { background:white; padding:15px; margin:20px auto; border-radius:10px; box-shadow:0 3px 6px rgba(0,0,0,0.1); max-width:900px; text-align:center;}
+.frame h2 { margin-bottom:15px; font-size:16px;}
+.highlight-card, .member-card { width:120px; padding:8px; border-radius:10px; text-align:center; transition:0.2s;}
+.highlight-card:hover, .member-card:hover { transform:translateY(-3px);}
+.highlight-card img, .member-card img { width:60px; height:60px; border-radius:50%; object-fit:cover;}
+.highlight-card { background:linear-gradient(180deg,#fff8dc,#fff); box-shadow:0 2px 6px rgba(0,0,0,0.1); border:2px solid gold;}
+.highlight-card h4, .member-card h4 { margin-top:5px; font-size:12px; color:#0a2342;}
+.highlight-card p, .member-card p { font-size:10px; margin:1px 0; color:#555;}
+.highlight-grid, .members-container { display:flex; flex-wrap:wrap; justify-content:center; gap:12px; margin:auto;}
+.members-container { padding:5px;}
 </style>
 </head>
-
 <body>
 
 <div class="container mt-3">
-    <!-- ===================== TABS ===================== -->
+    <!-- TABS -->
     <ul class="nav nav-tabs" id="bccTabs" role="tablist">
         <li class="nav-item" role="presentation">
             <button class="nav-link active" id="batting-tab" data-bs-toggle="tab" data-bs-target="#batting" type="button" role="tab">Batting</button>
@@ -156,24 +42,21 @@ body {
     </ul>
 
     <div class="tab-content mt-2">
-        <!-- ===================== BATTING TAB ===================== -->
+        <!-- BATTING TAB -->
         <div class="tab-pane fade show active" id="batting" role="tabpanel">
             <div class="top-bar">
                 <div class="game-widget" id="nextGame">
-                    <h3>Next Game</h3>
-                    <p>Loading...</p>
+                    <h3>Next Game</h3><p>Loading...</p>
                 </div>
                 <div class="bcc-banner" style="flex:2;">
                     <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
                     <div class="banner-tagline">Presented by asadushaikh.com/bcc</div> 
                 </div>
                 <div class="game-widget" id="lastGame">
-                    <h3>Last Game</h3>
-                    <p>Loading...</p>
+                    <h3>Last Game</h3><p>Loading...</p>
                 </div>
             </div>
 
-            <!-- Season Filter -->
             <div style="text-align:center; margin:10px 0;">
                 <label for="seasonFilter" style="margin-right:10px; font-weight:600;">Select Season:</label>
                 <select id="seasonFilter">
@@ -183,83 +66,69 @@ body {
                 </select>
             </div>
 
-            <!-- Centurions -->
             <div class="frame">
                 <h2>Centurions</h2>
                 <div id="centurions" class="highlight-grid"></div>
             </div>
 
-            <!-- Top 5 -->
             <div class="frame">
                 <h2>Top 5 Batsmen</h2>
                 <div id="top5" class="highlight-grid"></div>
             </div>
 
-            <!-- All Members -->
             <div class="frame">
                 <div id="allMembers" class="members-container"></div>
             </div>
         </div>
 
-        <!-- ===================== BOWLING/FIELDING TAB ===================== -->
-		
-		<!-- ===================== BOWLING/FIELDING TAB ===================== -->
-		<div class="tab-pane fade" id="bowling" role="tabpanel">
+        <!-- BOWLING/FIELDING TAB -->
+        <div class="tab-pane fade" id="bowling" role="tabpanel">
+            <div style="text-align:center; margin:10px 0;">
+                <label for="seasonFilterBowling" style="margin-right:10px; font-weight:600;">Select Season:</label>
+                <select id="seasonFilterBowling">
+                    <option value="2025-26" selected>2025-26</option>
+                    <option value="2024-25">2024-25</option>
+                    <option value="All">All Seasons</option>
+                </select>
+            </div>
 
-			<!-- Season Filter -->
-			<div style="text-align:center; margin:10px 0;">
-				<label for="seasonFilterBowling" style="margin-right:10px; font-weight:600;">Select Season:</label>
-				<select id="seasonFilterBowling">
-					<option value="2025-26" selected>2025-26</option>
-					<option value="2024-25">2024-25</option>
-					<option value="All">All Seasons</option>
-				</select>
-			</div>
+            <div class="frame">
+                <h2>Top 5 Bowlers</h2>
+                <div id="top5Bowling" class="highlight-grid"></div>
+            </div>
 
-			<!-- Top 5 Bowlers -->
-			<div class="frame">
-				<h2>Top 5 Bowlers</h2>
-				<div id="top5Bowling" class="highlight-grid"></div>
-			</div>
-
-			<!-- All Members -->
-			<div class="frame">
-				<div id="allMembersBowling" class="members-container"></div>
-			</div>
-
-		</div>
+            <div class="frame">
+                <div id="allMembersBowling" class="members-container"></div>
+            </div>
+        </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
-<!-- ===================== EXISTING JS ===================== -->
 <script>
 const seasonStartDates = { "2024-25": new Date("2024-04-20"), "2025-26": new Date("2025-04-20") };
 let allRows = [], matchRows = [];
 
 function parseDate(str) {
     if(!str) return null;
-    if(str.includes("-")) { const p = str.split("-"); return new Date(p[0], p[1]-1, p[2]); }
-    if(str.includes("/")) { const p = str.split("/"); return new Date(p[2], p[0]-1, p[1]); }
+    if(str.includes("-")) { const p=str.split("-"); return new Date(p[0],p[1]-1,p[2]); }
+    if(str.includes("/")) { const p=str.split("/"); return new Date(p[2],p[0]-1,p[1]); }
     return null;
 }
 
-// ===================== MEMBERS & STATS =====================
-function renderAllMembers(players, top5Names = new Set()){
-    const allDiv = document.getElementById("allMembers");
-    allDiv.innerHTML = "";
-    Object.entries(players)
-        .filter(([name]) => !top5Names.has(name))
-        .sort((a,b) => b[1].runs - a[1].runs)
+// ---------------- BATTING FUNCTIONS ----------------
+function renderAllMembers(players, top5Names=new Set()){
+    const allDiv=document.getElementById("allMembers");
+    allDiv.innerHTML="";
+    Object.entries(players).filter(([name])=>!top5Names.has(name))
+        .sort((a,b)=>b[1].runs-a[1].runs)
         .forEach(([name,p])=>{
-            const avg = p.outs>0 ? (p.runs/p.outs).toFixed(1) : p.runs;
-            const sr = ((p.runs/p.balls)*100).toFixed(1);
-            const card = document.createElement("div");
-            card.className = "member-card";
-            card.innerHTML = `
+            const avg=p.outs>0?(p.runs/p.outs).toFixed(1):p.runs;
+            const sr=((p.runs/p.balls)*100).toFixed(1);
+            const card=document.createElement("div");
+            card.className="member-card";
+            card.innerHTML=`
                 <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${name}.jpg" alt="${name}">
                 <h4>${name}</h4>
                 <p>Runs: ${p.runs}</p>
@@ -271,43 +140,37 @@ function renderAllMembers(players, top5Names = new Set()){
 }
 
 function filterSeason(season){
-    const centDiv = document.getElementById("centurions");
-    const topDiv = document.getElementById("top5");
+    const centDiv=document.getElementById("centurions");
+    const topDiv=document.getElementById("top5");
 
-    const allowedPlayers = ["Aamir","Aamir Noor","Adeel","Anas","Asad","Atif","Fahad","Farhan", "Hafiz Atiq","Hafiz Rizwan","Imran","Imtiaz","Luqmaan","Majid","Nouman","Patel","Rony","Saleem","Salman","Saud","Shakeel","Sheraz","Umar","Nabeel","Zain","Suhaib","Monis","Faraz"];
+    const allowedPlayers = ["Aamir","Aamir Noor","Adeel","Anas","Asad","Atif","Fahad","Farhan","Hafiz Atiq","Hafiz Rizwan","Imran","Imtiaz","Luqmaan","Majid","Nouman","Patel","Rony","Saleem","Salman","Saud","Shakeel","Sheraz","Umar","Nabeel","Zain","Suhaib","Monis","Faraz"];
 
-    const filteredRows = allRows
-        .filter(cols=>allowedPlayers.includes(cols[0]?.trim()))
+    const filteredRows = allRows.filter(cols=>allowedPlayers.includes(cols[0]?.trim()))
         .filter(cols=>{
-            const dateObj = parseDate(cols[3]);
+            const dateObj=parseDate(cols[3]);
             if(!dateObj) return false;
             if(season==="All") return true;
-            if(season==="2025-26") return dateObj >= seasonStartDates["2025-26"];
-            if(season==="2024-25") return dateObj >= seasonStartDates["2024-25"] && dateObj < seasonStartDates["2025-26"];
+            if(season==="2025-26") return dateObj>=seasonStartDates["2025-26"];
+            if(season==="2024-25") return dateObj>=seasonStartDates["2024-25"] && dateObj<seasonStartDates["2025-26"];
             return true;
         });
 
-    let players = {}, centurions=[];
+    let players={}, centurions=[];
 
     filteredRows.forEach(cols=>{
         const name=cols[0].trim(), date=cols[3].trim(), runs=parseInt(cols[6]), balls=parseInt(cols[7]);
-        if(!name || isNaN(runs)||isNaN(balls)) return;
-        if(!players[name]) players[name] = {runs:0, balls:0, innings:0, outs:0};
-
-        let status = cols[17]?.toLowerCase() || "how out"; // adjust index if CSV differs
-        if(!["n/o","Not Out","Retired","DNB"].includes(status)) players[name].outs += 1;
-
-        players[name].runs += runs;
-        players[name].balls += balls;
-        players[name].innings += 1;
-
-        if(runs >= 100) centurions.push({name,runs,balls,date});
+        if(!name||isNaN(runs)||isNaN(balls)) return;
+        if(!players[name]) players[name]={runs:0,balls:0,innings:0,outs:0};
+        let status=cols[17]?.toLowerCase()||"how out";
+        if(!["n/o","not out","retired","dnb"].includes(status)) players[name].outs+=1;
+        players[name].runs+=runs; players[name].balls+=balls; players[name].innings+=1;
+        if(runs>=100) centurions.push({name,runs,balls,date});
     });
 
     // Render Centurions
     centDiv.innerHTML="";
     centurions.forEach(p=>{
-        const card = document.createElement("div");
+        const card=document.createElement("div");
         card.className="highlight-card";
         card.innerHTML=`
             <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
@@ -318,20 +181,17 @@ function filterSeason(season){
         centDiv.appendChild(card);
     });
 
-    // Top 5
-    const topStats = Object.entries(players)
-        .map(([name,p])=>{
-            const avg = p.outs>0 ? (p.runs/p.outs).toFixed(1) : p.runs;
-            const sr = ((p.runs/p.balls)*100).toFixed(1);
-            return {name,runs:p.runs,avg,sr};
-        })
-        .sort((a,b)=>b.runs-a.runs)
-        .slice(0,5);
+    // Top 5 Batsmen
+    const topStats=Object.entries(players).map(([name,p])=>{
+        const avg=p.outs>0?(p.runs/p.outs).toFixed(1):p.runs;
+        const sr=((p.runs/p.balls)*100).toFixed(1);
+        return {name,runs:p.runs,avg,sr};
+    }).sort((a,b)=>b.runs-a.runs).slice(0,5);
 
-    const top5Names = new Set(topStats.map(p=>p.name));
+    const top5Names=new Set(topStats.map(p=>p.name));
     topDiv.innerHTML="";
     topStats.forEach(p=>{
-        const card = document.createElement("div");
+        const card=document.createElement("div");
         card.className="highlight-card";
         card.innerHTML=`
             <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
@@ -348,91 +208,19 @@ function filterSeason(season){
 
 document.getElementById("seasonFilter").addEventListener("change", e=>filterSeason(e.target.value));
 
-// ===================== MATCH WIDGET =====================
-function startCountdown(el, targetDate){
-    function update(){
-        const diff = targetDate - new Date();
-        if(diff <= 0){ 
-            el.innerHTML = "Match Day!"; 
-            clearInterval(interval); 
-            return; 
-        }
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor(diff / (1000 * 60 * 60) % 24);
-        const m = Math.floor(diff / (1000 * 60) % 60);
-        const s = Math.floor(diff / 1000 % 60);
-        el.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
-    }
-    update();
-    const interval = setInterval(update, 1000);
-}
-
-function renderGameWidgets(){
-    const now=new Date();
-    let nextGame=null, lastGame=null;
-
-    matchRows.forEach(cols=>{
-        const date=parseDate(cols[1]), capt1=cols[2], color1=cols[3], capt2=cols[4], color2=cols[5], winner=cols[6];
-        if(!date) return;
-
-        if(date>=now && (!nextGame || date<nextGame.date)) nextGame={date,capt1,capt2,color1,color2};
-        if(date<now && (!lastGame || date>lastGame.date)) lastGame={date,capt1,capt2,winner};
-    });
-
-    // Next Game
-    if(nextGame){
-        const ngEl=document.getElementById("nextGame");
-        ngEl.innerHTML=`
-            <h3>Next Game: ${nextGame.date.toDateString()}</h3>
-            <p><span style="color:${nextGame.color1}; font-weight:700;">${nextGame.capt1}</span> vs <span style="color:${nextGame.color2}; font-weight:700;">${nextGame.capt2}</span></p>
-            <p class="countdown">Starts in: <span id="countdown"></span></p>
-        `;
-        startCountdown(document.querySelector("#nextGame .countdown span"), nextGame.date);
-    }
-
-    // Last Game
-    if(lastGame){
-        const lgEl=document.getElementById("lastGame");
-        lgEl.innerHTML=`
-            <h3>Last Game: ${lastGame.date.toDateString()}</h3>
-            <p><b>${lastGame.capt1}</b> vs <b>${lastGame.capt2}</b></p>
-            <p><b>Winner:</b> ${lastGame.winner}</p>
-        `;
-    }
-}
-
-// ===================== FETCH DATA =====================
-fetch("data/mat_summary.csv")
-.then(r=>r.text())
-.then(data=>{
-    matchRows=data.split("\n").slice(1).map(r=>r.split(",").map(c=>c.trim())).filter(r=>r.length>5);
-    renderGameWidgets();
-});
-
-fetch("data/bcc_data.csv")
-.then(r=>r.text())
-.then(data=>{
-    allRows=data.split("\n").slice(1).map(r=>r.split(",").map(c=>c.trim())).filter(r=>r.length>=8);
-    filterSeason("2025-26");
-});
-
-
-function renderAllMembersBowling(players, top5Names = new Set()){
-    const div = document.getElementById("allMembersBowling");
-    div.innerHTML = "";
-
-    Object.entries(players)
-        .filter(([name]) => !top5Names.has(name))
-        .sort((a,b) => b[1].wickets - a[1].wickets)
+// ---------------- BOWLING FUNCTIONS ----------------
+function renderAllMembersBowling(players, top5Names=new Set()){
+    const div=document.getElementById("allMembersBowling");
+    div.innerHTML="";
+    Object.entries(players).filter(([name])=>!top5Names.has(name))
+        .sort((a,b)=>b[1].wickets-a[1].wickets)
         .forEach(([name,p])=>{
-
-            const avg = p.wickets > 0 ? (p.runsConceded / p.wickets).toFixed(1) : "-";
-            const eco = p.overs > 0 ? (p.runsConceded / p.overs).toFixed(1) : "-";
-
-            const card = document.createElement("div");
-            card.className = "member-card";
-            card.innerHTML = `
-                <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${name}.jpg">
+            const avg=p.wickets>0?(p.runsConceded/p.wickets).toFixed(1):"-";
+            const eco=p.overs>0?(p.runsConceded/p.overs).toFixed(1):"-";
+            const card=document.createElement("div");
+            card.className="member-card";
+            card.innerHTML=`
+                <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${name}.jpg" alt="${name}">
                 <h4>${name}</h4>
                 <p>Wickets: ${p.wickets}</p>
                 <p>Avg: ${avg}</p>
@@ -443,72 +231,46 @@ function renderAllMembersBowling(players, top5Names = new Set()){
 }
 
 function filterSeasonBowling(season){
-
-    const topDiv = document.getElementById("top5Bowling");
-
+    const topDiv=document.getElementById("top5Bowling");
     const allowedPlayers = ["Aamir","Aamir Noor","Adeel","Anas","Asad","Atif","Fahad","Farhan","Hafiz Atiq","Hafiz Rizwan","Imran","Imtiaz","Luqmaan","Majid","Nouman","Patel","Rony","Saleem","Salman","Saud","Shakeel","Sheraz","Umar","Nabeel","Zain","Suhaib","Monis","Faraz"];
 
-    const filteredRows = allRows
-        .filter(cols => allowedPlayers.includes(cols[0]?.trim()))
+    const filteredRows = allRows.filter(cols=>allowedPlayers.includes(cols[0]?.trim()))
         .filter(cols=>{
-            const dateObj = parseDate(cols[3]);
+            const dateObj=parseDate(cols[3]);
             if(!dateObj) return false;
-
             if(season==="All") return true;
-            if(season==="2025-26") return dateObj >= seasonStartDates["2025-26"];
-            if(season==="2024-25") return dateObj >= seasonStartDates["2024-25"] && dateObj < seasonStartDates["2025-26"];
-
+            if(season==="2025-26") return dateObj>=seasonStartDates["2025-26"];
+            if(season==="2024-25") return dateObj>=seasonStartDates["2024-25"] && dateObj<seasonStartDates["2025-26"];
             return true;
         });
 
-    let players = {};
-
+    let players={};
     filteredRows.forEach(cols=>{
-        const name = cols[0].trim();
-
-        // ⚠️ UPDATE THESE INDEXES BASED ON YOUR CSV
-        const wickets = parseInt(cols[25]);       // wickets column
-        const runsConceded = parseInt(cols[24]);  // runs conceded
-        const overs = parseFloat(cols[23]);       // overs bowled
-
+        const name=cols[0].trim();
+        const overs=parseFloat(cols[23]);
+        const runsConceded=parseInt(cols[24]);
+        const wickets=parseInt(cols[25]);
         if(!name || isNaN(wickets)) return;
-
-        if(!players[name]) players[name] = {
-            wickets:0,
-            runsConceded:0,
-            overs:0
-        };
-
-        players[name].wickets += wickets;
-        players[name].runsConceded += isNaN(runsConceded) ? 0 : runsConceded;
-        players[name].overs += isNaN(overs) ? 0 : overs;
+        if(!players[name]) players[name]={wickets:0,runsConceded:0,overs:0};
+        players[name].wickets+=wickets;
+        players[name].runsConceded+=isNaN(runsConceded)?0:runsConceded;
+        players[name].overs+=isNaN(overs)?0:overs;
     });
 
-    // ===== TOP 5 BY WICKETS =====
-    const topStats = Object.entries(players)
-        .map(([name,p])=>{
-            const avg = p.wickets > 0 ? (p.runsConceded / p.wickets).toFixed(1) : "-";
-            const eco = p.overs > 0 ? (p.runsConceded / p.overs).toFixed(1) : "-";
+    // Top 5 Bowlers
+    const topStats=Object.entries(players).map(([name,p])=>{
+        const avg=p.wickets>0?(p.runsConceded/p.wickets).toFixed(1):"-";
+        const eco=p.overs>0?(p.runsConceded/p.overs).toFixed(1):"-";
+        return {name,p:wickets,avg,eco,wickets:p.wickets};
+    }).sort((a,b)=>b.wickets-a.wickets).slice(0,5);
 
-            return {
-                name,
-                wickets: p.wickets,
-                avg,
-                eco
-            };
-        })
-        .sort((a,b)=>b.wickets - a.wickets)
-        .slice(0,5);
-
-    const top5Names = new Set(topStats.map(p=>p.name));
-
-    topDiv.innerHTML = "";
-
+    const top5Names=new Set(topStats.map(p=>p.name));
+    topDiv.innerHTML="";
     topStats.forEach(p=>{
-        const card = document.createElement("div");
-        card.className = "highlight-card";
-        card.innerHTML = `
-            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
+        const card=document.createElement("div");
+        card.className="highlight-card";
+        card.innerHTML=`
+            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
             <h4>${p.name}</h4>
             <p>Wickets: ${p.wickets}</p>
             <p>Avg: ${p.avg}</p>
@@ -520,9 +282,23 @@ function filterSeasonBowling(season){
     renderAllMembersBowling(players, top5Names);
 }
 
-// FILTER EVENT
-document.getElementById("seasonFilterBowling")
-    .addEventListener("change", e => filterSeasonBowling(e.target.value));
+document.getElementById("seasonFilterBowling").addEventListener("change", e=>filterSeasonBowling(e.target.value));
+
+// ---------------- FETCH DATA ----------------
+fetch("data/mat_summary.csv")
+.then(r=>r.text())
+.then(data=>{
+    matchRows=data.split("\n").slice(1).map(r=>r.split(",").map(c=>c.trim())).filter(r=>r.length>5);
+    renderGameWidgets();
+});
+
+fetch("data/bcc_data.csv")
+.then(r=>r.text())
+.then(data=>{
+    allRows=data.split("\n").slice(1).map(r=>r.split(",").map(c=>c.trim())).filter(r=>r.length>=26);
+    filterSeason("2025-26");
+    filterSeasonBowling("2025-26");
+});
 </script>
 
 </body>
