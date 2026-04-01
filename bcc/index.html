@@ -292,7 +292,7 @@ function filterSeason(season){
         if(!players[name]) players[name] = {runs:0, balls:0, innings:0, outs:0};
 
         let status = cols[8]?.toLowerCase() || "out"; // adjust index if CSV differs
-        if(!["n/o","not out","retired","dnb"].includes(status)) players[name].outs += 1;
+        if(!["n/o","Not Out","Retired","DNB"].includes(status)) players[name].outs += 1;
 
         players[name].runs += runs;
         players[name].balls += balls;
