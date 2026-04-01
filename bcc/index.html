@@ -213,16 +213,16 @@ function renderAllMembersBowling(players, top5Names=new Set()){
     const div=document.getElementById("allMembersBowling");
     div.innerHTML="";
     Object.entries(players).filter(([name])=>!top5Names.has(name))
-        .sort((a,b)=>b[1].wickets-a[1].wickets)
+        .sort((a,b)=>b[1].Wickets-a[1].Wickets)
         .forEach(([name,p])=>{
-            const avg=p.wickets>0?(p.runsConceded/p.wickets).toFixed(1):"-";
+            const avg=p.Wickets>0?(p.runsConceded/p.Wickets).toFixed(1):"-";
             const eco=p.overs>0?(p.runsConceded/p.overs).toFixed(1):"-";
             const card=document.createElement("div");
             card.className="member-card";
             card.innerHTML=`
                 <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${name}.jpg" alt="${name}">
                 <h4>${name}</h4>
-                <p>Wickets: ${p.wickets}</p>
+                <p>Wickets: ${p.Wickets}</p>
                 <p>Avg: ${avg}</p>
                 <p>Eco: ${eco}</p>
             `;
@@ -249,20 +249,20 @@ function filterSeasonBowling(season){
         const name=cols[0].trim();
         const overs=parseFloat(cols[23]);
         const runsConceded=parseInt(cols[24]);
-        const wickets=parseInt(cols[25]);
-        if(!name || isNaN(wickets)) return;
-        if(!players[name]) players[name]={wickets:0,runsConceded:0,overs:0};
-        players[name].wickets+=wickets;
+        const Wickets=parseInt(cols[25]);
+        if(!name || isNaN(Wickets)) return;
+        if(!players[name]) players[name]={Wickets:0,runsConceded:0,overs:0};
+        players[name].Wickets+=Wickets;
         players[name].runsConceded+=isNaN(runsConceded)?0:runsConceded;
         players[name].overs+=isNaN(overs)?0:overs;
     });
 
     // Top 5 Bowlers
     const topStats=Object.entries(players).map(([name,p])=>{
-        const avg=p.wickets>0?(p.runsConceded/p.wickets).toFixed(1):"-";
+        const avg=p.Wickets>0?(p.runsConceded/p.Wickets).toFixed(1):"-";
         const eco=p.overs>0?(p.runsConceded/p.overs).toFixed(1):"-";
-        return {name,p:wickets,avg,eco,wickets:p.wickets};
-    }).sort((a,b)=>b.wickets-a.wickets).slice(0,5);
+        return {name,p:Wickets,avg,eco,Wickets:p.Wickets};
+    }).sort((a,b)=>b.Wickets-a.Wickets).slice(0,5);
 
     const top5Names=new Set(topStats.map(p=>p.name));
     topDiv.innerHTML="";
@@ -272,7 +272,7 @@ function filterSeasonBowling(season){
         card.innerHTML=`
             <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
             <h4>${p.name}</h4>
-            <p>Wickets: ${p.wickets}</p>
+            <p>Wickets: ${p.Wickets}</p>
             <p>Avg: ${p.avg}</p>
             <p>Eco: ${p.eco}</p>
         `;
