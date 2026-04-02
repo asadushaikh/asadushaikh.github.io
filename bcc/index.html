@@ -793,7 +793,7 @@ function showPlayerDetails(playerName){
         const wickets = parseInt(cols[25]) || 0;
         const ballsBowled = overs * 6;
 
-        const avg = wickets ? (runsCon / wickets).toFixed(1) : "-";
+        const avg = overs ? (runsCon / overs).toFixed(1) : "-";
         const bowlSR = wickets ? (ballsBowled / wickets).toFixed(1) : "-";
 
         if(overs > 0){
