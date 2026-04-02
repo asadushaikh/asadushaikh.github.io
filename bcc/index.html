@@ -761,7 +761,7 @@ function showPlayerDetails(playerName){
         <thead>
             <tr>
                 <th>Date</th><th>Overs</th><th>Runs</th><th>Wickets</th>
-                <th>Dots</th><th>Wides</th><th>No Balls</th><th>Avg</th><th>S/R</th>
+                <th>Dots</th><th>Wides</th><th>No Balls</th><th>Avg</th><th>S/R</th><th>Dismissed Players</th>
             </tr>
         </thead><tbody>
     `;
@@ -796,6 +796,19 @@ function showPlayerDetails(playerName){
         const avg = overs ? (runsCon / overs).toFixed(1) : "-";
         const bowlSR = wickets ? (ballsBowled / wickets).toFixed(1) : "-";
 
+        // 🔥 GET DISMISSED PLAYERS
+        const dismissedPlayers = allRows
+            .filter(r => {
+                return (
+                    r[19]?.trim() === playerName &&                // bowler match
+                    r[3]?.trim() === cols[3]?.trim() &&            // same date
+                    r[0]?.trim() !== "" &&                         // valid batsman
+                    !["n/o","not out","dnb","retired"].includes((r[17]||"").toLowerCase())
+                );
+            })
+            .map(r => r[0])   // batsman name
+            .join(", ");
+
         if(overs > 0){
             bowlingHTML += `
                 <tr>
@@ -808,6 +821,7 @@ function showPlayerDetails(playerName){
                     <td>${cols[26] || ""}</td>
                     <td>${avg}</td>
                     <td>${bowlSR}</td>
+                    <td style="font-size:10px;">${dismissedPlayers || "-"}</td>
                 </tr>
             `;
         }
