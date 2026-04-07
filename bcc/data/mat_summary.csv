@@ -58,47 +58,48 @@ Match,Date,Capt 1,Capt 1 Color,Capt 2,Capt 2 Color,Winner,Runner Up,MoM,Winner C
 5,5/18/2025,Hasnain,B,Muddassir,G,Hasnain,Muddassir,Irfan,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,Q-R2,Majid
 6,5/25/2025,Saud,B,Saleem,G,Saud,Saleem,Sheraz,B,,G,,Round 1 - Best of 3,Tays Ground,Game 1,2,1st,,Shakeel
 7,6/1/2025,Saleem,B,Saud,G,Saud,Saleem,Asad ,G,,B,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,Q-R2,Muddassir
-,6/8/2025,Majid,G,Aamir,B,Aamir,Majid,Atif,B,,G,,Round 1 - Best of 3,Tays Ground,Game 1,2,1st,,Asam
-,6/15/2025,Majid,B,Aamir,G,Majid,Aamir,Imran,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,,Luqman
-,6/22/2025,Aamir,G,Majid,B,Aamir,Majid,Patel,G,,B,,Round 1 - Best of 3,Tays Ground,Game 3,2,2nd,Q-R2,Farhan
-,6/29/2025,Fahad,G,Asam,B,Fahad,Asam,Fahad,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,Imtiaz
+8,6/8/2025,Majid,G,Aamir,B,Aamir,Majid,Atif,B,,G,,Round 1 - Best of 3,Tays Ground,Game 1,2,1st,,Asam
+9,6/15/2025,Majid,B,Aamir,G,Majid,Aamir,Imran,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,,Luqman
+10,6/22/2025,Aamir,G,Majid,B,Aamir,Majid,Patel,G,,B,,Round 1 - Best of 3,Tays Ground,Game 3,2,2nd,Q-R2,Farhan
+11,6/29/2025,Fahad,G,Asam,B,Fahad,Asam,Fahad,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,Imtiaz
 ,7/6/2025,Fahad,,Asam,,TBD,TBD,TBD,TBD,,,,Round 1 - Best of 3,Tays Ground,Game 2,,,No Match - Attendance,
-,7/13/2025,Fahad,B,Asam,G,Fahad,Asam,Saleem,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,Q-R2,Hafiz Atiq
-,7/20/2025,Farhan,B,Patel,G,Patel,Farhan,Irfan,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,1st,,Aamir
-,7/27/2025,Farhan,B,Patel,G,Farhan,Patel,Umar,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,,Hasnain
-,8/3/2025,Farhan,G,Patel,B,Farhan,Patel,Atif,G,,B,,Round 1 - Best of 3,Tays Ground,Game 3,2,1st,Q-R2,Irfan
-,8/10/2025,Imtiaz,B,Misbah,G,Misbah,Imtiaz,Majid,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,Patel
-,8/17/2025,Imtiaz,B,Misbah,G,Imtiaz,Misbah,Imtiaz,B,,G,,Round 1 - Best of 3,Tays Parking Lot,Game 2,2,2nd,,Hafiz Rizwan
-,8/24/2025,Imtiaz,B,Misbah,G,Imtiaz,Misbah,Majid,B,,G,,Round 1 - Best of 3,Tays Ground,Game 3,2,2nd,Q-R2,Salman
+12,7/13/2025,Fahad,B,Asam,G,Fahad,Asam,Saleem,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,Q-R2,Hafiz Atiq
+13,7/20/2025,Farhan,B,Patel,G,Patel,Farhan,Irfan,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,1st,,Aamir
+14,7/27/2025,Farhan,B,Patel,G,Farhan,Patel,Umar,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,,Hasnain
+15,8/3/2025,Farhan,G,Patel,B,Farhan,Patel,Atif,G,,B,,Round 1 - Best of 3,Tays Ground,Game 3,2,1st,Q-R2,Irfan
+16,8/10/2025,Imtiaz,B,Misbah,G,Misbah,Imtiaz,Majid,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,Patel
+17,8/17/2025,Imtiaz,B,Misbah,G,Imtiaz,Misbah,Imtiaz,B,,G,,Round 1 - Best of 3,Tays Parking Lot,Game 2,2,2nd,,Hafiz Rizwan
+18,8/24/2025,Imtiaz,B,Misbah,G,Imtiaz,Misbah,Majid,B,,G,,Round 1 - Best of 3,Tays Ground,Game 3,2,2nd,Q-R2,Salman
 ,8/31/2025,,,,,,,,,,,,,,,,,No Match - Attendance,
-,9/7/2025,Hafiz Atiq,G,Irfan,B,Hafiz Atiq,Irfan,Rony,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,Saleem
-,9/14/2025,Hafiz Atiq,B,Irfan,G,Irfan,Hafiz Atiq,Farhan,G,,B,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,,Adeel
-,9/21/2025,Hafiz Atiq,B,Irfan,G,Irfan,Hafiz Atiq,Fahad,G,,B,,Round 1 - Best of 3,Tays Ground,Game 3,2,2nd,Q-R2,Nafees
-,9/28/2025,Aamir Noor,G,Imran,B,Imran,Aamir Noor,Fahad,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,,Umar
-,10/5/2025,Aamir Noor,G,Imran,B,Imran,Aamir Noor,Rony,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,Q-R2,Nouman
-,10/12/2025,Rony,B,Nafees,G,Rony,Nafees,Hasnain,B,,G,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,Imran
-,10/19/2025,Rony,G,Nafees,B,Rony,Nafees,Majid,G,,B,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,Q-R2,Asad
-,10/26/2025,Atif,B,Nabeel,G,Atif,Nabeel,,B,,G,,Round 1 - Best of 3,Tays Parking Lot,Game 1,2,2nd,,Waseem
-,11/2/2025,Atif,G,Nabeel,B,Nabeel,Atif,Fahad,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,,Rony
-,11/9/2025,Atif,B,Nabeel,G,Atif,Nabeel,,B,,G,,Round 1 - Best of 3,Tays Ground,Game 3,2,2nd,,
-,11/16/2025,Asad ,B,Hafiz Rizwan,G,Asad ,Hafiz Rizwan,Adeel,B,,G,,Round 1 - Best of 3,Tays Ground,Game 1,2,1st,,
-,11/23/2025,Asad ,B,Hafiz Rizwan,G,Hafiz Rizwan,Asad ,Majid,G,,B,,Round 1 - Best of 3,Tays Parking Lot,Game 2,2,2nd,,
+19,9/7/2025,Hafiz Atiq,G,Irfan,B,Hafiz Atiq,Irfan,Rony,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,Saleem
+20,9/14/2025,Hafiz Atiq,B,Irfan,G,Irfan,Hafiz Atiq,Farhan,G,,B,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,,Adeel
+21,9/21/2025,Hafiz Atiq,B,Irfan,G,Irfan,Hafiz Atiq,Fahad,G,,B,,Round 1 - Best of 3,Tays Ground,Game 3,2,2nd,Q-R2,Nafees
+22,9/28/2025,Aamir Noor,G,Imran,B,Imran,Aamir Noor,Fahad,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,,Umar
+23,10/5/2025,Aamir Noor,G,Imran,B,Imran,Aamir Noor,Rony,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,Q-R2,Nouman
+24,10/12/2025,Rony,B,Nafees,G,Rony,Nafees,Hasnain,B,,G,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,Imran
+25,10/19/2025,Rony,G,Nafees,B,Rony,Nafees,Majid,G,,B,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,Q-R2,Asad
+26,10/26/2025,Atif,B,Nabeel,G,Atif,Nabeel,,B,,G,,Round 1 - Best of 3,Tays Parking Lot,Game 1,2,2nd,,Waseem
+27,11/2/2025,Atif,G,Nabeel,B,Nabeel,Atif,Fahad,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,,Rony
+28,11/9/2025,Atif,B,Nabeel,G,Atif,Nabeel,,B,,G,,Round 1 - Best of 3,Tays Ground,Game 3,2,2nd,,
+29,11/16/2025,Asad ,B,Hafiz Rizwan,G,Asad ,Hafiz Rizwan,Adeel,B,,G,,Round 1 - Best of 3,Tays Ground,Game 1,2,1st,,
+30,11/23/2025,Asad ,B,Hafiz Rizwan,G,Hafiz Rizwan,Asad ,Majid,G,,B,,Round 1 - Best of 3,Tays Parking Lot,Game 2,2,2nd,,
 ,11/30/2025,,,,,,,,,,,,,,,,,No Match,Thankgiving
-,12/7/2025,Hafiz Rizwan,G,Asad ,B,Asad ,Hafiz Rizwan,Adeel,B,,G,,Round 1 - Best of 3,Tays Parking Lot,Game 3,2,2nd,,
-,12/14/2025,Anas,B,Sheraz,G,Sheraz,Anas,Adeel,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,
+31,12/7/2025,Hafiz Rizwan,G,Asad ,B,Asad ,Hafiz Rizwan,Adeel,B,,G,,Round 1 - Best of 3,Tays Parking Lot,Game 3,2,2nd,,
+32,12/14/2025,Anas,B,Sheraz,G,Sheraz,Anas,Adeel,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,
 ,12/21/2025,,,,,,,,,,,,,,,,,No Match,Holidays
 ,12/28/2025,,,,,,,,,,,,,,,,,No Match,Holidays
-,1/4/2026,Anas,G,Sheraz,B,Sheraz,Anas,Fahad,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,,
-,1/11/2026,Luqmaan,B,Shakeel,G,Shakeel,Luqmaan,Adeel,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,
-,1/18/2026,Luqmaan,B,Shakeel,G,Luqmaan,Shakeel,Umar,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,,
+33,1/4/2026,Anas,G,Sheraz,B,Sheraz,Anas,Fahad,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,,
+34,1/11/2026,Luqmaan,B,Shakeel,G,Shakeel,Luqmaan,Adeel,G,,B,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,
+35,1/18/2026,Luqmaan,B,Shakeel,G,Luqmaan,Shakeel,Umar,B,,G,,Round 1 - Best of 3,Tays Ground,Game 2,2,1st,,
 ,1/25/2026,,,,,,,,,,,,,,,,,,
-,2/1/2026,Nouman,B,Umar,G,Nouman,Nouman,Fahad,,,,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,
-,2/8/2026,Nouman,G,Umar,B,Nouman,Umar,Majid,G,,B,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,,
-,2/15/2026,Luqmaan,B,Shakeel,G,Luqmaan,Shakeel,Aamir,B,,G,,Round 1 - Best of 3,Tays Parking Lot,Game 3,2,2nd,Q-R2,
+36,2/1/2026,Nouman,B,Umar,G,Nouman,Nouman,Fahad,,,,,Round 1 - Best of 3,Tays Ground,Game 1,2,2nd,,
+37,2/8/2026,Nouman,G,Umar,B,Nouman,Umar,Majid,G,,B,,Round 1 - Best of 3,Tays Ground,Game 2,2,2nd,,
+38,2/15/2026,Luqmaan,B,Shakeel,G,Luqmaan,Shakeel,Aamir,B,,G,,Round 1 - Best of 3,Tays Parking Lot,Game 3,2,2nd,Q-R2,
 ,2/22/2026,,,,,,,,,,,,,,,,,No Match,Ramadhan
 ,3/1/2026,,,,,,,,,,,,,,,,,No Match,Ramadhan
 ,3/8/2026,,,,,,,,,,,,,,,,,No Match,Ramadhan
 ,3/15/2026,,,,,,,,,,,,,,,,,No Match,Ramadhan
-,3/22/2026,Imran,G,Saleem,B,Imran,Saleem,,G,,B,,Round 2 Knockout,Tays Ground,Game 1,,2nd,,
-,3/29/2026,Fahad,G,Aamir Noor,B,Aamir Noor,Fahad,Hafiz Rizwan,G,,B,,Round 2 Knockout,Tays Ground,Game 2,,2nd,,
-,4/5/2026,Hafiz Atiq,,Atif,,,,,,,,,Round 2 Knockout,Tays Ground,Game 3,,,,
+39,3/22/2026,Imran,G,Saleem,B,Imran,Saleem,,G,,B,,Round 2 Knockout,Tays Ground,Game 1,,2nd,,
+40,3/29/2026,Fahad,G,Aamir Noor,B,Aamir Noor,Fahad,Hafiz Rizwan,G,,B,,Round 2 Knockout,Tays Ground,Game 2,,2nd,,
+41,4/5/2026,Hafiz Atiq,G,Atif,B,Atif,Hafiz Atiq,Atif,B,,G,,Round 2 Knockout,Tays Ground,Game 3,,2nd,,
+42,4/12/2026,Aamir,,Sheraz,,,,,,,,,Round 2 Knockout,Tays Ground,Game 4,,,,
