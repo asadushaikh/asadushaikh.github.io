@@ -408,22 +408,6 @@ body {
     animation: scrollCards 35s linear infinite;
     align-items: center;   /* ✅ THIS FIXES VERTICAL ALIGNMENT */
 }
-.banner-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-}
-
-.bcc-logo {
-    width: 42px;       /* adjust if needed */
-    height: 42px;
-    object-fit: contain;
-    border-radius: 50%;
-    background: white;
-    padding: 2px;
-    box-shadow: 0 0 6px rgba(255,255,255,0.6);
-}
 </style>
 </head>
 <body>
@@ -498,16 +482,7 @@ body {
             <p>Loading...</p>
         </div>
         <div class="bcc-banner" style="flex:1.6;">
-            <div class="banner-content">
-                <img src="data/bcc_logo.PNG" alt="BCC Logo" class="bcc-logo">
-                
-                <div>
-                    <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
-                    <p class="banner-sub">
-                    </p>
-                </div>
-                <img src="data/bcc_logo.PNG" alt="BCC Logo" class="bcc-logo">
-            </div>
+            <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
         </div>
         <div class="game-widget" id="lastGame">
             <h3>Last Game</h3>
@@ -544,6 +519,7 @@ body {
                  alt="PDF" style="width:14px; height:14px;">
             Batting PDF
         </a>
+
         <!-- NEW -->
 
     </div>
@@ -842,27 +818,6 @@ function renderGameWidgets(){
     }
 }
 
-function parseDate(str){
-    if(!str) return null;
-
-    str = str.trim();
-
-    // YYYY-MM-DD
-    if(str.includes("-")){
-        const p = str.split("-");
-        return new Date(p[0], p[1]-1, p[2]);
-    }
-
-    // MM/DD/YYYY or M/D/YYYY
-    if(str.includes("/")){
-        const p = str.split("/");
-        if(p[2].length === 2) p[2] = "20" + p[2]; // handle 2-digit year
-        return new Date(p[2], p[0]-1, p[1]);
-    }
-
-    return null;
-}
-
 // ===================== FETCH DATA =====================
 fetch("data/mat_summary.csv")
 .then(r=>r.text())
@@ -1107,27 +1062,6 @@ function showPlayerDetails(playerName){
             html2canvas: { scale: 0.5 }
         });
     };
-}
-function startCountdown(el, targetDate){
-    function update(){
-        const now = new Date();
-        const diff = targetDate - now;
-
-        if(diff <= 0){
-            el.innerHTML = "LIVE";
-            return;
-        }
-
-        const days = Math.floor(diff / (1000*60*60*24));
-        const hrs = Math.floor((diff / (1000*60*60)) % 24);
-        const mins = Math.floor((diff / (1000*60)) % 60);
-        const secs = Math.floor((diff / 1000) % 60);
-
-        el.innerHTML = `${days}d ${hrs}h ${mins}m ${secs}s`;
-    }
-
-    update();
-    setInterval(update, 1000);
 }
 
 </script>
