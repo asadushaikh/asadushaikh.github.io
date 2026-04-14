@@ -93,7 +93,7 @@ body {
     width: 110px;        
     padding: 12px;
     border-radius: 50px; 
-    background: linear-gradient(145deg,#ffffff,#e6f2ff);
+    background: linear-gradient(145deg,#c0d8f0,#e6f2ff);
     box-shadow: 0 6px 14px rgba(0,0,0,0.15), 0 0 8px rgba(255,255,255,0.3) inset;
     text-align: center;
     transition: transform 0.3s, box-shadow 0.3s;
@@ -197,10 +197,10 @@ body {
 
 /* ===================== GAME WIDGET COLORS ===================== */
 #nextGame {
-    background: linear-gradient(180deg,#3002fc);
+    background: linear-gradient(180deg,#0066a5);
 }
 #lastGame {
-    background: linear-gradient(180deg,#3002fc);
+    background: linear-gradient(180deg,#0066a5);
 }
 
 /* ===================== GAME WIDGETS ===================== */
@@ -333,7 +333,7 @@ body {
 .ticker {
   display: inline-block;
   white-space: nowrap;
-  color: #fff;
+  color: #dbdeec;
   font-size: 12px;
   padding: 6px 0;
   animation: scrollTicker 40s linear infinite;
@@ -350,44 +350,125 @@ body {
 .ticker:hover {
   animation-play-state: paused;
 }
+/* ===================== CARD TICKER ===================== */
+.card-ticker {
+    overflow: hidden;
+    width: 100%;
+    padding: 6px 0;
+}
+
+.card-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    animation: scrollCards 35s linear infinite;
+}
+
+@keyframes scrollCards {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+/* Make cards smaller for ticker */
+.card-track .highlight-card {
+    width: 85px;
+    padding: 6px;
+}
+
+.card-track img {
+    width: 45px;
+    height: 45px;
+}
+/* ===================== TICKER CATEGORY LABEL ===================== */
+.ticker-label {
+    display: flex;              /* ✅ makes centering easier */
+    align-items: center;        /* vertical center */
+    justify-content: center;
+    
+    height: 85px;               /* match card height */
+    padding: 0 12px;
+
+    font-weight: 800;
+    color: #0066a5;
+    margin: 0 10px;
+    animation: flashLabel 1s infinite alternate;
+    text-transform: uppercase;
+    font-size: 11px;
+}
+
+
+@keyframes flashLabel {
+    0% { opacity: 0.2; transform: scale(0.95); }
+    100% { opacity: 1; transform: scale(1.05); }
+}
+.card-track {
+    display: flex;
+    gap: 12px;
+    width: max-content;
+    animation: scrollCards 35s linear infinite;
+    align-items: center;   /* ✅ THIS FIXES VERTICAL ALIGNMENT */
+}
+.banner-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.bcc-logo {
+    width: 42px;       /* adjust if needed */
+    height: 42px;
+    object-fit: contain;
+    border-radius: 50%;
+    background: white;
+    padding: 2px;
+    box-shadow: 0 0 6px rgba(255,255,255,0.6);
+}
 </style>
 </head>
 <body>
 
 <!-- ===================== NEWS TICKER ===================== -->
+<!-- ===================== PLAYER CARDS TICKER ===================== -->
+<div class="ticker-wrapper" style="background:#ffffff;">
+  <div class="card-ticker">
+    <div class="card-track" id="cardTickerTrack"></div>
+  </div>
+</div>
 <div class="ticker-wrapper">
   <div class="ticker" style="transform: translateX(100%);">
         <span class="bcc-flash">BCC News</span>
         <span>⚡ Q2: BCC excels with new technology stack</span>
+        <!-- <span class="bcc-flash">BCC News</span> -->
+        <!-- <span>👏 4/05: Young talent shines</span> -->
         <span class="bcc-flash">BCC News</span>
-        <span>👏 4/05: Young talent shines</span>
+        <span>🍽️ 04/05: Thanks to Saleem Riaz for the delicious brunch</span>
         <span class="bcc-flash">BCC News</span>
-        <span>🍽️ 04/05: Thanks to Farhan Moosa Silat for the delicious brunch</span>
-        <span class="bcc-flash">BCC News</span>
-        <span>🏏 04/05: Atif dominates with 87 runs in 41 balls; leads his team to Quarter Finals</span>
+        <span>🏏 04/05: Umar plays responsibly; helps team Aamir into Quarter Finals</span>
         <span class="bcc-flash">BCC News</span>
         <span>🔥 Tight race in the 1000 Club between Fahad, Farhan & Majid</span>
         <span class="bcc-flash">BCC News</span>
-        <span>💥 Aamir Khan smashes another fifty!</span>
-	    <!-- <span class="bcc-flash">BCC News</span> -->
-        <!--<span>🎯 Hafiz Atiq surges with 38 wikcets!</span>-->
+        <span>💥 Majid's explosive performance - 38 off 12!</span>
+	    <span class="bcc-flash">BCC News</span>
+        <span>🎯 Asad surges with 38 wikcets!</span>
 	    <span class="bcc-flash">BCC News</span>
 	    </span>📊 Prepared by Asad Shaikh | Presented by AUS Data Solutions<span>
         <!-- duplicate for seamless loop -->
-        <span class="bcc-flash">BCC News</span>
+
+                <span class="bcc-flash">BCC News</span>
         <span>⚡ Q2: BCC excels with new technology stack</span>
+        <!-- <span class="bcc-flash">BCC News</span> -->
+        <!-- <span>👏 4/05: Young talent shines</span> -->
         <span class="bcc-flash">BCC News</span>
-        <span>👏 4/05: Young talent shines</span>
+        <span>🍽️ 04/05: Thanks to Saleem Riaz for the delicious brunch</span>
         <span class="bcc-flash">BCC News</span>
-        <span>🍽️ 04/05: Thanks to Farhan Moosa Silat for the delicious brunch</span>
-        <span class="bcc-flash">BCC News</span>
-        <span>🏏 04/05: Atif dominates with 87 runs in 41 balls; leads his team to Quarter Finals</span>
+        <span>🏏 04/05: Umar plays responsibly; helps team Aamir into Quarter Finals</span>
         <span class="bcc-flash">BCC News</span>
         <span>🔥 Tight race in the 1000 Club between Fahad, Farhan & Majid</span>
         <span class="bcc-flash">BCC News</span>
-        <span>💥 Aamir Khan smashes another fifty!</span>
-	    <!-- <span class="bcc-flash">BCC News</span> -->
-        <!--<span>🎯 Hafiz Atiq surges with 38 wikcets!</span>-->
+        <span>💥 Majid's explosive performance - 38 off 12!</span>
+	    <span class="bcc-flash">BCC News</span>
+        <span>🎯 Asad surges with 38 wikcets!</span>
 	    <span class="bcc-flash">BCC News</span>
 	    </span>📊 Prepared by Asad Shaikh | Presented by AUS Data Solutions<span>
   </div>
@@ -417,11 +498,18 @@ body {
             <p>Loading...</p>
         </div>
         <div class="bcc-banner" style="flex:1.6;">
-            <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
-            <div class="banner-tagline">Brotherhood • Competition • Passion for Cricket</div>
-            <p class="banner-sub">
-                Data prepared and presented by Asad Shaikh | AUS Data Solutions
-            </p>
+            <div class="banner-content">
+                <img src="data/bcc_logo.PNG" alt="BCC Logo" class="bcc-logo">
+                
+                <div>
+                    <h1>Brothers' Cricket Club (BCC) - Katy, TX</h1>
+                    <div class="banner-tagline">Brotherhood • Competition • Passion for Cricket</div>
+                    <p class="banner-sub">
+                        Data prepared and presented by Asad Shaikh | AUS Data Solutions
+                    </p>
+                </div>
+                <img src="data/bcc_logo.PNG" alt="BCC Logo" class="bcc-logo">
+            </div>
         </div>
         <div class="game-widget" id="lastGame">
             <h3>Last Game</h3>
@@ -458,30 +546,10 @@ body {
                  alt="PDF" style="width:14px; height:14px;">
             Batting PDF
         </a>
-
         <!-- NEW -->
 
     </div>
 </div>
-
-    <!-- Centurions / Highlights -->
-    <div class="frame" id="highlights">
-        <h2>Highlights</h2>
-        <div id="centurions" class="highlight-grid"></div>
-    </div>
-
-    <!-- Top 5 Batsmen -->
-    <div class="frame top5-frame">
-        <h2>Top 5 Batsmen</h2>
-        <div id="top5" class="highlight-grid"></div>
-    </div>
-
-    <!-- Top 5 Bowlers -->
-    <div class="frame top5-frame">
-        <h2>Top 5 Bowlers</h2>
-        <div id="topBowlers" class="highlight-grid"></div>
-    </div>
-
     <!-- All Members -->
     <div class="frame">
         <div id="allMembers" class="members-container"></div>
@@ -542,100 +610,12 @@ function renderAllMembers(players, top5Names = new Set(), season="2025-26"){
 }
 
 function filterSeason(season){
-    const centDiv = document.getElementById("centurions");
-    const topDiv = document.getElementById("top5");
 
-    const allowedPlayers = ["Aamir","Aamir Noor","Adeel","Anas","Asad","Atif","Fahad","Farhan", "Hafiz Atiq","Hafiz Rizwan","Imran","Imtiaz","Luqmaan","Majid","Nouman","Patel","Rony","Saleem","Salman","Saud","Shakeel","Sheraz","Umar","Nabeel","Zain","Suhaib","Monis","Faraz"];
+    const allowedPlayers = ["Aamir","Aamir Noor","Adeel","Anas","Asad","Atif","Fahad","Farhan","Hafiz Atiq","Hafiz Rizwan","Imran","Imtiaz","Luqmaan","Majid","Nouman","Patel","Rony","Saleem","Salman","Saud","Shakeel","Sheraz","Umar","Nabeel","Zain","Suhaib","Monis","Faraz"];
 
     const filteredRows = allRows
-        .filter(cols=>allowedPlayers.includes(cols[0]?.trim()))
-        .filter(cols=>{
-            const dateObj = parseDate(cols[3]);
-            if(!dateObj) return false;
-            if(season==="All") return true;
-            if(season==="2025-26") return dateObj >= seasonStartDates["2025-26"];
-            if(season==="2024-25") return dateObj >= seasonStartDates["2024-25"] && dateObj < seasonStartDates["2025-26"];
-            return true;
-        });
-
-    let players = {}, centurions=[];
-
-    filteredRows.forEach(cols=>{
-        const name=cols[0].trim(), date=cols[3].trim(), runs=parseInt(cols[6]), balls=parseInt(cols[7]);
-        if(!name || isNaN(runs)||isNaN(balls)) return;
-        if(!players[name]) players[name] = {runs:0, balls:0, innings:0, outs:0, wickets:0};
-
-        let status = cols[17]?.toLowerCase() || "how out"; // adjust index if CSV differs
-        if(!["n/o","Not Out","Retired","DNB"].includes(status)) players[name].outs += 1;
-
-        players[name].runs += runs;
-        players[name].balls += balls;
-        players[name].innings += 1;
-
-        if(runs >= 100) centurions.push({name,runs,balls,date});
-		
-		const wickets = parseInt(cols[25]) || 0;
-		players[name].wickets += wickets;
-    });
-
-    // Render Centurions
-    // Render Centurions
-centDiv.innerHTML="";
-centurions.forEach(p=>{
-    const card = document.createElement("div");
-    card.className="highlight-card";
-    card.innerHTML=`
-        <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
-        <h4>${p.name}</h4>
-        <p>${p.runs} (${p.balls})</p>
-        <p>${p.date}</p>
-    `;
-    centDiv.appendChild(card);
-});
-
-// Add special highlight card (Asad Hat-trick) only for 2025-26 and All
-if(season === "2025-26" || season === "All") {
-    const specialCard = document.createElement("div");
-    specialCard.className = "highlight-card";
-    specialCard.innerHTML = `
-        <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/Asad.jpg" alt="Asad">
-        <h4>Asad</h4>
-        <p>Hat-trick</p>
-        <p>06/01/2025</p>
-    `;
-    centDiv.appendChild(specialCard);
-}
-
-    // Top 5
-    const topStats = Object.entries(players)
-        .map(([name,p])=>{
-            const avg = p.outs>0 ? (p.runs/p.outs).toFixed(1) : p.runs;
-            const sr = ((p.runs/p.balls)*100).toFixed(1);
-            return {name,runs:p.runs,avg,sr};
-        })
-        .sort((a,b)=>b.runs-a.runs)
-        .slice(0,5);
-
-    const top5Names = new Set(topStats.map(p=>p.name));
-    topDiv.innerHTML="";
-    topStats.forEach(p=>{
-        const card = document.createElement("div");
-        card.className="highlight-card";
-        card.innerHTML=`
-            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
-            <h4>${p.name}</h4>
-            <p>Runs: ${p.runs}</p>
-        `;
-        topDiv.appendChild(card);
-    });
-	
-	// Top 5 Bowlers
-const bowlDiv = document.getElementById("topBowlers");
-
-const topBowlers = Object.entries(players)
-    .map(([name,p]) => {
-        const seasonRows = allRows.filter(cols => {
-            if(cols[0]?.trim() !== name) return false;
+        .filter(cols => allowedPlayers.includes(cols[0]?.trim()))
+        .filter(cols => {
             const dateObj = parseDate(cols[3]);
             if(!dateObj) return false;
             if(season === "All") return true;
@@ -644,87 +624,245 @@ const topBowlers = Object.entries(players)
             return true;
         });
 
+    let players = {}, centurions = [];
+
+    filteredRows.forEach(cols=>{
+        const name = cols[0].trim();
+        const date = cols[3].trim();
+        const runs = parseInt(cols[6]);
+        const balls = parseInt(cols[7]);
+
+        if(!name || isNaN(runs) || isNaN(balls)) return;
+
+        if(!players[name]) {
+            players[name] = {runs:0, balls:0, outs:0, wickets:0};
+        }
+
+        let status = cols[17]?.toLowerCase() || "";
+        if(!["n/o","not out","retired","dnb"].includes(status)){
+            players[name].outs += 1;
+        }
+
+        players[name].runs += runs;
+        players[name].balls += balls;
+
+        if(runs >= 100){
+            centurions.push({name, runs, balls, date});
+        }
+
+        const wickets = parseInt(cols[25]) || 0;
+    });
+
+    // ===================== TOP 5 BATTERS =====================
+    const topStats = Object.entries(players)
+        .map(([name,p]) => ({name, runs:p.runs}))
+        .sort((a,b)=>b.runs-a.runs)
+        .slice(0,5);
+
+    // ===================== TOP 5 BOWLERS =====================
+    const topBowlers = Object.keys(players)
+    .map(name => {
+
+        const seasonRows = allRows.filter(cols => {
+            if(cols[0]?.trim() !== name) return false;
+            const dateObj = parseDate(cols[3]);
+            if(!dateObj) return false;
+
+            if(season === "All") return true;
+            if(season === "2025-26") return dateObj >= seasonStartDates["2025-26"];
+            if(season === "2024-25") return dateObj >= seasonStartDates["2024-25"] && dateObj < seasonStartDates["2025-26"];
+
+            return true;
+        });
+
         const wickets = seasonRows.reduce((sum, cols) => sum + (parseInt(cols[25]) || 0), 0);
-        return {name, wickets};
+
+        return { name, wickets };
     })
     .sort((a,b) => b.wickets - a.wickets)
     .slice(0,5);
 
-bowlDiv.innerHTML = "";
+    // ===================== RENDER MEMBERS =====================
+    renderAllMembers(players);
 
-topBowlers.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "highlight-card";
-    card.innerHTML = `
-        <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
-        <h4>${p.name}</h4>
-		<p>Wkts: ${p.wickets}</p>
-    `;
-    bowlDiv.appendChild(card);
-});
+    // ===================== BUILD TICKER =====================
+    const track = document.getElementById("cardTickerTrack");
+    track.innerHTML = "";
 
-    renderAllMembers(players, top5Names);
+    function addLabel(text){
+        track.innerHTML += `<span class="ticker-label">${text}</span>`;
+    }
+
+    function createCardHTML(p, type, index){
+    if(type === "century"){
+        return `
+        <div class="highlight-card">
+           <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
+            <h4>${p.name}</h4>
+            <p>${p.runs} (${p.balls})</p>
+            <p>${p.date}</p>
+        </div>`;
+    }
+
+    if(type === "bat"){
+        return `
+        <div class="highlight-card">
+            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
+            <div style="font-size:14px; font-weight:800;">
+            ${index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : "#" + (index+1)}
+            </div>
+<h4>${p.name}</h4>
+            <p>Runs: ${p.runs}</p>
+        </div>`;
+    }
+
+    if(type === "bowl"){
+        return `
+        <div class="highlight-card">
+            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
+            <div style="font-size:14px; font-weight:800;">
+            ${index === 0 ? "🥇" : index === 1 ? "🥈" : index === 2 ? "🥉" : "#" + (index+1)}
+            </div>
+            <h4>${p.name}</h4>
+            <p>Wkts: ${p.wickets}</p>
+        </div>`;
+    }
 }
 
-document.getElementById("seasonFilter").addEventListener("change", e=>filterSeason(e.target.value));
+    // ===== CENTURIONS =====
+    addLabel("Centurions ►►");
+    centurions.forEach(p=>{
+        track.innerHTML += createCardHTML(p, "century");
+    });
 
-// ===================== MATCH WIDGET =====================
-function startCountdown(el, targetDate){
-    function update(){
-        const diff = targetDate - new Date();
-        if(diff <= 0){ 
-            el.innerHTML = "Match Day!"; 
-            clearInterval(interval); 
-            return; 
-        }
-        const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const h = Math.floor(diff / (1000 * 60 * 60) % 24);
-        const m = Math.floor(diff / (1000 * 60) % 60);
-        const s = Math.floor(diff / 1000 % 60);
-        el.innerHTML = `${d}d ${h}h ${m}m ${s}s`;
+    // ===== HATTRICK =====
+    if(season === "2025-26" || season === "All"){
+        addLabel("Hattrick ►►");
+        track.innerHTML += `
+        <div class="highlight-card">
+            <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/Asad.jpg">
+            <h4>Asad</h4>
+            <p>Hat-trick</p>
+            <p style="font-size:8px;">06/01/2025</p>
+        </div>`;
     }
-    update();
-    const interval = setInterval(update, 1000);
+
+    // ===== TOP BATTERS =====
+    addLabel("Top 5 Batsmen ►►");
+    topStats.forEach((p, i)=>{
+        track.innerHTML += createCardHTML(p, "bat", i);
+    });
+
+    // ===== TOP BOWLERS =====
+    addLabel("Top 5 Bowlers ►►");
+    topBowlers.forEach((p, i)=>{
+        track.innerHTML += createCardHTML(p, "bowl", i);
+    });
+
+    // ===== LOOP =====
+    const content = track.innerHTML;
+    track.innerHTML = content + content;
 }
 
 function renderGameWidgets(){
-    const now=new Date();
-    let nextGame=null, lastGame=null;
+    const now = new Date();
+    let nextGame = null, lastGame = null;
 
-    matchRows.forEach(cols=>{
-        const date=parseDate(cols[1]), capt1=cols[2], color1=cols[3], capt2=cols[4], color2=cols[5], winner=cols[6], manofthematch=cols[8];
+    matchRows.forEach(cols => {
+        const date = parseDate(cols[1]);
+
         if(!date) return;
 
-        if(date>=now && (!nextGame || date<nextGame.date)) nextGame={date,capt1,capt2,color1,color2};
-        // Force time to Sunday 7:30 AM
-        if(nextGame) nextGame.date.setHours(7,30,0,0);
-        if(date<now && (!lastGame || date>lastGame.date)) lastGame={date,capt1,capt2,winner,manofthematch};
+        const capt1 = cols[2];
+        const color1 = cols[3];
+        const capt2 = cols[4];
+        const color2 = cols[5];
+        const winner = cols[6];
+        const manofthematch = cols[8];
+
+        // NEXT GAME
+        if(date >= now && (!nextGame || date < nextGame.date)){
+            nextGame = {
+                date: new Date(date), // clone
+                capt1, capt2, color1, color2
+            };
+        }
+
+        // LAST GAME
+        if(date < now && (!lastGame || date > lastGame.date)){
+            lastGame = {
+                date: new Date(date),
+                capt1, capt2, winner, manofthematch
+            };
+        }
     });
 
-    // Next Game
+    // ✅ Set fixed time AFTER selection
     if(nextGame){
-        const ngEl=document.getElementById("nextGame");
-        ngEl.innerHTML=`
+        nextGame.date.setHours(7,30,0,0);
+    }
+
+    // ================= NEXT GAME =================
+    const ngEl = document.getElementById("nextGame");
+
+    if(nextGame){
+        ngEl.innerHTML = `
             <h3>Next Game</h3>
-            <p><span style="color:${nextGame.color1}; font-weight:700;">${nextGame.capt1}</span> vs <span style="color:${nextGame.color2}; font-weight:700;">${nextGame.capt2}</span></p>
+            <p>
+                <span style="color:${nextGame.color1}; font-weight:700;">
+                    ${nextGame.capt1}
+                </span> vs 
+                <span style="color:${nextGame.color2}; font-weight:700;">
+                    ${nextGame.capt2}
+                </span>
+            </p>
             <p>${nextGame.date.toDateString()}</p>
             <p class="countdown">Starts in: <span id="countdown"></span></p>
         `;
-        startCountdown(document.querySelector("#nextGame .countdown span"), nextGame.date);
+
+        startCountdown(
+            document.querySelector("#countdown"),
+            nextGame.date
+        );
+    } else {
+        ngEl.innerHTML = `<h3>Next Game</h3><p>No upcoming matches</p>`;
     }
 
-    // Last Game
+    // ================= LAST GAME =================
+    const lgEl = document.getElementById("lastGame");
+
     if(lastGame){
-        const lgEl=document.getElementById("lastGame");
-        lgEl.innerHTML=`
+        lgEl.innerHTML = `
             <h3>Last Game</h3>
             <p><b>${lastGame.capt1}</b> vs <b>${lastGame.capt2}</b></p>
             <p>${lastGame.date.toDateString()}</p>
-            <p><b>Winner:</b> ${lastGame.winner}</p>
-            <p><b>Man of the Match:</b> ${lastGame.manofthematch}</p>
-
+            <p><b>Winner:</b> ${lastGame.winner || "-"}</p>
+            <p><b>Man of the Match:</b> ${lastGame.manofthematch || "-"}</p>
         `;
+    } else {
+        lgEl.innerHTML = `<h3>Last Game</h3><p>No completed matches</p>`;
     }
+}
+
+function parseDate(str){
+    if(!str) return null;
+
+    str = str.trim();
+
+    // YYYY-MM-DD
+    if(str.includes("-")){
+        const p = str.split("-");
+        return new Date(p[0], p[1]-1, p[2]);
+    }
+
+    // MM/DD/YYYY or M/D/YYYY
+    if(str.includes("/")){
+        const p = str.split("/");
+        if(p[2].length === 2) p[2] = "20" + p[2]; // handle 2-digit year
+        return new Date(p[2], p[0]-1, p[1]);
+    }
+
+    return null;
 }
 
 // ===================== FETCH DATA =====================
@@ -761,7 +899,7 @@ const fullNameMap = {
   "Patel": "Abdul Rahman Patel",
   "Rony": "Syed Choudhary - Rony",
   "Saleem": "Saleem Riaz",
-  "Salman": "Salman Maqsood",
+  "Salman": "Salman Masood",
   "Saud": "Saud Memon",
   "Shakeel": "Shakeel",
   "Sheraz": "Sheraz Mughal",
@@ -971,6 +1109,27 @@ function showPlayerDetails(playerName){
             html2canvas: { scale: 0.5 }
         });
     };
+}
+function startCountdown(el, targetDate){
+    function update(){
+        const now = new Date();
+        const diff = targetDate - now;
+
+        if(diff <= 0){
+            el.innerHTML = "LIVE";
+            return;
+        }
+
+        const days = Math.floor(diff / (1000*60*60*24));
+        const hrs = Math.floor((diff / (1000*60*60)) % 24);
+        const mins = Math.floor((diff / (1000*60)) % 60);
+        const secs = Math.floor((diff / 1000) % 60);
+
+        el.innerHTML = `${days}d ${hrs}h ${mins}m ${secs}s`;
+    }
+
+    update();
+    setInterval(update, 1000);
 }
 
 </script>
