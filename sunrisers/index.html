@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Saturday Sunrisers - Players</title>
+
+<style>
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0b3d2e, #000);
+    color: #fff;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(90deg, #ff8c00, #ffd700);
+    color: #000;
+}
+
+header img {
+    width: 120px;
+}
+
+header h1 {
+    margin: 10px 0 0;
+    font-size: 2.5rem;
+}
+
+.container {
+    padding: 30px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section-title {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #ffd700;
+}
+
+.players {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: linear-gradient(145deg, #1c1c1c, #0b3d2e);
+    border-radius: 15px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: scale(1.05);
+}
+
+.player-img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 3px solid #ff8c00;
+    margin-bottom: 10px;
+}
+
+.player-name {
+    font-size: 1.3rem;
+    color: #ffd700;
+}
+
+.player-role {
+    font-size: 0.9rem;
+    color: #ccc;
+}
+
+.stats {
+    margin-top: 10px;
+    font-size: 0.85rem;
+}
+
+footer {
+    text-align: center;
+    padding: 15px;
+    margin-top: 30px;
+    background: #111;
+    color: #aaa;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <img src="logo.png" alt="Sunrisers Logo">
+    <h1>Saturday Sunrisers</h1>
+    <p>Player Introduction</p>
+</header>
+
+<div class="container">
+    <div class="section-title">Meet the Squad</div>
+
+    <div class="players">
+
+        <div class="card">
+            <img src="player1.jpg" class="player-img">
+            <div class="player-name">Asad</div>
+            <div class="player-role">All-Rounder</div>
+            <div class="stats">Runs: 540 | Wickets: 18</div>
+        </div>
+
+        <div class="card">
+            <img src="player2.jpg" class="player-img">
+            <div class="player-name">Ali</div>
+            <div class="player-role">Batsman</div>
+            <div class="stats">Runs: 620 | Avg: 45</div>
+        </div>
+
+        <div class="card">
+            <img src="player3.jpg" class="player-img">
+            <div class="player-name">Khan</div>
+            <div class="player-role">Bowler</div>
+            <div class="stats">Wickets: 25 | Econ: 6.2</div>
+        </div>
+
+        <div class="card">
+            <img src="player4.jpg" class="player-img">
+            <div class="player-name">Rahul</div>
+            <div class="player-role">Wicket Keeper</div>
+            <div class="stats">Catches: 15 | Stumpings: 5</div>
+        </div>
+
+    </div>
+</div>
+
+<footer>
+    © 2026 Saturday Sunrisers Cricket Club | Katy, TX
+</footer>
+
+</body>
+</html>
