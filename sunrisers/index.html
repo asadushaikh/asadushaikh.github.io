@@ -8,16 +8,23 @@
 <style>
 body {
     margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #0b3d2e, #000);
     color: #fff;
+}
+* {
+    box-sizing: border-box;
 }
 
 header {
     text-align: center;
     padding: 20px;
-    background: linear-gradient(90deg, #ff8c00, #ffd700);
+    background: linear-gradient(90deg, #e6d115, #ffd700);
     color: #000;
+    border: none;
+    outline: none;
+    box-shadow: none;
 }
 
 header img {
@@ -48,41 +55,76 @@ header h1 {
     gap: 20px;
 }
 
-.card {
-    background: linear-gradient(145deg, #1c1c1c, #0b3d2e);
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    box-shadow: 0 0 15px rgba(255, 140, 0, 0.6);
-    transition: transform 0.3s ease;
-}
 
 .card:hover {
     transform: scale(1.05);
 }
 
+
+.card {
+    background: linear-gradient(145deg, #151515, #0b3d2e);
+    border-radius: 12px;
+    padding: 14px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(255, 140, 0, 0.35);
+    transition: transform 0.2s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+}
+
+.card:hover {
+    transform: scale(1.03);
+}
+
 .player-img {
-    width: 100px;
-    height: 100px;
+    width: 70px;
+    height: 70px;
     border-radius: 50%;
-    border: 3px solid #ff8c00;
-    margin-bottom: 10px;
+    border: 2px solid #ff8c00;
+    object-fit: cover;
 }
 
 .player-name {
-    font-size: 1.3rem;
+    font-size: 1rem;
+    font-weight: 600;
     color: #ffd700;
+    margin: 2px 0;
 }
+
+.roles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 4px;
+}
+
+.roles span {
+    font-size: 0.75rem;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 3px 8px;
+    border-radius: 20px;
+    color: #ddd;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.stats {
+    font-size: 0.75rem;
+    color: #aaa;
+    margin-top: 4px;
+}
+
 
 .player-role {
     font-size: 0.9rem;
     color: #ccc;
 }
 
-.stats {
-    margin-top: 10px;
-    font-size: 0.85rem;
-}
+
 
 footer {
     text-align: center;
@@ -91,15 +133,207 @@ footer {
     background: #111;
     color: #aaa;
 }
+
+
+.roles span {
+    font-size: 0.7rem;   /* smaller */
+    padding: 2px 6px;
+    border-radius: 12px;
+    background: rgba(255,255,255,0.08);
+    color: #ccc;
+}
+
+.roles span:hover {
+    transform: scale(1.3);
+}
+.club-header {
+    padding: 8px 20px;
+}
+
+/* ONE ROW LAYOUT */
+.header-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+}
+
+/* LEFT */
+.header-left {
+    justify-self: start;
+}
+
+/* CENTER (TRUE CENTER) */
+.header-center {
+    text-align: center;
+}
+
+/* RIGHT */
+.header-right {
+    justify-self: end;
+}
+
+
+.header-right img {
+    width: 120px;
+}
+.scorecard-link {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: #000;
+    background: #ffd700;
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.scorecard-link:hover {
+    background: #ff8c00;
+    color: #fff;
+}
+.header-center h1 {
+    margin: 0;
+    font-size: 2.2rem;
+}
+
+.header-center p {
+    margin: 2px 0;
+}
+
+.header-center .venue,
+.header-center .address {
+    margin: 2px 0;
+    font-size: 0.85rem;
+}
+
+.next-match-mini {
+    line-height: 1.3;
+}
+
+.header-row {
+    align-items: start; /* FIXES vertical empty space */
+}
+
+.last-match {
+    margin-top: 5px;
+}
+.player-link {
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: #ffd700;
+    text-decoration: none;
+}
+
+.player-link:hover {
+    text-decoration: underline;
+}
+.countdown {
+    margin-top: 6px;
+    font-size: 0.8rem;
+    color: black; /* gold */
+    font-weight: 600;
+}
+
+.countdown span {
+    color: black; /* numbers also gold */
+    font-weight: 700;
+}
+.directions-link {
+    display: inline-block;
+    margin-top: 6px;
+    font-size: 0.75rem;
+    color: #056ef8;
+    
+    padding: 4px 10px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: 0.2s ease;
+}
+
+.directions-link:hover {
+    background: #ff8c00;
+    color: #fff;
+    transform: scale(1.05);
+}
 </style>
 </head>
+<script>
+const matchDate = new Date("April 18, 2026 08:00:00").getTime();
 
+const timer = setInterval(() => {
+    const now = new Date().getTime();
+    const diff = matchDate - now;
+
+    if (diff <= 0) {
+        clearInterval(timer);
+        document.querySelector(".countdown").innerHTML = "Match Started!";
+        return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById("days").innerText = String(days).padStart(2, '0');
+    document.getElementById("hours").innerText = String(hours).padStart(2, '0');
+    document.getElementById("minutes").innerText = String(minutes).padStart(2, '0');
+    document.getElementById("seconds").innerText = String(seconds).padStart(2, '0');
+}, 1000);
+</script>
 <body>
 
-<header>
-    <img src="sunrisers.jpg" alt="Sunrisers Logo">
-    <h1>Saturday Sunrisers</h1>
-    <p>Player Introduction</p>
+<header class="club-header">
+
+    <div class="header-row">
+
+        <!-- LEFT: NEXT MATCH -->
+        <div class="header-left">
+            <div class="next-match-mini">
+                <div class="title">🏏 Next Match</div>
+                <div>Mughees Malik vs Zuhair</div>
+                <div class="date">Sat 04/18/26 • 8:00 AM</div>
+                <div class="countdown">
+                    Starts in:
+                    <span id="days">00</span>Days
+                    <span id="hours">00</span>Hours
+                    <span id="minutes">00</span>Minutes
+                    <span id="seconds">00</span>Seconds
+                </div>
+
+                <div class="last-match">
+                    <a href="#" class="scorecard-link">📊 Last Match Scorecard</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- CENTER: CLUB NAME -->
+        <div class="header-center">
+            <h1>Saturday Sunrisers</h1>
+            <p>Rise, Shine, Dominate</p>
+            <div class="venue">Tays JHS, Katy, Texas</div>
+                <div class="address">
+                26721 Hawks Prairie Blvd, Katy, TX 77494
+            </div>
+
+            <a 
+                class="directions-link"
+                href="https://www.google.com/maps/dir/?api=1&destination=26721%20Hawks%20Prairie%20Blvd%2C%20Katy%2C%20TX%2077494"
+                target="_blank"
+            >
+                📍 Get Directions
+            </a>
+        </div>
+
+        <!-- RIGHT: LOGO -->
+        <div class="header-right">
+            <img src="sunrisers.png" alt="Sunrisers Logo">
+        </div>
+
+    </div>
+
 </header>
 
 <div class="container">
@@ -107,34 +341,216 @@ footer {
 
     <div class="players">
 
-        <div class="card">
-            <img src="player1.jpg" class="player-img">
-            <div class="player-name">Asad</div>
-            <div class="player-role">All-Rounder</div>
-            <div class="stats">Runs: 540 | Wickets: 18</div>
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Ahsan Akhtar</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Medium Pace Bowler</span>
+            <a href="#" class="player-link">View Player Stats →</a>
         </div>
+    </div>
 
-        <div class="card">
-            <img src="player2.jpg" class="player-img">
-            <div class="player-name">Ali</div>
-            <div class="player-role">Batsman</div>
-            <div class="stats">Runs: 620 | Avg: 45</div>
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Ahmad Umair</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Vareity Bowler</span>
+            <a href="#" class="player-link">View Player Stats →</a>
         </div>
+    </div>
 
-        <div class="card">
-            <img src="player3.jpg" class="player-img">
-            <div class="player-name">Khan</div>
-            <div class="player-role">Bowler</div>
-            <div class="stats">Wickets: 25 | Econ: 6.2</div>
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Ali Khan</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <a href="#" class="player-link">View Player Stats →</a>
         </div>
+    </div>
 
-        <div class="card">
-            <img src="player4.jpg" class="player-img">
-            <div class="player-name">Rahul</div>
-            <div class="player-role">Wicket Keeper</div>
-            <div class="stats">Catches: 15 | Stumpings: 5</div>
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Aman Shaikh</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Meduim Pace Bowler</span>
+            <a href="#" class="player-link">View Player Stats →</a>
         </div>
+    </div>
 
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Ammad</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Asad Shaikh</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Meduim Pace Bowler</span>
+            <span>Wicket Keeper 🧤</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Faiz</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Faizan</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Medium Pace Bowler</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Faraz Malik</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>Wicket Keeper 🧤</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Irfan Choudhary</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Mughees Malik</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Vareity Bowler</span>
+            <span>Wicket Keeper 🧤</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Musa Malik</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Fast Bowler</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Misbah Malik</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Spin Bowler</span>
+            <span>Wicket Keeper 🧤</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Nabil Farooq</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Spin Bowler</span>
+            <span>Wicket Keeper 🧤</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Rehan Jatoi</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Fast Bowler</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Saad Kamal</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Fast Bowler</span>
+            <span>Wicket Keeper 🧤</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Saeed</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Sajid Masroor</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Fast Bowler</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Umair Sheikh</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Medium Pace Bowler</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Zaid</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="player.png" class="player-img">
+        <div class="player-name">Zuhair</div>
+        <div class="roles">
+            <span>🏏 RH Bat</span>
+            <span>🎯 Fast Bowler</span>
+            <a href="#" class="player-link">View Player Stats →</a>
+        </div>
+    </div>
+
+</div>
     </div>
 </div>
 
