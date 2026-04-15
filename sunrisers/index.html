@@ -257,6 +257,43 @@ footer {
     color: #fff;
     transform: scale(1.05);
 }
+/* MOBILE FIX: stack header + move next match below */
+@media (max-width: 768px) {
+
+    .header-row {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 10px;
+    }
+
+    .header-center {
+        order: 1;
+    }
+
+    .header-right {
+        order: 2;
+    }
+
+    .header-left {
+        order: 3; /* THIS pushes Next Match BELOW header */
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .next-match-mini {
+        background: rgba(0,0,0,0.15);
+        padding: 12px;
+        border-radius: 10px;
+        width: 100%;
+        max-width: 320px;
+    }
+
+    .countdown {
+        font-size: 0.75rem;
+    }
+}
 </style>
 </head>
 <script>
