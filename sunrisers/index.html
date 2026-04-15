@@ -265,7 +265,7 @@ footer {
         flex-direction: column;
         align-items: center;
         text-align: center;
-        gap: 10px;
+        gap: 12px;
     }
 
     .header-center {
@@ -277,21 +277,28 @@ footer {
     }
 
     .header-left {
-        order: 3; /* THIS pushes Next Match BELOW header */
+        order: 3;
         width: 100%;
+        display: flex;
+        justify-content: center; /* 🔥 centers the box itself */
         margin-top: 10px;
     }
 
     .next-match-mini {
         background: rgba(0,0,0,0.15);
-        padding: 12px;
-        border-radius: 10px;
-        width: 100%;
-        max-width: 320px;
+        padding: 14px;
+        border-radius: 12px;
+
+        width: 90%;
+        max-width: 340px;
+
+        margin: 0 auto; /* 🔥 extra safety centering */
+        text-align: center; /* 🔥 fixes inner alignment */
     }
 
     .countdown {
         font-size: 0.75rem;
+        text-align: center;
     }
 }
 </style>
