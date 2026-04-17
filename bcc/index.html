@@ -197,10 +197,10 @@ body {
 
 /* ===================== GAME WIDGET COLORS ===================== */
 #nextGame {
-    background: linear-gradient(180deg,#3002fc);
+    background: linear-gradient(180deg,#135486);
 }
 #lastGame {
-    background: linear-gradient(180deg,#3002fc);
+    background: linear-gradient(180deg,#135486);
 }
 
 /* ===================== GAME WIDGETS ===================== */
@@ -350,6 +350,39 @@ body {
 .ticker:hover {
   animation-play-state: paused;
 }
+/* ===== Combined Carousel Frame ===== */
+#combinedFrame {
+    background: linear-gradient(180deg,#ffd700,#ffffff);
+    border: 2px solid #ffd700;
+}
+
+/* Tabs */
+.carousel-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.carousel-tabs button:hover {
+    background: #0a2342;
+}
+
+/* Carousel */
+.carousel-container {
+    overflow: hidden;
+    width: 100%;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.4s ease;
+}
+
+.carousel-slide {
+    min-width: 100%;
+    text-align: center;
+}
 </style>
 </head>
 <body>
@@ -464,26 +497,42 @@ body {
     </div>
 </div>
 
-    <!-- Centurions / Highlights -->
-    <div class="frame" id="highlights">
-        <h2>Highlights</h2>
-        <div id="centurions" class="highlight-grid"></div>
-    </div>
+    <div class="frame" id="combinedFrame">
+        <h2>Season Highlights & Leaders</h2>
 
-    <!-- Top 5 Batsmen -->
-    <div class="frame top5-frame">
-        <h2>Top 5 Batsmen</h2>
-        <div id="top5" class="highlight-grid"></div>
-    </div>
+        <!-- Carousel Tabs -->
+        
 
-    <!-- Top 5 Bowlers -->
-    <div class="frame top5-frame">
-        <h2>Top 5 Bowlers</h2>
-        <div id="topBowlers" class="highlight-grid"></div>
+        <!-- Carousel Wrapper -->
+        <div class="carousel-container">
+            <div class="carousel-track" id="carouselTrack">
+
+                <!-- Slide 1 -->
+                <div class="carousel-slide">
+                    <h3>Exceptional Performances</h3>
+                    <div id="centurions" class="highlight-grid"></div>
+                </div>
+
+                <!-- Slide 2 -->
+                <div class="carousel-slide">
+                    <h3>Top 5 Batsmen</h3>
+                    <div id="top5" class="highlight-grid"></div>
+                </div>
+
+                <!-- Slide 3 -->
+                <div class="carousel-slide">
+                    <h3>Top 5 Bowlers</h3>
+                    <div id="topBowlers" class="highlight-grid"></div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
     <!-- All Members -->
+    <!-- All Members -->
     <div class="frame">
+        <h2>All Members</h2>
         <div id="allMembers" class="members-container"></div>
     </div>
 </div>
@@ -972,6 +1021,17 @@ function showPlayerDetails(playerName){
         });
     };
 }
+let currentSlide = 0;
+
+function showSlide(index) {
+    const track = document.getElementById("carouselTrack");
+    currentSlide = index;
+    track.style.transform = `translateX(-${index * 100}%)`;
+}
+setInterval(() => {
+    currentSlide = (currentSlide + 1) % 3;
+    showSlide(currentSlide);
+}, 4000);
 
 </script>
 </body>
