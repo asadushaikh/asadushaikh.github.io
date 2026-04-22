@@ -418,7 +418,7 @@ body {
        <!-- <span class="bcc-flash">BCC News</span>-->
        <!-- <span>👏 4/05: Young talent shines</span>-->
         <span class="bcc-flash">BCC News</span>
-        <span>🍽️ 04/19: Thanks to Hafiz Rizwan Sahab for the delicious brunch</span>
+        <span>🍽️ 04/12: Thanks to Hafiz Rizwan Sahab for the delicious brunch</span>
         <span class="bcc-flash">BCC News</span>
         <span>🏏 04/19: Suhaib helps team Rony to win thriller, take team to Quarter Finals</span>
         <span class="bcc-flash">BCC News</span>
@@ -435,7 +435,7 @@ body {
         <!-- <span class="bcc-flash">BCC News</span>-->
         <!-- <span>👏 4/05: Young talent shines</span>-->
         <span class="bcc-flash">BCC News</span>
-        <span>🍽️ 04/19: Thanks to Hafiz Rizwan Sahab for the delicious brunch</span>
+        <span>🍽️ 04/12: Thanks to Hafiz Rizwan Sahab for the delicious brunch</span>
         <span class="bcc-flash">BCC News</span>
         <span>🏏 04/19: Suhaib helps team Rony to win thriller, take team to Quarter Finals</span>
         <span class="bcc-flash">BCC News</span>
@@ -673,46 +673,61 @@ if(season === "2025-26" || season === "All") {
 
     // Top 5
 // Top 5
-        const topStats = Object.entries(players)
-            .map(([name,p])=>{
-                const avg = p.outs>0 ? (p.runs/p.outs).toFixed(1) : p.runs;
-                const sr = ((p.runs/p.balls)*100).toFixed(1);
-                return {name,runs:p.runs,avg,sr};
-            })
-            .sort((a,b)=>b.runs-a.runs)
-            .slice(0,5);
+// Top Batsmen with Ties
+const sortedBatsmen = Object.entries(players)
+    .map(([name,p]) => ({
+        name,
+        runs: p.runs
+    }))
+    .sort((a,b)=>b.runs-a.runs);
 
-        const medals = ["🥇","🥈","🥉","4️⃣","5️⃣"];
+// Assign ranks with ties
+let rankedBatsmen = [];
+let currentRank = 0;
+let lastRuns = null;
 
-        const top5Names = new Set(topStats.map(p=>p.name));
-        topDiv.innerHTML="";
+sortedBatsmen.forEach((p, index) => {
+    if (p.runs !== lastRuns) {
+        currentRank = index + 1;
+    }
+    lastRuns = p.runs;
 
-        topStats.forEach((p, i)=>{
-            const rank = i + 1;
-            const card = document.createElement("div");
-            card.className="highlight-card";
+    rankedBatsmen.push({
+        ...p,
+        rank: currentRank
+    });
+});
 
-            const medal = medals[i] || "";
+// Keep all players with rank ≤ 5
+const topBatsmen = rankedBatsmen.filter(p => p.rank <= 5);
 
-            card.innerHTML=`
+const medalsMap = {
+    1: "🥇",
+    2: "🥈",
+    3: "🥉"
+};
 
-                <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
+topDiv.innerHTML = "";
 
-                <div style="font-size:12px; font-weight:700; margin-bottom:2px;">
-                    ${rank > 3 ? `<span style="color:#555;">#${rank}</span>` : medal}
-                </div>
-                
-                <h4 style="margin-top:4px;">${p.name}</h4>
-                <p>Runs: ${p.runs}</p>
-            `;
-            topDiv.appendChild(card);
-        });
+topBatsmen.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "highlight-card";
 
-	
-	// Top 5 Bowlers
-const bowlDiv = document.getElementById("topBowlers");
+    const label = medalsMap[p.rank] || `#${p.rank}`;
 
-const topBowlers = Object.entries(players)
+    card.innerHTML = `
+        <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
+        <div style="font-size:12px; font-weight:700; margin-bottom:2px;">
+            ${label}
+        </div>
+        <h4>${p.name}</h4>
+        <p>Runs: ${p.runs}</p>
+    `;
+    topDiv.appendChild(card);
+});
+
+	// Top Bowlers with Ties
+const sortedBowlers = Object.entries(players)
     .map(([name,p]) => {
         const seasonRows = allRows.filter(cols => {
             if(cols[0]?.trim() !== name) return false;
@@ -725,35 +740,52 @@ const topBowlers = Object.entries(players)
         });
 
         const wickets = seasonRows.reduce((sum, cols) => sum + (parseInt(cols[25]) || 0), 0);
-        return {name, wickets};
+
+        return { name, wickets };
     })
-    .sort((a,b) => b.wickets - a.wickets)
-    .slice(0,5);
+    .sort((a,b)=>b.wickets-a.wickets);
 
-const ballmedals = ["🥇","🥈","🥉","4️⃣","5️⃣"];
+// Assign ranks with ties
+let rankedBowlers = [];
+let currentRankball = 0;
+let lastWkts = null;
 
+sortedBowlers.forEach((p, index) => {
+    if (p.wickets !== lastWkts) {
+        currentRankball = index + 1;
+    }
+    lastWkts = p.wickets;
+
+    rankedBowlers.push({
+        ...p,
+        rank: currentRankball
+    });
+});
+
+// Keep all players with rank ≤ 5
+const topBowlers = rankedBowlers.filter(p => p.rank <= 5);
+const bowlDiv = document.getElementById("topBowlers");
 bowlDiv.innerHTML = "";
 
-topBowlers.forEach((p, i) => {
-    const rank = i + 1;
+topBowlers.forEach(p => {
     const card = document.createElement("div");
     card.className = "highlight-card";
 
-    const medal = ballmedals[i] || "";
+    const label = medalsMap[p.rank] || `#${p.rank}`;
 
     card.innerHTML = `
-
-        <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg" alt="${p.name}">
+        <img src="https://raw.githubusercontent.com/asadushaikh/asadushaikh.github.io/main/bcc/images/${p.name}.jpg">
         <div style="font-size:12px; font-weight:700; margin-bottom:2px;">
-            ${rank > 3 ? `<span style="color:#555;">#${rank}</span>` : medal}
+            ${label}
         </div>
-        <h4 style="margin-top:4px;">${p.name}</h4>
+        <h4>${p.name}</h4>
         <p>Wkts: ${p.wickets}</p>
     `;
     bowlDiv.appendChild(card);
 });
+	// Top 5 Bowlers
 
-    renderAllMembers(players, top5Names);
+    renderAllMembers(players);
 }
 
 document.getElementById("seasonFilter").addEventListener("change", e=>filterSeason(e.target.value));
