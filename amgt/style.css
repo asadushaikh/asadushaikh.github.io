@@ -1,1 +1,1039 @@
+/* =========================================================
+   A&M GLOBAL TOURS
+   Main Website Styles
+========================================================= */
 
+/* ---------- RESET ---------- */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    color: #172033;
+    background: #ffffff;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+button,
+input {
+    font: inherit;
+}
+
+
+/* ---------- GLOBAL ---------- */
+
+:root {
+    --navy: #082b59;
+    --dark-blue: #041c3a;
+    --blue: #1261a0;
+    --light-blue: #eaf5ff;
+    --gold: #d8a72d;
+    --gold-light: #f5d77a;
+    --white: #ffffff;
+    --light: #f6f9fc;
+    --text: #172033;
+    --muted: #667085;
+    --border: #e2e8f0;
+    --shadow: 0 15px 40px rgba(8, 43, 89, 0.10);
+}
+
+.container {
+    width: min(1180px, 92%);
+    margin: 0 auto;
+}
+
+.section {
+    padding: 90px 0;
+}
+
+.section-heading {
+    text-align: center;
+    max-width: 720px;
+    margin: 0 auto 50px;
+}
+
+.section-label {
+    color: var(--gold);
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 10px;
+}
+
+.section-heading h2,
+.about-content h2,
+.visa-content h2,
+.subscribe-content h2 {
+    color: var(--navy);
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.15;
+    margin-bottom: 18px;
+}
+
+.section-heading p:not(.section-label) {
+    color: var(--muted);
+    font-size: 17px;
+}
+
+
+/* ---------- HEADER ---------- */
+
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.97);
+    border-bottom: 1px solid var(--border);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.04);
+}
+
+.nav-container {
+    min-height: 78px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+
+/* ---------- LOGO ---------- */
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.logo-main {
+    color: var(--navy);
+    font-size: 30px;
+    font-weight: 900;
+    letter-spacing: -1px;
+}
+
+.logo-sub {
+    color: var(--gold);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 3px;
+    margin-top: 4px;
+}
+
+
+/* ---------- NAVIGATION ---------- */
+
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: 27px;
+}
+
+.main-nav a {
+    color: #344054;
+    font-size: 14px;
+    font-weight: 700;
+    transition: 0.25s ease;
+}
+
+.main-nav a:hover,
+.main-nav a.active {
+    color: var(--blue);
+}
+
+.nav-button {
+    background: var(--navy);
+    color: var(--white);
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 800;
+    transition: 0.25s ease;
+}
+
+.nav-button:hover {
+    background: var(--gold);
+    color: var(--dark-blue);
+    transform: translateY(-2px);
+}
+
+
+/* ---------- HERO ---------- */
+
+.hero {
+    min-height: 680px;
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(4, 28, 58, 0.92),
+            rgba(4, 28, 58, 0.62),
+            rgba(4, 28, 58, 0.18)
+        ),
+        url("images/hero.jpg") center/cover no-repeat;
+
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        rgba(8, 43, 89, 0.25),
+        transparent
+    );
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    color: white;
+    max-width: 760px;
+}
+
+.hero-eyebrow {
+    color: var(--gold-light);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: clamp(44px, 6vw, 78px);
+    line-height: 1.05;
+    font-weight: 900;
+    letter-spacing: -2px;
+    margin-bottom: 25px;
+}
+
+.hero h1 span {
+    color: var(--gold-light);
+}
+
+.hero-text {
+    max-width: 620px;
+    font-size: 19px;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+
+/* ---------- BUTTONS ---------- */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 13px 25px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 800;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: 0.25s ease;
+}
+
+.btn-primary {
+    background: var(--gold);
+    color: var(--dark-blue);
+}
+
+.btn-primary:hover {
+    background: var(--gold-light);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(216, 167, 45, 0.25);
+}
+
+.btn-outline {
+    border-color: rgba(255, 255, 255, 0.7);
+    color: white;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: var(--navy);
+}
+
+
+/* ---------- QUICK SERVICES ---------- */
+
+.quick-services {
+    position: relative;
+    margin-top: -60px;
+    z-index: 5;
+}
+
+.services-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    background: white;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.service-card {
+    padding: 30px 25px;
+    text-align: center;
+    border-right: 1px solid var(--border);
+}
+
+.service-card:last-child {
+    border-right: none;
+}
+
+.service-icon {
+    font-size: 34px;
+    margin-bottom: 12px;
+}
+
+.service-card h3 {
+    color: var(--navy);
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.service-card p {
+    color: var(--muted);
+    font-size: 13px;
+}
+
+
+/* ---------- TOUR CARDS ---------- */
+
+.tour-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.tour-card {
+    background: white;
+    border-radius: 14px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    box-shadow: 0 8px 30px rgba(8, 43, 89, 0.07);
+    transition: 0.3s ease;
+}
+
+.tour-card:hover {
+    transform: translateY(-7px);
+    box-shadow: var(--shadow);
+}
+
+.tour-image {
+    height: 245px;
+    position: relative;
+    background-position: center;
+    background-size: cover;
+}
+
+.tour-dubai {
+    background-image:
+        linear-gradient(rgba(8, 43, 89, 0.05), rgba(8, 43, 89, 0.15)),
+        url("images/dubai.jpg");
+}
+
+.tour-turkey {
+    background-image:
+        linear-gradient(rgba(8, 43, 89, 0.05), rgba(8, 43, 89, 0.15)),
+        url("images/turkey.jpg");
+}
+
+.tour-pakistan {
+    background-image:
+        linear-gradient(rgba(8, 43, 89, 0.05), rgba(8, 43, 89, 0.15)),
+        url("images/pakistan.jpg");
+}
+
+.tour-badge {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: var(--gold);
+    color: var(--dark-blue);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 800;
+}
+
+.tour-content {
+    padding: 25px;
+}
+
+.tour-location {
+    color: var(--blue);
+    font-size: 13px;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+.tour-content h3 {
+    color: var(--navy);
+    font-size: 23px;
+    margin-bottom: 10px;
+}
+
+.tour-content > p:not(.tour-location) {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 18px;
+}
+
+.learn-more {
+    color: var(--blue);
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.learn-more:hover {
+    color: var(--gold);
+}
+
+
+/* ---------- DESTINATIONS ---------- */
+
+.destinations-section {
+    background: var(--light);
+}
+
+.destination-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+.destination-card {
+    min-height: 260px;
+    border-radius: 14px;
+    overflow: hidden;
+    position: relative;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(4, 28, 58, 0.9),
+            rgba(4, 28, 58, 0.05)
+        ),
+        linear-gradient(135deg, #1261a0, #082b59);
+
+    transition: 0.3s ease;
+}
+
+.destination-card:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow);
+}
+
+.destination-content {
+    position: absolute;
+    left: 25px;
+    bottom: 22px;
+    color: white;
+}
+
+.destination-content span {
+    font-size: 30px;
+}
+
+.destination-content h3 {
+    font-size: 26px;
+    margin-top: 5px;
+}
+
+.destination-content p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 13px;
+}
+
+
+/* ---------- VISA SECTION ---------- */
+
+.visa-section {
+    padding: 90px 0;
+    background:
+        linear-gradient(
+            110deg,
+            var(--navy),
+            #0d4c83
+        );
+    color: white;
+}
+
+.visa-container {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    align-items: center;
+    gap: 70px;
+}
+
+.visa-content h2 {
+    color: white;
+}
+
+.visa-content > p:not(.section-label) {
+    color: rgba(255, 255, 255, 0.82);
+    max-width: 650px;
+    margin-bottom: 28px;
+}
+
+.visa-highlight {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+}
+
+.visa-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.visa-highlight h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.visa-highlight p {
+    color: rgba(255, 255, 255, 0.78);
+}
+
+
+/* ---------- ABOUT ---------- */
+
+.about-container {
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+.about-content > p:not(.section-label) {
+    color: var(--muted);
+    margin-bottom: 18px;
+    font-size: 16px;
+}
+
+.text-link {
+    display: inline-block;
+    color: var(--blue);
+    font-weight: 800;
+    margin-top: 10px;
+}
+
+.text-link:hover {
+    color: var(--gold);
+}
+
+.about-stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+}
+
+.stat {
+    background: var(--light-blue);
+    border-radius: 14px;
+    padding: 30px 20px;
+    text-align: center;
+    border: 1px solid #dcecf9;
+}
+
+.stat strong {
+    display: block;
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.stat span {
+    color: var(--navy);
+    font-weight: 800;
+    font-size: 14px;
+}
+
+
+/* ---------- SUBSCRIBE ---------- */
+
+.subscribe-section {
+    padding: 80px 0;
+    background:
+        linear-gradient(
+            135deg,
+            #f0f7ff,
+            #fffaf0
+        );
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+}
+
+.subscribe-container {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 70px;
+    align-items: center;
+}
+
+.subscribe-content p:not(.section-label) {
+    color: var(--muted);
+    font-size: 16px;
+}
+
+.subscribe-form {
+    background: white;
+    padding: 30px;
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--border);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: end;
+    margin-bottom: 18px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+}
+
+.form-group label {
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 800;
+}
+
+.form-group input {
+    width: 100%;
+    height: 48px;
+    border: 1px solid #cbd5e1;
+    border-radius: 7px;
+    padding: 0 14px;
+    outline: none;
+    transition: 0.2s ease;
+}
+
+.form-group input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(18, 97, 160, 0.1);
+}
+
+.subscribe-form .btn {
+    width: 100%;
+}
+
+.form-note {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 5px;
+}
+
+.form-message {
+    margin-top: 12px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+
+/* ---------- CONTACT ---------- */
+
+.contact-section {
+    background: white;
+}
+
+.contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.contact-card {
+    text-align: center;
+    padding: 35px 25px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    transition: 0.3s ease;
+}
+
+.contact-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow);
+}
+
+.contact-icon {
+    font-size: 35px;
+    margin-bottom: 12px;
+}
+
+.contact-card h3 {
+    color: var(--navy);
+    font-size: 20px;
+    margin-bottom: 8px;
+}
+
+.contact-card p {
+    color: var(--muted);
+    font-size: 13px;
+    margin-bottom: 12px;
+}
+
+.contact-card a {
+    color: var(--blue);
+    font-weight: 800;
+    font-size: 14px;
+}
+
+
+/* ---------- FOOTER ---------- */
+
+.site-footer {
+    background: var(--dark-blue);
+    color: white;
+}
+
+.footer-container {
+    padding: 60px 0;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 50px;
+}
+
+.footer-brand .logo-main {
+    color: white;
+}
+
+.footer-brand p {
+    max-width: 350px;
+    margin-top: 18px;
+    color: rgba(255, 255, 255, 0.65);
+    font-size: 14px;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links h4 {
+    color: var(--gold-light);
+    margin-bottom: 8px;
+}
+
+.footer-links a {
+    color: rgba(255, 255, 255, 0.68);
+    font-size: 14px;
+    transition: 0.2s ease;
+}
+
+.footer-links a:hover {
+    color: white;
+}
+
+.footer-bottom {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    text-align: center;
+}
+
+.footer-bottom p {
+    color: rgba(255, 255, 255, 0.55);
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE DESIGN
+========================================================= */
+
+
+/* ---------- TABLET ---------- */
+
+@media (max-width: 950px) {
+
+    .main-nav {
+        gap: 15px;
+    }
+
+    .main-nav a {
+        font-size: 12px;
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .service-card:nth-child(2) {
+        border-right: none;
+    }
+
+    .service-card:nth-child(-n + 2) {
+        border-bottom: 1px solid var(--border);
+    }
+
+    .tour-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .tour-card:last-child {
+        grid-column: span 2;
+        max-width: 50%;
+        margin: 0 auto;
+    }
+
+    .destination-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .visa-container,
+    .about-container,
+    .subscribe-container {
+        grid-template-columns: 1fr;
+        gap: 45px;
+    }
+
+    .footer-container {
+        grid-template-columns: 1.5fr 1fr 1fr;
+    }
+}
+
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 700px) {
+
+    .container {
+        width: 90%;
+    }
+
+    .section {
+        padding: 65px 0;
+    }
+
+
+    /* Header */
+
+    .site-header {
+        position: relative;
+    }
+
+    .nav-container {
+        min-height: auto;
+        padding: 17px 0;
+        flex-wrap: wrap;
+    }
+
+    .main-nav {
+        width: 100%;
+        order: 3;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 10px 18px;
+        padding-top: 12px;
+    }
+
+    .main-nav a {
+        font-size: 12px;
+    }
+
+    .nav-button {
+        padding: 9px 13px;
+        font-size: 11px;
+    }
+
+
+    /* Hero */
+
+    .hero {
+        min-height: 600px;
+        background-position: center;
+    }
+
+    .hero h1 {
+        font-size: 43px;
+        letter-spacing: -1px;
+    }
+
+    .hero-text {
+        font-size: 16px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 280px;
+    }
+
+
+    /* Services */
+
+    .quick-services {
+        margin-top: -30px;
+    }
+
+    .services-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .service-card {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .service-card:last-child {
+        border-bottom: none;
+    }
+
+
+    /* Tours */
+
+    .tour-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .tour-card:last-child {
+        grid-column: auto;
+        max-width: none;
+    }
+
+
+    /* Destinations */
+
+    .destination-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .destination-card {
+        min-height: 210px;
+    }
+
+    .destination-content {
+        left: 17px;
+        bottom: 17px;
+    }
+
+    .destination-content h3 {
+        font-size: 21px;
+    }
+
+
+    /* Visa */
+
+    .visa-section {
+        padding: 65px 0;
+    }
+
+    .visa-highlight {
+        padding: 30px 20px;
+    }
+
+
+    /* About */
+
+    .about-stats {
+        grid-template-columns: 1fr 1fr;
+    }
+
+
+    /* Subscribe */
+
+    .subscribe-section {
+        padding: 65px 0;
+    }
+
+    .subscribe-form {
+        padding: 22px;
+    }
+
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+
+    /* Contact */
+
+    .contact-grid {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* Footer */
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 35px;
+        padding: 45px 0;
+    }
+}
+
+
+/* ---------- SMALL PHONES ---------- */
+
+@media (max-width: 420px) {
+
+    .logo-main {
+        font-size: 25px;
+    }
+
+    .logo-sub {
+        font-size: 8px;
+        letter-spacing: 2px;
+    }
+
+    .nav-button {
+        display: none;
+    }
+
+    .hero {
+        min-height: 560px;
+    }
+
+    .hero h1 {
+        font-size: 38px;
+    }
+
+    .destination-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .about-stats {
+        grid-template-columns: 1fr;
+    }
+}
